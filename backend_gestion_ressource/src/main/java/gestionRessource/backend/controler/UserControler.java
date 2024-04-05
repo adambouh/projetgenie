@@ -25,7 +25,7 @@ public class UserControler {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/authentification")
+	@PostMapping("/authentification")
 	public UserDTO authentification(@RequestBody AuthentificationDTO authentification) {
 		String encodedPassword = PasswordEncoderUtil.encodePassword(authentification.getPassword());
 		User user = userService.getUserByLoginPassword(authentification.getLogin(), encodedPassword);
