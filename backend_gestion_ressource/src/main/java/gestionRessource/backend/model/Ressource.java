@@ -1,8 +1,8 @@
 package gestionRessource.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -11,12 +11,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Ressource")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Ressource {
 
 	@Id
@@ -32,17 +33,23 @@ public class Ressource {
 	@Enumerated(EnumType.STRING)
 	private EtatDemande etatDemande;
 
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@JsonIgnoreProperties({ "notifications", "ressources", "password" })
+	private User user;
+
 	public Ressource() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ressource(Long id, String codeInventaire, String marque, EtatDemande etatDemande) {
+	public Ressource(Long id, String codeInventaire, String marque, EtatDemande etatDemande, User user) {
 		super();
 		this.id = id;
 		this.codeInventaire = codeInventaire;
 		this.marque = marque;
 		this.etatDemande = etatDemande;
+		this.user = user;
 	}
 
 	public String getCodeInventaire() {
@@ -69,20 +76,20 @@ public class Ressource {
 		this.id = id;
 	}
 
-	public String getCode_inventaire() {
-		return codeInventaire;
-	}
-
-	public void setCode_inventaire(String codeInventaire) {
-		this.codeInventaire = codeInventaire;
-	}
-
 	public EtatDemande getEtatDemande() {
 		return etatDemande;
 	}
 
 	public void setEtatDemande(EtatDemande etatDemande) {
 		this.etatDemande = etatDemande;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

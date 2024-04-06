@@ -1,11 +1,9 @@
 package gestionRessource.backend.model;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("Imprimante")
 public class Imprimante extends Ressource {
 
 	@Column(name = "resolution")
@@ -13,6 +11,16 @@ public class Imprimante extends Ressource {
 
 	@Column(name = "vitesseImpression")
 	private int vitesseImpression;
+
+	public Imprimante() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Imprimante(Long id, String codeInventaire, String marque, EtatDemande etatDemande, User user) {
+		super(id, codeInventaire, marque, etatDemande, user);
+		// TODO Auto-generated constructor stub
+	}
 
 	public Imprimante(int resolution, int vitesseImpression) {
 		super();

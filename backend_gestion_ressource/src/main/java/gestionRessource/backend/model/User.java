@@ -37,6 +37,9 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Notification> notifications;
 
+	@OneToMany(mappedBy = "user")
+	private List<Ressource> ressources;
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub

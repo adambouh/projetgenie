@@ -1,5 +1,7 @@
 package gestionRessource.backend.service.Impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User ajouterUser(User user) {
 		return userRepository.save(user);
+	}
+
+	@Override
+	public User getUserById(Long userId) {
+		Optional<User> userOptional = userRepository.findById(userId);
+		return userOptional.orElse(null);
 	}
 
 }

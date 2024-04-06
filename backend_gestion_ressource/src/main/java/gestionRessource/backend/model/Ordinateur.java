@@ -1,11 +1,9 @@
 package gestionRessource.backend.model;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("Ordinateur")
 public class Ordinateur extends Ressource {
 
 	@Column(name = "cpu")
@@ -22,6 +20,11 @@ public class Ordinateur extends Ressource {
 
 	public Ordinateur() {
 		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Ordinateur(Long id, String codeInventaire, String marque, EtatDemande etatDemande, User user) {
+		super(id, codeInventaire, marque, etatDemande, user);
 		// TODO Auto-generated constructor stub
 	}
 
