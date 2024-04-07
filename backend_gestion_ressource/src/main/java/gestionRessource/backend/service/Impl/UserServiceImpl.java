@@ -1,5 +1,6 @@
 package gestionRessource.backend.service.Impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,16 @@ public class UserServiceImpl implements UserService {
 	public User getUserById(Long userId) {
 		Optional<User> userOptional = userRepository.findById(userId);
 		return userOptional.orElse(null);
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public User getUserByLogin(String login) {
+		return userRepository.findByLogin(login);
 	}
 
 }

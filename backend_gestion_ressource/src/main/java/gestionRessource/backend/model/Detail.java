@@ -1,5 +1,8 @@
 package gestionRessource.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,27 +20,29 @@ public class Detail {
 	private Long id;
 
 	@Column(name = "dureeGarantie")
-	private boolean dureeGarantie;
+	private int dureeGarantie;
 
 	@Column(name = "marque")
-	private double marque;
+	private String marque;
 
 	@Column(name = "prix")
 	private double prix;
 
 	@ManyToOne
 	@JoinColumn(name = "ressource_id")
+	@JsonIgnoreProperties({ "user", "details", "appelDoffre" })
 	private Ressource ressource;
 
 	@ManyToOne
 	@JoinColumn(name = "proposition_id")
+	@JsonIgnore
 	private Proposition proposition;
 
 	public Detail() {
 		super();
 	}
 
-	public Detail(Long id, boolean dureeGarantie, double marque, double prix, Ressource ressource,
+	public Detail(Long id, int dureeGarantie, String marque, double prix, Ressource ressource,
 			Proposition proposition) {
 		super();
 		this.id = id;
@@ -56,19 +61,19 @@ public class Detail {
 		this.id = id;
 	}
 
-	public boolean isDureeGarantie() {
+	public int getDureeGarantie() {
 		return dureeGarantie;
 	}
 
-	public void setDureeGarantie(boolean dureeGarantie) {
+	public void setDureeGarantie(int dureeGarantie) {
 		this.dureeGarantie = dureeGarantie;
 	}
 
-	public double getMarque() {
+	public String getMarque() {
 		return marque;
 	}
 
-	public void setMarque(double marque) {
+	public void setMarque(String marque) {
 		this.marque = marque;
 	}
 

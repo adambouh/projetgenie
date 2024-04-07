@@ -3,6 +3,7 @@ package gestionRessource.backend.model;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -35,6 +36,7 @@ public class AppelDoffre {
 	private List<Ressource> ressources;
 
 	@OneToMany(mappedBy = "appelDoffre")
+	@JsonIgnore
 	private List<Proposition> propositions;
 
 	public AppelDoffre() {

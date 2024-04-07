@@ -8,4 +8,6 @@ import gestionRessource.backend.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	User findByLoginAndPassword(String login, String password);
+
+	User findByLogin(String login);
 }

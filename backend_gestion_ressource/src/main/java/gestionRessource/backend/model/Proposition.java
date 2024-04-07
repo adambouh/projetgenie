@@ -3,8 +3,12 @@ package gestionRessource.backend.model;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,8 +30,8 @@ public class Proposition {
 	@Column(name = "dateLivraison")
 	private Date dateLivraison;
 
-	@Column(name = "etatProposition")
-	private boolean etatProposition;
+	@Enumerated(EnumType.STRING)
+	private EtatProposition etatProposition;
 
 	@Column(name = "montantTotal")
 	private double montantTotal;
@@ -37,6 +41,7 @@ public class Proposition {
 
 	@ManyToOne
 	@JoinColumn(name = "appelDoffre_id")
+	@JsonIgnoreProperties({ "ressources", "propositions" })
 	private AppelDoffre appelDoffre;
 
 	@ManyToOne
@@ -47,8 +52,8 @@ public class Proposition {
 		super();
 	}
 
-	public Proposition(Long id, Date dateProposition, Date dateLivraison, boolean etatProposition, double montantTotal,
-			List<Detail> details, AppelDoffre appelDoffre, Fournisseur fournisseur) {
+	public Proposition(Long id, Date dateProposition, Date dateLivraison, EtatProposition etatProposition,
+			double montantTotal, List<Detail> details, AppelDoffre appelDoffre, Fournisseur fournisseur) {
 		super();
 		this.id = id;
 		this.dateProposition = dateProposition;
@@ -84,11 +89,11 @@ public class Proposition {
 		this.dateLivraison = dateLivraison;
 	}
 
-	public boolean isEtatProposition() {
+	public EtatProposition getEtatProposition() {
 		return etatProposition;
 	}
 
-	public void setEtatProposition(boolean etatProposition) {
+	public void setEtatProposition(EtatProposition etatProposition) {
 		this.etatProposition = etatProposition;
 	}
 
