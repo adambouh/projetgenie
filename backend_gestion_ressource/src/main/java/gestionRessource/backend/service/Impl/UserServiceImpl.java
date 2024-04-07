@@ -42,4 +42,8 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByLogin(login);
 	}
 
+	public User modifierUser(User user) {
+		return userRepository.save(user);
+	}
+
 }

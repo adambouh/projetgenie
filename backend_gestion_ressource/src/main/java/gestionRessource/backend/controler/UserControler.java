@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,6 +68,20 @@ public class UserControler {
 	@GetMapping("/getUserByLogin")
 	public User getUserByLogin(@RequestParam String login) {
 		return userService.getUserByLogin(login);
+	}
+
+	@PutMapping("/modifyUser")
+	public ResponseEntity<String> modifyUser(@RequestParam Long id, @RequestBody UserDTO userdto) {
+		User user = UserConvert.convertUserDtoToUser(userdto);
+		user.setId(id);
+		Departement departement = departementService.getDepartementById(userdto.getDepartement_id());
+		user.setDepartement(departement);
+		User userModified = userService.modifierUser(user);
+		if (userModified != null) {
+			return new ResponseEntity<>("User modified successfully", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Failed to modify user", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 }
