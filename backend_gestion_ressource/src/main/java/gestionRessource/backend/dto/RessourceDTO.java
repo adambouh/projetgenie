@@ -5,7 +5,6 @@ import gestionRessource.backend.model.EtatDemande;
 public class RessourceDTO {
 	private String typeRessource;
 	private String codeInventaire;
-	private String marque;
 	private EtatDemande etatDemande;
 	private String cpu;
 	private String ram;
@@ -37,14 +36,6 @@ public class RessourceDTO {
 
 	public void setCodeInventaire(String codeInventaire) {
 		this.codeInventaire = codeInventaire;
-	}
-
-	public String getMarque() {
-		return marque;
-	}
-
-	public void setMarque(String marque) {
-		this.marque = marque;
 	}
 
 	public EtatDemande getEtatDemande() {

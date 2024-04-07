@@ -52,7 +52,6 @@ public class RessourceControler {
 		if (ressourceDto.getTypeRessource().equals("Ordinateur") && oldRessource instanceof Ordinateur) {
 			oldRessource.setCodeInventaire(ressourceDto.getCodeInventaire());
 			oldRessource.setEtatDemande(ressourceDto.getEtatDemande());
-			oldRessource.setMarque(ressourceDto.getMarque());
 			((Ordinateur) oldRessource).setCpu(ressourceDto.getCpu());
 			((Ordinateur) oldRessource).setRam(ressourceDto.getRam());
 			((Ordinateur) oldRessource).setDisqueDur(ressourceDto.getDisqueDur());
@@ -62,7 +61,6 @@ public class RessourceControler {
 		} else if (ressourceDto.getTypeRessource().equals("Imprimante") && oldRessource instanceof Imprimante) {
 			oldRessource.setCodeInventaire(ressourceDto.getCodeInventaire());
 			oldRessource.setEtatDemande(ressourceDto.getEtatDemande());
-			oldRessource.setMarque(ressourceDto.getMarque());
 			((Imprimante) oldRessource).setResolution(ressourceDto.getResolution());
 			((Imprimante) oldRessource).setVitesseImpression(ressourceDto.getVitesseImpression());
 			return ressourceService.updateRessource(oldRessource);
@@ -84,7 +82,6 @@ public class RessourceControler {
 			Ordinateur ordi = new Ordinateur();
 			ordi.setCodeInventaire(ressourceDto.getCodeInventaire());
 			ordi.setEtatDemande(EtatDemande.En_Cours_De_Traitement);
-			ordi.setMarque(ressourceDto.getMarque());
 			ordi.setCpu(ressourceDto.getCpu());
 			ordi.setDisqueDur(ressourceDto.getDisqueDur());
 			ordi.setEcran(ressourceDto.getEcran());
@@ -96,7 +93,6 @@ public class RessourceControler {
 			Imprimante impr = new Imprimante();
 			impr.setCodeInventaire(ressourceDto.getCodeInventaire());
 			impr.setEtatDemande(EtatDemande.En_Cours_De_Traitement);
-			impr.setMarque(ressourceDto.getMarque());
 			impr.setResolution(ressourceDto.getResolution());
 			impr.setUser(user);
 			return ressourceService.saveRessource(impr);

@@ -1,5 +1,7 @@
 package gestionRessource.backend.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
@@ -23,8 +25,9 @@ public class Ordinateur extends Ressource {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ordinateur(Long id, String codeInventaire, String marque, EtatDemande etatDemande, User user) {
-		super(id, codeInventaire, marque, etatDemande, user);
+	public Ordinateur(Long id, String codeInventaire, EtatDemande etatDemande, User user, AppelDoffre appelDoffre,
+			List<Detail> details) {
+		super(id, codeInventaire, etatDemande, user, appelDoffre, details);
 		// TODO Auto-generated constructor stub
 	}
 

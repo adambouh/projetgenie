@@ -1,5 +1,7 @@
 package gestionRessource.backend.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -13,6 +15,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,9 +30,6 @@ public class Ressource {
 	@Column(name = "codeInventaire")
 	private String codeInventaire;
 
-	@Column(name = "marque")
-	private String marque;
-
 	@Enumerated(EnumType.STRING)
 	private EtatDemande etatDemande;
 
@@ -38,18 +38,27 @@ public class Ressource {
 	@JsonIgnoreProperties({ "notifications", "ressources", "password" })
 	private User user;
 
+	@ManyToOne
+	@JoinColumn(name = "appelDoffre_id")
+	private AppelDoffre appelDoffre;
+
+	@OneToMany(mappedBy = "ressource")
+	private List<Detail> details;
+
 	public Ressource() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ressource(Long id, String codeInventaire, String marque, EtatDemande etatDemande, User user) {
+	public Ressource(Long id, String codeInventaire, EtatDemande etatDemande, User user, AppelDoffre appelDoffre,
+			List<Detail> details) {
 		super();
 		this.id = id;
 		this.codeInventaire = codeInventaire;
-		this.marque = marque;
 		this.etatDemande = etatDemande;
 		this.user = user;
+		this.appelDoffre = appelDoffre;
+		this.details = details;
 	}
 
 	public String getCodeInventaire() {
@@ -58,14 +67,6 @@ public class Ressource {
 
 	public void setCodeInventaire(String codeInventaire) {
 		this.codeInventaire = codeInventaire;
-	}
-
-	public String getMarque() {
-		return marque;
-	}
-
-	public void setMarque(String marque) {
-		this.marque = marque;
 	}
 
 	public Long getId() {
@@ -90,6 +91,22 @@ public class Ressource {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public AppelDoffre getAppelDoffre() {
+		return appelDoffre;
+	}
+
+	public void setAppelDoffre(AppelDoffre appelDoffre) {
+		this.appelDoffre = appelDoffre;
+	}
+
+	public List<Detail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<Detail> details) {
+		this.details = details;
 	}
 
 }
