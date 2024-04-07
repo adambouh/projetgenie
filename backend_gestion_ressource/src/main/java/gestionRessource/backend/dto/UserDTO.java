@@ -12,6 +12,7 @@ public class UserDTO {
 	private String password;
 	private List<Notification> notificationList;
 	private Role role;
+	private Long departement_id;
 
 	public String getFirst_name() {
 		return first_name;
@@ -59,6 +60,14 @@ public class UserDTO {
 
 	public void setNotificationList(List<Notification> notificationList) {
 		this.notificationList = notificationList;
+	}
+
+	public Long getDepartement_id() {
+		return departement_id;
+	}
+
+	public void setDepartement_id(Long departement_id) {
+		this.departement_id = departement_id;
 	}
 
 }

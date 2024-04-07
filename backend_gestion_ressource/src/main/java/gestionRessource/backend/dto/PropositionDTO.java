@@ -8,6 +8,7 @@ public class PropositionDTO {
 	private Date dateProposition;
 	private Date dateLivraison;
 	private double montantTotal;
+	private Long fournisseur_id;
 	private List<DetailRessourceDTO> detailRessourceDto;
 
 	public Long getIdAppelDoffre() {
@@ -48,6 +49,14 @@ public class PropositionDTO {
 
 	public void setDetailRessourceDto(List<DetailRessourceDTO> detailRessourceDto) {
 		this.detailRessourceDto = detailRessourceDto;
+	}
+
+	public Long getFournisseur_id() {
+		return fournisseur_id;
+	}
+
+	public void setFournisseur_id(Long fournisseur_id) {
+		this.fournisseur_id = fournisseur_id;
 	}
 
 }

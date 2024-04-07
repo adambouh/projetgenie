@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import gestionRessource.backend.convert.UserConvert;
 import gestionRessource.backend.dto.AuthentificationDTO;
 import gestionRessource.backend.dto.UserDTO;
+import gestionRessource.backend.model.Departement;
 import gestionRessource.backend.model.User;
+import gestionRessource.backend.service.DepartementService;
 import gestionRessource.backend.service.UserService;
 import gestionRessource.backend.utils.PasswordEncoderUtil;
 
@@ -27,6 +29,9 @@ public class UserControler {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private DepartementService departementService;
 
 	@PostMapping("/authentification")
 	public UserDTO authentification(@RequestBody AuthentificationDTO authentification) {
@@ -44,6 +49,8 @@ public class UserControler {
 	@PostMapping("/addUser")
 	public ResponseEntity<String> addUser(@RequestBody UserDTO userdto) {
 		User user = UserConvert.convertUserDtoToUser(userdto);
+		Departement departement = departementService.getDepartementById(userdto.getDepartement_id());
+		user.setDepartement(departement);
 		User userAdded = userService.ajouterUser(user);
 		if (userAdded != null) {
 			return new ResponseEntity<>("User added successfully", HttpStatus.OK);
