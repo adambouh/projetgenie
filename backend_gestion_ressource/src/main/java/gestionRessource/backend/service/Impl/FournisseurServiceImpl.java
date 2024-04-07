@@ -21,4 +21,9 @@ public class FournisseurServiceImpl implements FournisseurService {
 		return fournisseurOptional.get();
 	}
 
+	@Override
+	public Fournisseur ajouterFournisseur(Fournisseur fournisseur) {
+		return fournisseurRepository.save(fournisseur);
+	}
+
 }

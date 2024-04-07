@@ -27,6 +27,9 @@ public class Fournisseur extends User {
 	@Column(name = "siteInternet")
 	private String siteInternet;
 
+	@Column(name = "societe")
+	private String societe;
+
 	@OneToMany(mappedBy = "fournisseur")
 	private List<Proposition> propositions;
 
@@ -35,10 +38,17 @@ public class Fournisseur extends User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Fournisseur(Long id, String first_name, String last_name, String login, String password, Role role,
-			List<Notification> notifications, Departement departement) {
-		super(id, first_name, last_name, login, password, role, notifications, departement);
-		// TODO Auto-generated constructor stub
+	public Fournisseur(String adresse, String etatFournisseur, String gerant, String lieu, int scorePanne,
+			String siteInternet, String societe, List<Proposition> propositions) {
+		super();
+		this.adresse = adresse;
+		this.etatFournisseur = etatFournisseur;
+		this.gerant = gerant;
+		this.lieu = lieu;
+		this.scorePanne = scorePanne;
+		this.siteInternet = siteInternet;
+		this.societe = societe;
+		this.propositions = propositions;
 	}
 
 	public String getAdresse() {
@@ -95,6 +105,14 @@ public class Fournisseur extends User {
 
 	public void setPropositions(List<Proposition> propositions) {
 		this.propositions = propositions;
+	}
+
+	public String getSociete() {
+		return societe;
+	}
+
+	public void setSociete(String societe) {
+		this.societe = societe;
 	}
 
 }
