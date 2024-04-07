@@ -10,6 +10,12 @@ export class AuthService {
   private authTokenKey = 'authToken';
   private tokenExpirationKey = 'tokenExpiration';
 
+  private first_name = "first_name";
+  private last_name = "last_name";
+  private username = "login";
+  private password = "password";
+  private notificationList = "notificationList";
+  private role = "role";
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
@@ -18,8 +24,13 @@ export class AuthService {
       .pipe(
         tap((response: any) => {
           // Authentication succeeded, store the authentication token and its expiration date
-          localStorage.setItem(this.authTokenKey, response.first_name); // Store first_name as token
-        }),
+          localStorage.setItem(this.authTokenKey, response.first_name);
+          localStorage.setItem(this.first_name ,response.first_name );
+          localStorage.setItem(this.last_name ,response.last_name );
+          localStorage.setItem(this.username,response.username);
+          localStorage.setItem(this.password ,response.password );
+          localStorage.setItem(this.notificationList ,response.notificationList);
+          localStorage.setItem(this.role ,response.role);}),
         catchError((error) => {
           // Handle login error
           return throwError(error);
