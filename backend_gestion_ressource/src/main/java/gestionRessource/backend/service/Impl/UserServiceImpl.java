@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User ajouterUser(User user) {
+	public User saveUser(User user) {
 		return userRepository.save(user);
 	}
 
@@ -40,10 +40,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserByLogin(String login) {
 		return userRepository.findByLogin(login);
-	}
-
-	public User modifierUser(User user) {
-		return userRepository.save(user);
 	}
 
 }

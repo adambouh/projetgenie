@@ -52,7 +52,7 @@ public class UserControler {
 		User user = UserConvert.convertUserDtoToUser(userdto);
 		Departement departement = departementService.getDepartementById(userdto.getDepartement_id());
 		user.setDepartement(departement);
-		User userAdded = userService.ajouterUser(user);
+		User userAdded = userService.saveUser(user);
 		if (userAdded != null) {
 			return new ResponseEntity<>("User added successfully", HttpStatus.OK);
 		} else {
@@ -72,15 +72,30 @@ public class UserControler {
 
 	@PutMapping("/modifyUser")
 	public ResponseEntity<String> modifyUser(@RequestParam Long id, @RequestBody UserDTO userdto) {
-		User user = UserConvert.convertUserDtoToUser(userdto);
-		user.setId(id);
+		User oldUser = userService.getUserById(id);
 		Departement departement = departementService.getDepartementById(userdto.getDepartement_id());
-		user.setDepartement(departement);
-		User userModified = userService.modifierUser(user);
+		oldUser.setDepartement(departement);
+		oldUser.setFirst_name(userdto.getFirst_name());
+		oldUser.setLast_name(userdto.getLast_name());
+		oldUser.setLogin(userdto.getLogin());
+		User userModified = userService.saveUser(oldUser);
 		if (userModified != null) {
 			return new ResponseEntity<>("User modified successfully", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("Failed to modify user", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PutMapping("/modifyPasswordUser")
+	public ResponseEntity<String> modifyPasswordUser(@RequestParam Long user_id, @RequestBody String password) {
+		User oldUser = userService.getUserById(user_id);
+		String encodedPassword = PasswordEncoderUtil.encodePassword(password);
+		oldUser.setPassword(encodedPassword);
+		User userModified = userService.saveUser(oldUser);
+		if (userModified != null) {
+			return new ResponseEntity<>("Password modified successfully", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Failed to modify password", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
