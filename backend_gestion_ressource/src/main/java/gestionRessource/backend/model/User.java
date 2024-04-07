@@ -11,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -40,8 +42,9 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Notification> notifications;
 
-	@OneToMany(mappedBy = "user")
-	private List<Ressource> ressources;
+	@ManyToOne
+	@JoinColumn(name = "departement_id")
+	private Departement departement;
 
 	public User() {
 		super();
@@ -49,7 +52,7 @@ public class User {
 	}
 
 	public User(Long id, String first_name, String last_name, String login, String password, Role role,
-			List<Notification> notifications) {
+			List<Notification> notifications, Departement departement) {
 		super();
 		this.id = id;
 		this.first_name = first_name;
@@ -58,6 +61,15 @@ public class User {
 		this.password = password;
 		this.role = role;
 		this.notifications = notifications;
+		this.departement = departement;
+	}
+
+	public Departement getDepartement() {
+		return departement;
+	}
+
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
 	}
 
 	public Long getId() {

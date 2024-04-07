@@ -1,7 +1,6 @@
 package gestionRessource.backend.model;
 
 import java.sql.Date;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -14,7 +13,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,16 +34,14 @@ public class Proposition {
 	@Column(name = "montantTotal")
 	private double montantTotal;
 
-	@OneToMany(mappedBy = "proposition")
-	private List<Detail> details;
-
 	@ManyToOne
 	@JoinColumn(name = "appelDoffre_id")
-	@JsonIgnoreProperties({ "ressources", "propositions" })
+	@JsonIgnoreProperties({ "propositions" })
 	private AppelDoffre appelDoffre;
 
 	@ManyToOne
 	@JoinColumn(name = "fourniseur_id")
+	@JsonIgnoreProperties({ "propositions" })
 	private Fournisseur fournisseur;
 
 	public Proposition() {
@@ -53,14 +49,13 @@ public class Proposition {
 	}
 
 	public Proposition(Long id, Date dateProposition, Date dateLivraison, EtatProposition etatProposition,
-			double montantTotal, List<Detail> details, AppelDoffre appelDoffre, Fournisseur fournisseur) {
+			double montantTotal, AppelDoffre appelDoffre, Fournisseur fournisseur) {
 		super();
 		this.id = id;
 		this.dateProposition = dateProposition;
 		this.dateLivraison = dateLivraison;
 		this.etatProposition = etatProposition;
 		this.montantTotal = montantTotal;
-		this.details = details;
 		this.appelDoffre = appelDoffre;
 		this.fournisseur = fournisseur;
 	}
@@ -103,14 +98,6 @@ public class Proposition {
 
 	public void setMontantTotal(double montantTotal) {
 		this.montantTotal = montantTotal;
-	}
-
-	public List<Detail> getDetails() {
-		return details;
-	}
-
-	public void setDetails(List<Detail> details) {
-		this.details = details;
 	}
 
 	public AppelDoffre getAppelDoffre() {

@@ -1,7 +1,5 @@
 package gestionRessource.backend.model;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -15,7 +13,6 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -35,15 +32,18 @@ public class Ressource {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@JsonIgnoreProperties({ "notifications", "ressources", "password" })
+	@JsonIgnoreProperties({ "notifications", "password", "departement" })
 	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "appelDoffre_id")
+	@JsonIgnoreProperties({ "ressources", "propositions" })
 	private AppelDoffre appelDoffre;
 
-	@OneToMany(mappedBy = "ressource")
-	private List<Detail> details;
+	@ManyToOne
+	@JoinColumn(name = "detail_id")
+	@JsonIgnoreProperties({ "ressource", "proposition" })
+	private Detail detail;
 
 	public Ressource() {
 		super();
@@ -51,14 +51,14 @@ public class Ressource {
 	}
 
 	public Ressource(Long id, String codeInventaire, EtatDemande etatDemande, User user, AppelDoffre appelDoffre,
-			List<Detail> details) {
+			Detail detail) {
 		super();
 		this.id = id;
 		this.codeInventaire = codeInventaire;
 		this.etatDemande = etatDemande;
 		this.user = user;
 		this.appelDoffre = appelDoffre;
-		this.details = details;
+		this.detail = detail;
 	}
 
 	public String getCodeInventaire() {
@@ -101,12 +101,12 @@ public class Ressource {
 		this.appelDoffre = appelDoffre;
 	}
 
-	public List<Detail> getDetails() {
-		return details;
+	public Detail getDetail() {
+		return detail;
 	}
 
-	public void setDetails(List<Detail> details) {
-		this.details = details;
+	public void setDetail(Detail detail) {
+		this.detail = detail;
 	}
 
 }

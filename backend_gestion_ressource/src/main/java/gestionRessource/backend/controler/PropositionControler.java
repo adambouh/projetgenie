@@ -62,7 +62,7 @@ public class PropositionControler {
 				detailList.add(detail);
 				detailService.saveDetail(detail);
 			}
-			proposition.setDetails(detailList);
+			// proposition.setDetails(detailList);
 		}
 
 		return propositionService.saveProposition(proposition);

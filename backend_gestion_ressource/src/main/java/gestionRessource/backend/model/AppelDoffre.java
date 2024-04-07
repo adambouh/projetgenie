@@ -3,7 +3,6 @@ package gestionRessource.backend.model;
 import java.sql.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -32,11 +31,11 @@ public class AppelDoffre {
 	private boolean etatDisponibilite;
 
 	@OneToMany(mappedBy = "appelDoffre")
-	@JsonIgnoreProperties({ "user" })
+	@JsonIgnoreProperties({ "user", "appelDoffre" })
 	private List<Ressource> ressources;
 
 	@OneToMany(mappedBy = "appelDoffre")
-	@JsonIgnore
+	@JsonIgnoreProperties({ "appelDoffre" })
 	private List<Proposition> propositions;
 
 	public AppelDoffre() {
@@ -44,13 +43,15 @@ public class AppelDoffre {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AppelDoffre(Long id, Date dateDebut, Date dateFin, boolean etatDisponibilite, List<Ressource> ressources) {
+	public AppelDoffre(Long id, Date dateDebut, Date dateFin, boolean etatDisponibilite, List<Ressource> ressources,
+			List<Proposition> propositions) {
 		super();
 		this.id = id;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.etatDisponibilite = etatDisponibilite;
 		this.ressources = ressources;
+		this.propositions = propositions;
 	}
 
 	public Long getId() {
@@ -91,6 +92,14 @@ public class AppelDoffre {
 
 	public void setRessources(List<Ressource> ressources) {
 		this.ressources = ressources;
+	}
+
+	public List<Proposition> getPropositions() {
+		return propositions;
+	}
+
+	public void setPropositions(List<Proposition> propositions) {
+		this.propositions = propositions;
 	}
 
 }
