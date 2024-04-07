@@ -71,7 +71,7 @@ public class UserControler {
 	}
 
 	@PutMapping("/modifyUser")
-	public ResponseEntity<String> modifyUser(@RequestParam Long id, @RequestBody UserDTO userdto) {
+	public User modifyUser(@RequestParam Long id, @RequestBody UserDTO userdto) {
 		User oldUser = userService.getUserById(id);
 		Departement departement = departementService.getDepartementById(userdto.getDepartement_id());
 		oldUser.setDepartement(departement);
@@ -80,22 +80,22 @@ public class UserControler {
 		oldUser.setLogin(userdto.getLogin());
 		User userModified = userService.saveUser(oldUser);
 		if (userModified != null) {
-			return new ResponseEntity<>("User modified successfully", HttpStatus.OK);
+			return userModified;
 		} else {
-			return new ResponseEntity<>("Failed to modify user", HttpStatus.INTERNAL_SERVER_ERROR);
+			return null;
 		}
 	}
 
 	@PutMapping("/modifyPasswordUser")
-	public ResponseEntity<String> modifyPasswordUser(@RequestParam Long user_id, @RequestBody String password) {
+	public User modifyPasswordUser(@RequestParam Long user_id, @RequestBody String password) {
 		User oldUser = userService.getUserById(user_id);
 		String encodedPassword = PasswordEncoderUtil.encodePassword(password);
 		oldUser.setPassword(encodedPassword);
 		User userModified = userService.saveUser(oldUser);
 		if (userModified != null) {
-			return new ResponseEntity<>("Password modified successfully", HttpStatus.OK);
+			return userModified;
 		} else {
-			return new ResponseEntity<>("Failed to modify password", HttpStatus.INTERNAL_SERVER_ERROR);
+			return null;
 		}
 	}
 
