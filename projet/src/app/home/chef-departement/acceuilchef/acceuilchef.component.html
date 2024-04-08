@@ -1,1 +1,63 @@
-<p>acceuilchef works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="card-title ">Enseignants</h4>
+                        <p class="card-category">Votre département comporte ces enseignants</p>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-warning" (click)='demanderbesoin()'>
+                            Demander Besoins
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Nom
+                            </th>
+                            <th>
+                                Prenom
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let enseignant of enseignants">
+                                <tr>
+                                    <td>
+                                        {{ enseignant.id }}
+                                    </td>
+                                    <td>
+                                        {{ enseignant.nom }}
+                                    </td>
+                                    <td>
+                                        {{enseignant.prenom}}
+                                    </td>
+                                    
+                                    <td class="td-actions">
+                                        <button type="button" rel="tooltip"
+                                            class="btn btn-primary btn-link btn-sm" >
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
