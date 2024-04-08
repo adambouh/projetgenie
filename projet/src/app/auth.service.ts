@@ -23,14 +23,17 @@ export class AuthService {
     return this.http.post('http://localhost:8080/api/user/authentification', credentials)
       .pipe(
         tap((response: any) => {
+          console.log(credentials)
+          console.log(response)
           // Authentication succeeded, store the authentication token and its expiration date
-          localStorage.setItem(this.authTokenKey, response.first_name);
-          localStorage.setItem(this.first_name ,response.first_name );
+          if(response.first_name){
+          localStorage.setItem(this.first_name ,response.first_name);
           localStorage.setItem(this.last_name ,response.last_name );
-          localStorage.setItem(this.username,response.username);
+          localStorage.setItem(this.username,response.login);
           localStorage.setItem(this.password ,response.password );
           localStorage.setItem(this.notificationList ,response.notificationList);
-          localStorage.setItem(this.role ,response.role);}),
+          localStorage.setItem(this.role ,response.role);}
+          }),
         catchError((error) => {
           // Handle login error
           return throwError(error);
@@ -40,7 +43,7 @@ export class AuthService {
 
   logout() {
     // Clear authentication-related data from localStorage
-    localStorage.removeItem(this.authTokenKey);
+    localStorage.clear();
   }
 
   isLoggedIn(): boolean {
@@ -48,7 +51,7 @@ export class AuthService {
   }
 
   private isValidSession(): boolean {
-    const authToken = localStorage.getItem(this.authTokenKey);
+    const authToken = localStorage.getItem(this.first_name);
 
     if (authToken ) {
       return true;// Check if the token is not expired

@@ -17,6 +17,9 @@ import { AcceuilchefComponent } from './home/chef-departement/acceuilchef/acceui
 import { DemandesComponent } from './home/chef-departement/demandes/demandes.component';
 import { EnseignantsComponent } from './home/chef-departement/enseignants/enseignants.component';
 
+import { ProfileComponent } from './home/responsable-des-resources/profile/profile.component';
+import { PersonnelComponent } from './home/responsable-des-resources/personnel/personnel.component';
+
 
 // Import HomeComponent here
 const routes: Routes = [
@@ -28,7 +31,10 @@ const routes: Routes = [
     component: responsabledesresources,
     children: [ { path: '', redirectTo: 'acceuil', pathMatch: 'full' },
       { path: 'acceuil', component: AcceuilComponent },
-      { path: 'personels', component: PersonnelsComponent }
+      { path: 'personels', component: PersonnelsComponent },
+      { path: 'Profile', component: ProfileComponent },
+      { path: 'personels/:id', component: PersonnelComponent }
+
 
     ]
   }],
@@ -60,6 +66,7 @@ export default routes;
     ChefDepartementComponent,
     NotificationsComponent,
     DemandesComponent, // Add HomeComponent to the declarations array
+    ProfileComponent, PersonnelComponent, // Add HomeComponent to the declarations array
   ],
   imports: [
     BrowserModule,
