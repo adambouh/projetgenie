@@ -49,14 +49,15 @@ public class AppelDoffreControler {
 		appelDoffre.setDateFin(appelDoffreDto.getDateFin());
 		appelDoffre.setEtatDisponibilite(true);
 		// chercher et setter la liste des ressources à partir des ressources id
-		List<Ressource> ressourceList = new ArrayList<Ressource>();
 		if (appelDoffreDto.getRessourceIdList() != null && !appelDoffreDto.getRessourceIdList().isEmpty()) {
+			List<Ressource> ressourceList = new ArrayList<Ressource>();
 			for (Long idRessource : appelDoffreDto.getRessourceIdList()) {
 				Ressource ressource = ressourceService.getRessourceById(idRessource);
 				ressourceList.add(ressource);
 			}
+			appelDoffre.setRessources(ressourceList);
+
 		}
-		appelDoffre.setRessources(ressourceList);
 		return appelDoffreService.AjouterAppelDoffre(appelDoffre);
 
 	}
