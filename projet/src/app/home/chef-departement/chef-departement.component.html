@@ -1,0 +1,276 @@
+<div class="wrapper ">
+
+    <!-- Title and side bar -->
+    <div class="sidebar" data-color="purple" data-background-color="white">
+
+        <div class="logo"><a href="#" class="simple-text logo-normal">
+                MT SDSI
+            </a></div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li class="nav-item" [class.active]="isLinkActive('acceuil') "
+                    [class.disable-hover]="isLinkActive('acceuil')">
+                    <a class="nav-link" href="chefdep/acceuil">
+                        <i class="material-icons">dashboard</i>
+                        <p>Acceuil</p>
+                    </a>
+                </li>
+                <li class="nav-item" [class.active]="isLinkActive('demandes') "
+                    [class.disable-hover]="isLinkActive('demandes')">
+                    <a class="nav-link" href="chefdep/demandes">
+                        <i class="material-icons">content_paste</i>
+                        <p>Demandes</p>
+                    </a>
+                </li>
+
+                <li class="nav-item " [class.active]="isLinkActive('notifications') "
+                    [class.disable-hover]="isLinkActive('notifications')">
+                    <a class="nav-link" href="chefdep/notifications">
+                        <i class="material-icons">notifications</i>
+                        <p>Notifications</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- End title and side bar -->
+
+    <div class="main-panel">
+
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+            <div class="container-fluid">
+
+                <div class="collapse navbar-collapse justify-content-end">
+                    <form class="navbar-form">
+                        <div class="input-group no-border">
+                            <input type="text" value class="form-control" placeholder="Chercher...">
+                            <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                <i class="material-icons">search</i>
+                                <div class="ripple-container"></div>
+                            </button>
+                        </div>
+                    </form>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">notifications</i>
+                                <span class="notification">{{nombreNotificationsNonVues}}</span>
+                                <p class="d-lg-none d-md-block">
+                                    Some Actions
+                                </p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" *ngFor="let note of notifications.slice(0, 3)" href="#">
+                                    {{ note.sender }} : {{ note.contenu }}
+                                </a>
+                                <a class="dropdown-item text-center" href="chefdep/notifications"
+                                    onmouseover="this.style.color='white'; this.style.backgroundColor='orange';"
+                                    onmouseout="this.style.color='blue';this.style.backgroundColor='white';"
+                                    style="color: blue; text-decoration: underline;">
+                                    Consulter Notifications
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">person</i>
+                                <p class="d-lg-none d-md-block">
+                                    Compte
+                                </p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Exite</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- pop up modifier pc -->
+<div class="pop-up-container" #popUpUpdateDemande_pc style="display: none;">
+    <div class="container-fluid ">
+        <div class="row" id="centrage_pop_up">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Modifier besoin</h4>
+                        <p class="card-category">Adapter ce besoin au budget : PC</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="formulaire_update_demande_pc">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">CPU</label>
+                                        <input type="text" name="cpu" formControlName="cpu" class="form-control"
+                                            value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">RAM</label>
+                                        <input type="text" name="ram" formControlName="ram" class="form-control"
+                                            value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Disque</label>
+                                        <input type="text" name="disque" formControlName="disque" class="form-control"
+                                            value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Ecran</label><br>
+                                        <label class="radio-container">
+                                            <input type="radio" name="ecran" formControlName="ecran" id="optionsRadios1"
+                                                value="Avec" checked>
+                                            <span class="radio-checkmark"></span>
+                                            Avec
+                                        </label>
+                                        <label class="radio-container">
+                                            <input type="radio" name="ecran" formControlName="ecran" id="optionsRadios2"
+                                                value="Sans">
+                                            <span class="radio-checkmark"></span>
+                                            Sans
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary pull-right">Modifier</button>
+                            <button (click)="removeUpdateDemandePopUp()"
+                                class="btn btn-warning pull-right mx-2">Annuler</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- pop up modifier imprimante -->
+<div class="pop-up-container" #popUpUpdateDemande_imprimante style="display: none;">
+    <div class="container-fluid ">
+        <div class="row" id="centrage_pop_up">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Modifier besoin</h4>
+                        <p class="card-category">Adapter ce besoin au budget : Imprimante</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="formulaire_update_demande_imprimante">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Vitesse</label>
+                                        <input type="text" name="vitesse" formControlName="vitesse" class="form-control"
+                                            value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Résolution</label>
+                                        <input type="text" name="resolution" formControlName="resolution"
+                                            class="form-control" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary pull-right">Modifier</button>
+                            <button (click)="removeUpdateDemandePopUp()"
+                                class="btn btn-warning pull-right mx-2">Annuler</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- demander besoin -->
+<div class="pop-up-container" #demander_besoins style="display: none;">
+    <div class="container-fluid ">
+        <div class="row" id="centrage_pop_up">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Demander besoins</h4>
+                        <p class="card-category">Choisissez les enseignants à qui la demande sera envoyée</p>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- Textarea -->
+                                    <div class="form-group">
+                                        <label for="message">Message:</label>
+                                        <textarea class="form-control" id="message" name="message" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- Liste de checkboxes -->
+                                    <div class="form-group">
+                                        <label>Choisir les destinataires:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="receiver-1"
+                                                name="receivers" value="1">
+                                            <label class="form-check-label" for="receiver-1">Enseignant 1</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="receiver-2"
+                                                name="receivers" value="2">
+                                            <label class="form-check-label" for="receiver-2">Enseignant 2</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="receiver-3"
+                                                name="receivers" value="3">
+                                            <label class="form-check-label" for="receiver-3">Enseignant 3</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="receiver-4"
+                                                name="receivers" value="4">
+                                            <label class="form-check-label" for="receiver-4">Enseignant 4</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="receiver-5"
+                                                name="receivers" value="5">
+                                            <label class="form-check-label" for="receiver-5">Enseignant 5</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
+                            <button type="button" (click)="removeUpdateDemandePopUp()"
+                                class="btn btn-warning pull-right mx-2">Annuler</button>
+                            <div class="clearfix"></div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

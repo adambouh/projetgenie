@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">Demandes</h4>
+                <p class="card-category"> Besoins des enseignants</p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Enseignant
+                            </th>
+                            <th>
+                                Type
+                            </th>
+                            <th>
+                                Caractéristiques
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let demande of demandesEnseignants">
+                                <td>
+                                    {{ demande.id }}
+                                </td>
+                                <td>
+                                    {{ demande.name }}
+                                </td>
+                                <td>
+                                    {{demande.type}}
+                                </td>
+                                <ng-container *ngIf="demande.type === 'imprimante'">
+                                    <td>
+                                        <span>Vitesse : {{ demande.vitesse }}</span><br>
+                                        <span>Resolution : {{ demande.resolution }}</span>
+                                    </td>
+                                </ng-container>
+                                
+                                <ng-container *ngIf="demande.type === 'pc'">
+                                    <td>
+                                        <span>RAM : {{ demande.ram }}</span><br>
+                                        <span>CPU : {{ demande.cpu }}</span><br>
+                                        <span>Disque : {{ demande.disque }}</span>
+                                    </td>
+                                </ng-container>                                
+                                <td>
+                                    {{ demande.date }}
+                                </td>
+                                <td class="td-actions">
+                                    <button type="button" rel="tooltip" title="Edit Task"
+                                        class="btn btn-primary btn-link btn-sm" (click)="updateDemandePopUp(demande)">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                    <button type="button" rel="tooltip" title="Remove"
+                                        class="btn btn-danger btn-link btn-sm" (click)='deleteBesoin(demande.id)'>
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
