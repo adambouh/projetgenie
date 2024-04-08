@@ -1,5 +1,7 @@
 package gestionRessource.backend.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -13,6 +15,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -45,13 +48,16 @@ public class Ressource {
 	@JsonIgnoreProperties({ "ressource", "proposition" })
 	private Detail detail;
 
+	@OneToMany(mappedBy = "ressource")
+	private List<Panne> pannes;
+
 	public Ressource() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Ressource(Long id, String codeInventaire, EtatDemande etatDemande, User user, AppelDoffre appelDoffre,
-			Detail detail) {
+			Detail detail, List<Panne> pannes) {
 		super();
 		this.id = id;
 		this.codeInventaire = codeInventaire;
@@ -59,6 +65,7 @@ public class Ressource {
 		this.user = user;
 		this.appelDoffre = appelDoffre;
 		this.detail = detail;
+		this.pannes = pannes;
 	}
 
 	public String getCodeInventaire() {
@@ -107,6 +114,14 @@ public class Ressource {
 
 	public void setDetail(Detail detail) {
 		this.detail = detail;
+	}
+
+	public List<Panne> getPannes() {
+		return pannes;
+	}
+
+	public void setPannes(List<Panne> pannes) {
+		this.pannes = pannes;
 	}
 
 }
