@@ -48,6 +48,11 @@ public class Ressource {
 	@JsonIgnoreProperties({ "ressource", "proposition" })
 	private Detail detail;
 
+	@ManyToOne
+	@JoinColumn(name = "departement_id")
+	@JsonIgnoreProperties({ "ressources", "users" })
+	private Departement departement;
+
 	@OneToMany(mappedBy = "ressource")
 	private List<Panne> pannes;
 
@@ -57,7 +62,7 @@ public class Ressource {
 	}
 
 	public Ressource(Long id, String codeInventaire, EtatDemande etatDemande, User user, AppelDoffre appelDoffre,
-			Detail detail, List<Panne> pannes) {
+			Detail detail, Departement departement, List<Panne> pannes) {
 		super();
 		this.id = id;
 		this.codeInventaire = codeInventaire;
@@ -65,6 +70,7 @@ public class Ressource {
 		this.user = user;
 		this.appelDoffre = appelDoffre;
 		this.detail = detail;
+		this.departement = departement;
 		this.pannes = pannes;
 	}
 
@@ -122,6 +128,14 @@ public class Ressource {
 
 	public void setPannes(List<Panne> pannes) {
 		this.pannes = pannes;
+	}
+
+	public Departement getDepartement() {
+		return departement;
+	}
+
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
 	}
 
 }

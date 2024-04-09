@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import gestionRessource.backend.dto.PanneDTO;
 import gestionRessource.backend.model.EtatPanne;
 import gestionRessource.backend.model.Panne;
 import gestionRessource.backend.model.Ressource;
@@ -58,5 +60,19 @@ public class PanneControler {
 	public List<Panne> getPannes() {
 		return panneService.getAllPannes();
 
+	}
+
+	@GetMapping("/getPanneById")
+	public Panne getPanneById(@RequestParam Long panne_id) {
+		return panneService.getPanneById(panne_id);
+	}
+
+	@PutMapping("/modifyPanne")
+	public Panne modifyPanner(@RequestParam Long panne_id, @RequestBody PanneDTO panneDto) {
+		Panne oldPanne = panneService.getPanneById(panne_id);
+		oldPanne.setDateSignal(panneDto.getDateSignal());
+		oldPanne.setEtatPanne(panneDto.getEtatPanne());
+
+		return panneService.savePanne(oldPanne);
 	}
 }

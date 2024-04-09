@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import gestionRessource.backend.model.Departement;
 import gestionRessource.backend.model.Ressource;
+import gestionRessource.backend.repository.DepartementRepository;
 import gestionRessource.backend.repository.RessourceRepository;
 import gestionRessource.backend.service.RessourceService;
 
@@ -15,6 +17,9 @@ public class RessourceServiceImpl implements RessourceService {
 
 	@Autowired
 	private RessourceRepository ressourceRepository;
+
+	@Autowired
+	private DepartementRepository departementRepository;
 
 	@Override
 	public List<Ressource> getAllResources() {
@@ -50,6 +55,13 @@ public class RessourceServiceImpl implements RessourceService {
 	@Override
 	public List<Ressource> getRessourceDelivred() {
 		return ressourceRepository.findAllByCodeInventaireEmpty();
+	}
+
+	@Override
+	public List<Ressource> getRessourcesByDep(Long depId) {
+		Optional<Departement> optionalDep = departementRepository.findById(depId);
+		Departement dep = optionalDep.get();
+		return ressourceRepository.findByDepartement(dep);
 	}
 
 }

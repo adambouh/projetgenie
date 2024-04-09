@@ -26,8 +26,8 @@ public class Ordinateur extends Ressource {
 	}
 
 	public Ordinateur(Long id, String codeInventaire, EtatDemande etatDemande, User user, AppelDoffre appelDoffre,
-			Detail detail, List<Panne> pannes) {
-		super(id, codeInventaire, etatDemande, user, appelDoffre, detail, pannes);
+			Detail detail, Departement departement, List<Panne> pannes) {
+		super(id, codeInventaire, etatDemande, user, appelDoffre, detail, departement, pannes);
 		// TODO Auto-generated constructor stub
 	}
 

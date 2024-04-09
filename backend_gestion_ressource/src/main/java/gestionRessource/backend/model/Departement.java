@@ -2,6 +2,7 @@ package gestionRessource.backend.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -25,6 +26,10 @@ public class Departement {
 	@OneToMany(mappedBy = "departement")
 	@JsonIgnoreProperties({ "departement", "notifications" })
 	private List<User> users;
+
+	@OneToMany(mappedBy = "departement")
+	@JsonIgnore
+	private List<Ressource> ressources;
 
 	public Departement() {
 		super();

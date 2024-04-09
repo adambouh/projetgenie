@@ -13,6 +13,7 @@ public class RessourceDTO {
 	private int resolution;
 	private int vitesseImpression;
 	private long userId;
+	private long departementId;
 
 	public long getUserId() {
 		return userId;
@@ -92,6 +93,14 @@ public class RessourceDTO {
 
 	public void setVitesseImpression(int vitesseImpression) {
 		this.vitesseImpression = vitesseImpression;
+	}
+
+	public long getDepartementId() {
+		return departementId;
+	}
+
+	public void setDepartementId(long departementId) {
+		this.departementId = departementId;
 	}
 
 }

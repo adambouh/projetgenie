@@ -36,6 +36,7 @@ public class ConstatControler {
 		constat.setOrdreLogiciel(constatDto.getOrdreLogiciel());
 		constat.setOrdreMateriel(constatDto.getOrdreMateriel());
 		constat.setPanne(panne);
+		constatService.saveConstat(constat);
 		return constat;
 	}
 

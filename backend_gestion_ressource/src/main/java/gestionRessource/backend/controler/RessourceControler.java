@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import gestionRessource.backend.dto.RessourceDTO;
+import gestionRessource.backend.model.Departement;
 import gestionRessource.backend.model.EtatDemande;
 import gestionRessource.backend.model.Imprimante;
 import gestionRessource.backend.model.Ordinateur;
 import gestionRessource.backend.model.Ressource;
 import gestionRessource.backend.model.User;
+import gestionRessource.backend.service.DepartementService;
 import gestionRessource.backend.service.RessourceService;
 import gestionRessource.backend.service.UserService;
 
@@ -34,6 +36,9 @@ public class RessourceControler {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private DepartementService departementService;
 
 	@GetMapping("/getAllRessources")
 	public List<Ressource> getAllRessources() {
@@ -49,6 +54,10 @@ public class RessourceControler {
 	@PutMapping("/updateRessource")
 	public Ressource updateRessource(@RequestParam Long id, @RequestBody RessourceDTO ressourceDto) {
 		Ressource oldRessource = ressourceService.getRessourceById(id);
+		Departement departement = null;
+		if (ressourceDto.getDepartementId() != 0L) {
+			departement = departementService.getDepartementById(ressourceDto.getDepartementId());
+		}
 		if (ressourceDto.getTypeRessource().equals("Ordinateur") && oldRessource instanceof Ordinateur) {
 			oldRessource.setCodeInventaire(ressourceDto.getCodeInventaire());
 			oldRessource.setEtatDemande(ressourceDto.getEtatDemande());
@@ -56,6 +65,7 @@ public class RessourceControler {
 			((Ordinateur) oldRessource).setRam(ressourceDto.getRam());
 			((Ordinateur) oldRessource).setDisqueDur(ressourceDto.getDisqueDur());
 			((Ordinateur) oldRessource).setEcran(ressourceDto.getEcran());
+			((Ordinateur) oldRessource).setDepartement(departement);
 			return ressourceService.updateRessource(oldRessource);
 
 		} else if (ressourceDto.getTypeRessource().equals("Imprimante") && oldRessource instanceof Imprimante) {
@@ -63,6 +73,8 @@ public class RessourceControler {
 			oldRessource.setEtatDemande(ressourceDto.getEtatDemande());
 			((Imprimante) oldRessource).setResolution(ressourceDto.getResolution());
 			((Imprimante) oldRessource).setVitesseImpression(ressourceDto.getVitesseImpression());
+			((Imprimante) oldRessource).setDepartement(departement);
+
 			return ressourceService.updateRessource(oldRessource);
 		}
 		System.out.println("les données modifiées ne sont pas compatible");
@@ -78,6 +90,10 @@ public class RessourceControler {
 	@PostMapping("/addRessource")
 	public Ressource addRessource(@RequestBody RessourceDTO ressourceDto) {
 		User user = userService.getUserById(ressourceDto.getUserId());
+		Departement departement = null;
+		if (ressourceDto.getDepartementId() != 0L) {
+			departement = departementService.getDepartementById(ressourceDto.getDepartementId());
+		}
 		if (ressourceDto.getTypeRessource().equals("Ordinateur")) {
 			Ordinateur ordi = new Ordinateur();
 			ordi.setEtatDemande(EtatDemande.En_Cours_De_Traitement);
@@ -86,6 +102,7 @@ public class RessourceControler {
 			ordi.setEcran(ressourceDto.getEcran());
 			ordi.setRam(ressourceDto.getRam());
 			ordi.setUser(user);
+			ordi.setDepartement(departement);
 			return ressourceService.saveRessource(ordi);
 
 		} else if (ressourceDto.getTypeRessource().equals("Imprimante")) {
@@ -93,6 +110,8 @@ public class RessourceControler {
 			impr.setEtatDemande(EtatDemande.En_Cours_De_Traitement);
 			impr.setResolution(ressourceDto.getResolution());
 			impr.setUser(user);
+			impr.setDepartement(departement);
+
 			return ressourceService.saveRessource(impr);
 		}
 		System.out.println("y'a eu un probleme lors de l'ajout de la ressource");
@@ -121,6 +140,30 @@ public class RessourceControler {
 			ressourceService.saveRessource(oldRessource);
 		}
 		return oldRessource;
+
+	}
+
+	@PutMapping("/affectOrNotRessourceToDep")
+	public Ressource affectOrNotRessourceToDep(@RequestParam Long id, @RequestBody RessourceDTO ressourceDto) {
+		Ressource oldRessource = ressourceService.getRessourceById(id);
+		Departement departement = null;
+		Long departementId = ressourceDto.getDepartementId();
+		if (departementId != 0L) {
+			departement = departementService.getDepartementById(ressourceDto.getDepartementId());
+
+		}
+		if (oldRessource != null) {
+			oldRessource.setDepartement(departement);
+			ressourceService.saveRessource(oldRessource);
+		}
+		return oldRessource;
+
+	}
+
+	@GetMapping("/getRessourcesByDep")
+	public List<Ressource> getRessourcesByDep(@RequestParam Long depId) {
+		List<Ressource> ressources = ressourceService.getRessourcesByDep(depId);
+		return ressources;
 
 	}
 

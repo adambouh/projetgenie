@@ -18,4 +18,6 @@ public interface RessourceService {
 	List<Ressource> getRessourceByUserId(Long userId);
 
 	List<Ressource> getRessourceDelivred();
+
+	List<Ressource> getRessourcesByDep(Long depId);
 }
