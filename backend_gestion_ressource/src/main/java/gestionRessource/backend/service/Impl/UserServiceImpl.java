@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import gestionRessource.backend.model.Departement;
+import gestionRessource.backend.model.Role;
 import gestionRessource.backend.model.User;
 import gestionRessource.backend.repository.UserRepository;
 import gestionRessource.backend.service.UserService;
@@ -40,6 +42,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserByLogin(String login) {
 		return userRepository.findByLogin(login);
+	}
+
+	@Override
+	public List<User> getUsersByRoleAndDep(Role role, Departement dep) {
+		return userRepository.findByRoleAndDepartement(role, dep);
 	}
 
 }

@@ -50,7 +50,7 @@ public class UserControler {
 	@PostMapping("/addUser")
 	public ResponseEntity<String> addUser(@RequestBody UserDTO userdto) {
 		User user = UserConvert.convertUserDtoToUser(userdto);
-		Departement departement = departementService.getDepartementById(userdto.getDepartement_id());
+		Departement departement = departementService.getDepartementById(userdto.getDepartementId());
 		user.setDepartement(departement);
 		User userAdded = userService.saveUser(user);
 		if (userAdded != null) {
@@ -73,7 +73,7 @@ public class UserControler {
 	@PutMapping("/modifyUser")
 	public User modifyUser(@RequestParam Long id, @RequestBody UserDTO userdto) {
 		User oldUser = userService.getUserById(id);
-		Departement departement = departementService.getDepartementById(userdto.getDepartement_id());
+		Departement departement = departementService.getDepartementById(userdto.getDepartementId());
 		oldUser.setDepartement(departement);
 		oldUser.setFirst_name(userdto.getFirst_name());
 		oldUser.setLast_name(userdto.getLast_name());
@@ -99,4 +99,9 @@ public class UserControler {
 		}
 	}
 
+	@GetMapping("/getUsersByRoleAndDep")
+	public List<User> getUsersByRoleAndDep(@RequestBody UserDTO userDTO) {
+		Departement departement = departementService.getDepartementById(userDTO.getDepartementId());
+		return userService.getUsersByRoleAndDep(userDTO.getRole(), departement);
+	}
 }

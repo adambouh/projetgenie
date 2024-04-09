@@ -12,7 +12,7 @@ public class UserDTO {
 	private String password;
 	private List<Notification> notificationList;
 	private Role role;
-	private Long departement_id;
+	private Long departementId;
 
 	public String getFirst_name() {
 		return first_name;
@@ -62,12 +62,12 @@ public class UserDTO {
 		this.notificationList = notificationList;
 	}
 
-	public Long getDepartement_id() {
-		return departement_id;
+	public Long getDepartementId() {
+		return departementId;
 	}
 
-	public void setDepartement_id(Long departement_id) {
-		this.departement_id = departement_id;
+	public void setDepartementId(Long departementId) {
+		this.departementId = departementId;
 	}
 
 }

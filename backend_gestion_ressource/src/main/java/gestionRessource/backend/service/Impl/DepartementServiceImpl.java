@@ -1,5 +1,6 @@
 package gestionRessource.backend.service.Impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class DepartementServiceImpl implements DepartementService {
 	@Override
 	public void deleteDepartement(Long id) {
 		departementRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Departement> getAllDepartement() {
+		return departementRepository.findAll();
 	}
 
 }
