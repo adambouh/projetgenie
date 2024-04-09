@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,9 +46,9 @@ public class PanneControler {
 	}
 
 	@PutMapping("/affectPanneToTechnicien")
-	public Panne affectPanneToTechnicien(@RequestBody Long user_id, @RequestBody Long panne_id) {
-		User user = userService.getUserById(user_id);
-		Panne panne = panneService.getPanneById(panne_id);
+	public Panne affectPanneToTechnicien(@RequestParam Long panneId, @RequestParam Long userId) {
+		User user = userService.getUserById(userId);
+		Panne panne = panneService.getPanneById(panneId);
 		panne.setUser(user);
 		return panneService.savePanne(panne);
 
@@ -57,7 +56,6 @@ public class PanneControler {
 
 	@GetMapping("/getPannes")
 	public List<Panne> getPannes() {
-
 		return panneService.getAllPannes();
 
 	}
