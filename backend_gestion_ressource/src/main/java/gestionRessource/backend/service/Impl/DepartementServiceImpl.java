@@ -21,4 +21,14 @@ public class DepartementServiceImpl implements DepartementService {
 		return departementOptional.get();
 	}
 
+	@Override
+	public Departement ajouterDepartement(Departement departement) {
+		return departementRepository.save(departement);
+	}
+
+	@Override
+	public void deleteDepartement(Long id) {
+		departementRepository.deleteById(id);
+	}
+
 }

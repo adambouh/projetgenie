@@ -16,7 +16,10 @@
                                 Enseignant
                             </th>
                             <th>
-                                Besoin
+                                Type
+                            </th>
+                            <th>
+                                Caractéristiques
                             </th>
                             <th>
                                 Date
@@ -26,24 +29,40 @@
                             </th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let enseignant of demandesEnseignants">
+                            <tr *ngFor="let demande of demandesEnseignants">
                                 <td>
-                                    {{ enseignant.id }}
+                                    {{ demande.id }}
                                 </td>
                                 <td>
-                                    {{ enseignant.name }}
+                                    {{ demande.name }}
                                 </td>
                                 <td>
-                                    {{ enseignant.resource }}
+                                    {{demande.type}}
                                 </td>
+                                <ng-container *ngIf="demande.type === 'imprimante'">
+                                    <td>
+                                        <span>Vitesse : {{ demande.vitesse }}</span><br>
+                                        <span>Resolution : {{ demande.resolution }}</span>
+                                    </td>
+                                </ng-container>
+                                
+                                <ng-container *ngIf="demande.type === 'pc'">
+                                    <td>
+                                        <span>RAM : {{ demande.ram }}</span><br>
+                                        <span>CPU : {{ demande.cpu }}</span><br>
+                                        <span>Disque : {{ demande.disque }}</span>
+                                    </td>
+                                </ng-container>                                
                                 <td>
-                                    {{ enseignant.date }}
+                                    {{ demande.date }}
                                 </td>
                                 <td class="td-actions">
-                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
+                                    <button type="button" rel="tooltip" title="Edit Task"
+                                        class="btn btn-primary btn-link btn-sm" (click)="updateDemandePopUp(demande)">
                                         <i class="material-icons">edit</i>
                                     </button>
-                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
+                                    <button type="button" rel="tooltip" title="Remove"
+                                        class="btn btn-danger btn-link btn-sm" (click)='deleteBesoin(demande.id)'>
                                         <i class="material-icons">close</i>
                                     </button>
                                 </td>
@@ -55,3 +74,4 @@
         </div>
     </div>
 </div>
+

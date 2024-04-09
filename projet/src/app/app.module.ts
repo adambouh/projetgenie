@@ -15,11 +15,12 @@ import { ChefDepartementComponent } from './home/chef-departement/chef-departeme
 import { NotificationsComponent } from './home/chef-departement/notifications/notifications.component';
 import { AcceuilchefComponent } from './home/chef-departement/acceuilchef/acceuilchef.component';
 import { DemandesComponent } from './home/chef-departement/demandes/demandes.component';
-import { EnseignantsComponent } from './home/chef-departement/enseignants/enseignants.component';
 
 import { ProfileComponent } from './home/responsable-des-resources/profile/profile.component';
 import { PersonnelComponent } from './home/responsable-des-resources/personnel/personnel.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgFor, NgForOf } from '@angular/common';
 
 // Import HomeComponent here
 const routes: Routes = [
@@ -47,7 +48,6 @@ const routes: Routes = [
       {path: "demandes", component: DemandesComponent},
       {path: "notifications", component: NotificationsComponent}, // à dicuter
       {path: "acceuil", component: AcceuilchefComponent}, // à discuter
-      {path: "enseignants", component: EnseignantsComponent} // à discuter
     ]
   }
 ];
@@ -62,6 +62,7 @@ export default routes;
     HomeComponent,
     responsabledesresources,
     AcceuilComponent,
+    AcceuilchefComponent,
     PersonnelsComponent,
     ChefDepartementComponent,
     NotificationsComponent,
@@ -73,6 +74,9 @@ export default routes;
     RouterModule.forRoot(routes), // Configure your routes here
     FormsModule,
     HttpClientModule, 
+    ReactiveFormsModule,
+    NgFor,
+    NgForOf,
     MatCardModule, // Add HttpClientModule here
   ],
   providers: [],

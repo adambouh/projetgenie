@@ -5,3 +5,77 @@
     pointer-events: none; /* Désactive les événements de souris */
     cursor: default; /* Change le curseur en curseur par défaut */
 }
+
+/* Style des boutons radio */
+.radio-container {
+    display: inline-flex;
+    /* Utilisation de flexbox pour aligner les éléments */
+    align-items: flex-end;
+    /* Aligner les éléments en bas */
+    margin-right: 20px;
+    /* Espacement entre les boutons */
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+/* Style du bouton radio lui-même */
+.radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Style du bouton de vérification personnalisé */
+.radio-checkmark {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 5px;
+    /* Espacement entre le bouton et le libellé */
+}
+
+/* Lorsque le bouton radio est coché, changer la couleur du bouton de vérification */
+.radio-container input:checked+.radio-checkmark {
+    background-color: #2196F3;
+}
+
+/* Style de l'indicateur de sélection du bouton */
+.radio-container .radio-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* Afficher l'indicateur de sélection si le bouton radio est coché */
+.radio-container input:checked+.radio-checkmark:after {
+    display: block;
+}
+
+.pop-up-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(109, 107, 107, 0.5);
+    z-index: 98757544;
+    display: flex;
+    align-items: center;
+}
+
+#centrage_pop_up {
+    display: flex;
+    justify-content: center;
+}
