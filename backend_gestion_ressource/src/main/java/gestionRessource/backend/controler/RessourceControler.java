@@ -80,7 +80,6 @@ public class RessourceControler {
 		User user = userService.getUserById(ressourceDto.getUserId());
 		if (ressourceDto.getTypeRessource().equals("Ordinateur")) {
 			Ordinateur ordi = new Ordinateur();
-			ordi.setCodeInventaire(ressourceDto.getCodeInventaire());
 			ordi.setEtatDemande(EtatDemande.En_Cours_De_Traitement);
 			ordi.setCpu(ressourceDto.getCpu());
 			ordi.setDisqueDur(ressourceDto.getDisqueDur());
@@ -91,7 +90,6 @@ public class RessourceControler {
 
 		} else if (ressourceDto.getTypeRessource().equals("Imprimante")) {
 			Imprimante impr = new Imprimante();
-			impr.setCodeInventaire(ressourceDto.getCodeInventaire());
 			impr.setEtatDemande(EtatDemande.En_Cours_De_Traitement);
 			impr.setResolution(ressourceDto.getResolution());
 			impr.setUser(user);
@@ -107,4 +105,23 @@ public class RessourceControler {
 		return ressources;
 
 	}
+
+	@GetMapping("/getRessourcesDelivred")
+	public List<Ressource> getRessourcesDelivred() {
+		List<Ressource> ressources = ressourceService.getRessourceDelivred();
+		return ressources;
+
+	}
+
+	@PutMapping("/updateRessourceForLivraison")
+	public Ressource updateRessourceForLivraison(@RequestParam Long id, @RequestBody RessourceDTO ressourceDto) {
+		Ressource oldRessource = ressourceService.getRessourceById(id);
+		if (oldRessource != null) {
+			oldRessource.setCodeInventaire(ressourceDto.getCodeInventaire());
+			ressourceService.saveRessource(oldRessource);
+		}
+		return oldRessource;
+
+	}
+
 }

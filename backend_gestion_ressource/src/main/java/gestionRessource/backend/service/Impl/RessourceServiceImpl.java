@@ -47,4 +47,9 @@ public class RessourceServiceImpl implements RessourceService {
 		return ressourceRepository.findByUserIdOrderByEtatDemandeDesc(userId);
 	}
 
+	@Override
+	public List<Ressource> getRessourceDelivred() {
+		return ressourceRepository.findAllByCodeInventaireEmpty();
+	}
+
 }

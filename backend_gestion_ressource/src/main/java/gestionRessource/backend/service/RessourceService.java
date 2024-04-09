@@ -16,4 +16,6 @@ public interface RessourceService {
 	Ressource saveRessource(Ressource ressource);
 
 	List<Ressource> getRessourceByUserId(Long userId);
+
+	List<Ressource> getRessourceDelivred();
 }

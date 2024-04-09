@@ -103,4 +103,5 @@ public class UserControler {
 	public List<User> getUsersByRoleAndDep(@RequestBody UserDTO userDTO) {
 		return userService.getUsersByRoleAndDep(userDTO.getRole(), userDTO.getDepartementId());
 	}
+
 }

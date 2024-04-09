@@ -3,8 +3,10 @@ package gestionRessource.backend.controler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import gestionRessource.backend.dto.FournisseurDTO;
@@ -30,5 +32,19 @@ public class FournisseurControler {
 		fournisseur.setPassword(encodedPassword);
 		return fournisseurService.ajouterFournisseur(fournisseur);
 
+	}
+
+	@PutMapping("/modifyFournisseur")
+	public Fournisseur modifyFournisseur(@RequestParam Long fournisseur_id,
+			@RequestBody FournisseurDTO fournisseurDto) {
+		Fournisseur oldFournisseur = fournisseurService.getFournisseurById(fournisseur_id);
+		oldFournisseur.setAdresse(fournisseurDto.getAdresse());
+		oldFournisseur.setGerant(fournisseurDto.getGerant());
+		oldFournisseur.setLieu(fournisseurDto.getLieu());
+		oldFournisseur.setSiteInternet(fournisseurDto.getSiteInternet());
+		oldFournisseur.setScorePanne(fournisseurDto.getScorePanne());
+		oldFournisseur.setEtatFournisseur(fournisseurDto.getEtatFournisseur());
+
+		return fournisseurService.ajouterFournisseur(oldFournisseur);
 	}
 }
