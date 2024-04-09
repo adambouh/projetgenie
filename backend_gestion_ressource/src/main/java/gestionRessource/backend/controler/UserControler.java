@@ -35,11 +35,11 @@ public class UserControler {
 	private DepartementService departementService;
 
 	@PostMapping("/authentification")
-	public UserDTO authentification(@RequestBody AuthentificationDTO authentification) {
+	public User authentification(@RequestBody AuthentificationDTO authentification) {
 		String encodedPassword = PasswordEncoderUtil.encodePassword(authentification.getPassword());
 		User user = userService.getUserByLoginPassword(authentification.getLogin(), encodedPassword);
 		if (user != null) {
-			return UserConvert.convertUserToUserDto(user);
+			return user;
 
 		} else {
 			System.out.println("Login ou Password incorrecte");
