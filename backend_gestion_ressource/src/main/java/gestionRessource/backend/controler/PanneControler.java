@@ -70,8 +70,12 @@ public class PanneControler {
 	@PutMapping("/modifyPanne")
 	public Panne modifyPanner(@RequestParam Long panne_id, @RequestBody PanneDTO panneDto) {
 		Panne oldPanne = panneService.getPanneById(panne_id);
-		oldPanne.setDateSignal(panneDto.getDateSignal());
-		oldPanne.setEtatPanne(panneDto.getEtatPanne());
+		if (panneDto.getDateSignal() != null) {
+			oldPanne.setDateSignal(panneDto.getDateSignal());
+		}
+		if (panneDto.getEtatPanne() != null) {
+			oldPanne.setEtatPanne(panneDto.getEtatPanne());
+		}
 
 		return panneService.savePanne(oldPanne);
 	}
