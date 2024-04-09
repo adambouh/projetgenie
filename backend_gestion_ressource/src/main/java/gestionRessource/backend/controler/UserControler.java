@@ -101,7 +101,6 @@ public class UserControler {
 
 	@GetMapping("/getUsersByRoleAndDep")
 	public List<User> getUsersByRoleAndDep(@RequestBody UserDTO userDTO) {
-		Departement departement = departementService.getDepartementById(userDTO.getDepartementId());
-		return userService.getUsersByRoleAndDep(userDTO.getRole(), departement);
+		return userService.getUsersByRoleAndDep(userDTO.getRole(), userDTO.getDepartementId());
 	}
 }

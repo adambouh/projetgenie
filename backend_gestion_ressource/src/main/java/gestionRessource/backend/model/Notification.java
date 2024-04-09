@@ -2,7 +2,7 @@ package gestionRessource.backend.model;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,7 +30,7 @@ public class Notification {
 	private boolean etat_lu;
 
 	@ManyToOne
-	@JsonIgnore
+	@JsonIncludeProperties({ "login" })
 	@JoinColumn(name = "user_id")
 	private User user;
 

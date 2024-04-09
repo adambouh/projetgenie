@@ -2,7 +2,6 @@ package gestionRessource.backend.service;
 
 import java.util.List;
 
-import gestionRessource.backend.model.Departement;
 import gestionRessource.backend.model.Role;
 import gestionRessource.backend.model.User;
 
@@ -17,5 +16,5 @@ public interface UserService {
 
 	User getUserByLogin(String login);
 
-	List<User> getUsersByRoleAndDep(Role role, Departement dep);
+	List<User> getUsersByRoleAndDep(Role role, Long depId);
 }

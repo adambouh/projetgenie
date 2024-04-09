@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import gestionRessource.backend.model.Departement;
 import gestionRessource.backend.model.Role;
 import gestionRessource.backend.model.User;
+import gestionRessource.backend.repository.DepartementRepository;
 import gestionRessource.backend.repository.UserRepository;
 import gestionRessource.backend.service.UserService;
 
@@ -17,6 +18,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private DepartementRepository departementRepository;
 
 	@Override
 	public User getUserByLoginPassword(String login, String password) {
@@ -45,8 +49,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getUsersByRoleAndDep(Role role, Departement dep) {
-		return userRepository.findByRoleAndDepartement(role, dep);
+	public List<User> getUsersByRoleAndDep(Role role, Long depId) {
+		Optional<Departement> departementOptional = departementRepository.findById(depId);
+		Departement departement = departementOptional.get();
+		return userRepository.findByRoleAndDepartement(role, departement);
+
 	}
 
 }
