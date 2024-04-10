@@ -34,18 +34,24 @@ public class Notification {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@ManyToOne
+	@JoinColumn(name = "emetteur_id")
+	@JsonIncludeProperties({ "id" })
+	private User emetteur;
+
 	public Notification() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Notification(Long id, String contenu, Date date_envoi, boolean etat_lu, User user) {
+	public Notification(Long id, String contenu, Date date_envoi, boolean etat_lu, User user, User emetteur) {
 		super();
 		this.id = id;
 		this.contenu = contenu;
 		this.date_envoi = date_envoi;
 		this.etat_lu = etat_lu;
 		this.user = user;
+		this.emetteur = emetteur;
 	}
 
 	public Long getId() {
@@ -86,6 +92,14 @@ public class Notification {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public User getEmetteur() {
+		return emetteur;
+	}
+
+	public void setEmetteur(User emetteur) {
+		this.emetteur = emetteur;
 	}
 
 }

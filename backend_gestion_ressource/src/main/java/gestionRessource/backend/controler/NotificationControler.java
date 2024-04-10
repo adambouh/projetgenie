@@ -32,6 +32,7 @@ public class NotificationControler {
 	private List<Notification> addNotificationForDepartement(@RequestBody NotificationDTO notificationDto) {
 		List<Notification> notifList = new ArrayList<Notification>();
 		List<User> userList = userService.getUsersByRoleAndDep(Role.Enseignant, notificationDto.getDepId());
+		User emetteur = userService.getUserById(notificationDto.getEmetteur_id());
 		if (userList != null && !userList.isEmpty()) {
 			for (User user : userList) {
 				Notification notif = new Notification();
@@ -39,6 +40,7 @@ public class NotificationControler {
 				notif.setDate_envoi(new Date(System.currentTimeMillis()));
 				notif.setEtat_lu(false);
 				notif.setUser(user);
+				notif.setEmetteur(emetteur);
 				notificationService.AjouterNotification(notif);
 				notifList.add(notif);
 
@@ -50,12 +52,14 @@ public class NotificationControler {
 	@PostMapping("/addNotificationForUser")
 	private Notification addNotificationForUser(@RequestBody NotificationDTO notificationDto) {
 		User user = userService.getUserById(notificationDto.getUserId());
+		User emetteur = userService.getUserById(notificationDto.getEmetteur_id());
 		if (user != null) {
 			Notification notif = new Notification();
 			notif.setContenu(notificationDto.getMessage());
 			notif.setDate_envoi(new Date(System.currentTimeMillis()));
 			notif.setEtat_lu(false);
 			notif.setUser(user);
+			notif.setEmetteur(emetteur);
 			notificationService.AjouterNotification(notif);
 			return notif;
 		}
@@ -66,6 +70,7 @@ public class NotificationControler {
 	@PostMapping("/addNotificationForListUser")
 	private List<Notification> addNotificationForListUser(@RequestBody NotificationDTO notificationDto) {
 		List<Notification> notifList = new ArrayList<Notification>();
+		User emetteur = userService.getUserById(notificationDto.getEmetteur_id());
 		if (notificationDto.getListeUserId() != null && !notificationDto.getListeUserId().isEmpty()) {
 			for (Long userId : notificationDto.getListeUserId()) {
 				User user = userService.getUserById(userId);
@@ -75,6 +80,7 @@ public class NotificationControler {
 					notif.setDate_envoi(new Date(System.currentTimeMillis()));
 					notif.setEtat_lu(false);
 					notif.setUser(user);
+					notif.setEmetteur(emetteur);
 					notificationService.AjouterNotification(notif);
 					notifList.add(notif);
 				}
