@@ -1,5 +1,6 @@
 package gestionRessource.backend.model;
 
+import java.sql.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -20,8 +21,9 @@ public class Imprimante extends Ressource {
 	}
 
 	public Imprimante(Long id, String codeInventaire, EtatDemande etatDemande, User user, AppelDoffre appelDoffre,
-			Detail detail, Departement departement, List<Panne> pannes) {
-		super(id, codeInventaire, etatDemande, user, appelDoffre, detail, departement, pannes);
+			Detail detail, Departement departement, List<Panne> pannes, String typeRessource, Date dateCreation) {
+		super(id, codeInventaire, etatDemande, user, appelDoffre, detail, departement, pannes, typeRessource,
+				dateCreation);
 		// TODO Auto-generated constructor stub
 	}
 

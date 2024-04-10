@@ -1,5 +1,7 @@
 package gestionRessource.backend.dto;
 
+import java.sql.Date;
+
 import gestionRessource.backend.model.EtatDemande;
 
 public class RessourceDTO {
@@ -14,6 +16,7 @@ public class RessourceDTO {
 	private int vitesseImpression;
 	private long userId;
 	private long departementId;
+	private Date dateCreation;
 
 	public long getUserId() {
 		return userId;
@@ -85,6 +88,14 @@ public class RessourceDTO {
 
 	public void setResolution(int resolution) {
 		this.resolution = resolution;
+	}
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 	public int getVitesseImpression() {

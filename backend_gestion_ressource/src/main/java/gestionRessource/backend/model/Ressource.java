@@ -1,5 +1,6 @@
 package gestionRessource.backend.model;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -56,13 +57,19 @@ public class Ressource {
 	@OneToMany(mappedBy = "ressource")
 	private List<Panne> pannes;
 
-	public Ressource() {
+	@Column(name = "typeRessource")
+	private String typeRessource;
+
+	@Column(name = "dateCreation")
+	private Date dateCreation;
+
+	Ressource() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Ressource(Long id, String codeInventaire, EtatDemande etatDemande, User user, AppelDoffre appelDoffre,
-			Detail detail, Departement departement, List<Panne> pannes) {
+			Detail detail, Departement departement, List<Panne> pannes, String typeRessource, Date dateCreation) {
 		super();
 		this.id = id;
 		this.codeInventaire = codeInventaire;
@@ -72,6 +79,8 @@ public class Ressource {
 		this.detail = detail;
 		this.departement = departement;
 		this.pannes = pannes;
+		this.typeRessource = typeRessource;
+		this.dateCreation = dateCreation;
 	}
 
 	public String getCodeInventaire() {
@@ -136,6 +145,22 @@ public class Ressource {
 
 	public void setDepartement(Departement departement) {
 		this.departement = departement;
+	}
+
+	public String getTypeRessource() {
+		return typeRessource;
+	}
+
+	public void setTypeRessource(String typeRessource) {
+		this.typeRessource = typeRessource;
+	}
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 }

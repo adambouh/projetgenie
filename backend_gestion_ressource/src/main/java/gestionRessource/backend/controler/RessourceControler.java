@@ -1,5 +1,6 @@
 package gestionRessource.backend.controler;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,7 @@ public class RessourceControler {
 			((Ordinateur) oldRessource).setRam(ressourceDto.getRam());
 			((Ordinateur) oldRessource).setDisqueDur(ressourceDto.getDisqueDur());
 			((Ordinateur) oldRessource).setEcran(ressourceDto.getEcran());
+			((Ordinateur) oldRessource).setTypeRessource(ressourceDto.getTypeRessource());
 			((Ordinateur) oldRessource).setDepartement(departement);
 			return ressourceService.updateRessource(oldRessource);
 
@@ -73,6 +75,7 @@ public class RessourceControler {
 			oldRessource.setEtatDemande(ressourceDto.getEtatDemande());
 			((Imprimante) oldRessource).setResolution(ressourceDto.getResolution());
 			((Imprimante) oldRessource).setVitesseImpression(ressourceDto.getVitesseImpression());
+			((Imprimante) oldRessource).setTypeRessource(ressourceDto.getTypeRessource());
 			((Imprimante) oldRessource).setDepartement(departement);
 
 			return ressourceService.updateRessource(oldRessource);
@@ -101,6 +104,8 @@ public class RessourceControler {
 			ordi.setDisqueDur(ressourceDto.getDisqueDur());
 			ordi.setEcran(ressourceDto.getEcran());
 			ordi.setRam(ressourceDto.getRam());
+			ordi.setTypeRessource(ressourceDto.getTypeRessource());
+			ordi.setDateCreation(new Date(System.currentTimeMillis()));
 			ordi.setUser(user);
 			ordi.setDepartement(departement);
 			return ressourceService.saveRessource(ordi);
@@ -109,6 +114,8 @@ public class RessourceControler {
 			Imprimante impr = new Imprimante();
 			impr.setEtatDemande(EtatDemande.En_Cours_De_Traitement);
 			impr.setResolution(ressourceDto.getResolution());
+			impr.setTypeRessource(ressourceDto.getTypeRessource());
+			impr.setDateCreation(new Date(System.currentTimeMillis()));
 			impr.setUser(user);
 			impr.setDepartement(departement);
 
