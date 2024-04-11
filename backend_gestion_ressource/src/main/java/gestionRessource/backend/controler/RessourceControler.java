@@ -115,6 +115,7 @@ public class RessourceControler {
 			impr.setEtatDemande(EtatDemande.En_Cours_De_Traitement);
 			impr.setResolution(ressourceDto.getResolution());
 			impr.setTypeRessource(ressourceDto.getTypeRessource());
+			impr.setVitesseImpression(ressourceDto.getVitesseImpression());
 			impr.setDateCreation(new Date(System.currentTimeMillis()));
 			impr.setUser(user);
 			impr.setDepartement(departement);
