@@ -1,0 +1,224 @@
+/* SEND MESSAGE */
+.icon-send-message {
+  position: relative;
+}
+
+.icon-send-message:hover {
+  cursor: pointer;
+}
+
+.icon-send-message:hover .flesh {
+  display: block;
+}
+
+.icon-send-message:hover .explication {
+  display: block;
+}
+
+.icon-send-message .flesh {
+  display: none;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 5px;
+  top: -17px;
+  background-color: #3C91E6;
+  transform: rotate(45deg);
+}
+
+.icon-send-message .explication {
+  display: none;
+  font-size: 15px;
+  position: absolute;
+  top: -34px;
+  left: -10px;
+  width: 150px;
+  height: 30px;
+  color: white;
+  background-color: #3C91E6;
+  padding: 5px 5px;
+  border-radius: 5px;
+}
+
+/* SEND MESSAGE */
+
+/* POP UP CONTAINER */
+.pop-up-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  right: 0;
+  z-index: 10000;
+}
+
+.form-pop-up {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.form-pop-up-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 20px;
+}
+.form-control-texterea {
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  resize: none;
+}
+
+.form-control-texterea:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.btn-annuler {
+  background-color: #FFCE26;
+  margin-right: 17px;
+}
+.btn-envoyer {
+  background-color: #682773;
+}
+.btn-annuler, .btn-envoyer {
+  border: none;
+  color: white;
+  padding: 8px 50px;
+  border-radius: 3px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+.btn-annuler:hover {
+  background-color: rgb(255, 255, 255);
+  color: #FFCE26;
+}
+.btn-envoyer:hover {
+  background-color: rgb(255, 255, 255);
+  color: #682773;
+}
+.checkbox-list {
+  padding-left: 40px;
+}
+.checkbox-list .checkbox{
+  padding-top: 20px;
+  /* margin-top: 5px; */
+  height: 205px;
+  overflow-y: hidden;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+}
+.checkbox-list .checkbox:hover{
+  overflow-y: auto;
+}
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.checkbox-item input[type="checkbox"] {
+  margin-left: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.checkbox-item input[type="checkbox"]:checked {
+  background-color: #682773;
+}
+
+.checkbox-item input[type="checkbox"]:checked::after {
+  content: '\2714';
+  color: white;
+  font-size: 12px;
+  padding: 4px;
+  line-height: 20px;
+  text-align: center;
+}
+.checkbox-item label {
+  cursor: pointer;
+}
+
+.select-all-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.enseignant-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.enseignant-icon{
+  font-size: 50px; 
+  color: blue;
+}
+
+
+/* CHERCHE INPUT */
+
+form .form-input,.form-input {
+  display: flex;
+  align-items: center;
+  height: 36px;
+}
+form .form-input input,.form-input input {
+  flex-grow: 1;
+  padding: 0 16px;
+  height: 100%;
+  border: none;
+  background: var(--grey);
+  border-radius: 36px 0 0 36px;
+  outline: none;
+  width: 100%;
+  color: var(--dark);
+}
+form .form-input button,.form-input button {
+  width: 36px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--blue);
+  color: var(--light);
+  font-size: 18px;
+  border: none;
+  outline: none;
+  border-radius: 0 36px 36px 0;
+  cursor: pointer;
+}
+/* CHERCHE INPUT */

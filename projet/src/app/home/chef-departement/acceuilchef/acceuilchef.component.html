@@ -1,0 +1,120 @@
+<!-- MAIN -->
+<main>
+    <div class="head-title">
+        <div class="left">
+            <h1>Acceuil</h1>
+            <ul class="breadcrumb">
+                <!-- <li>
+            <a href="#">Acceuil</a>
+          </li>
+          <li><i class='bx bx-chevron-right' ></i></li>
+          <li>
+            <a class="active" routerLink="">Home</a>
+          </li> -->
+            </ul>
+        </div>
+
+        <a href="#" class="btn-download" (click)="DemandeBesoinPopUp()" onclick="event.preventDefault()">
+            <i class='bx bxs-file-plus'></i>
+            <span class="text">Demander Besoins</span>
+        </a>
+    </div>
+
+    <div class="table-data">
+        <div class="order">
+            <div class="head">
+                <h3>Enseignants</h3>
+                <form action="#">
+                    <div class="form-input">
+                        <input type="search" placeholder="Search..." #filter (input)="filterResults(filter.value)">
+                        <button type="button" class="search-btn" (click)="filterResults(filter.value)"><i
+                                class='bx bx-search'></i></button>
+                    </div>
+                </form>
+                <i class='bx bx-filter'></i>
+            </div>
+            <table>
+                <thead >
+                    <tr style="display: grid; grid-template-columns: 2fr 4fr 4fr 2fr;">
+                        <th>#</th>
+                        <th>Nom </th>
+                        <th>Prenom</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let enseignant of filtredEnseignants; let i = index"  style="display: grid; grid-template-columns: 2fr 4fr 4fr 2fr;">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ enseignant.last_name }}</td>
+                        <td>{{ enseignant.first_name }}</td>
+                        <td class="text-center">
+                            <i class="bx bxs-envelope icon-send-message" style="font-size: 24px; color: #3C91E6;" (click)="DemandeBesoinToEnseignantPopUp(enseignant)">
+                                <span class="flesh"></span>
+                                <span class="explication">Envoyer un message</span>
+                            </i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<div class="pop-up-container" #demanderBesoins style="display:none;">
+    <form class="form-pop-up">
+        <div class="form-pop-up-top">
+            <div>
+                <label for="message" class="message">Message</label><br>
+                <textarea id="message" name="message" class="form-control-texterea" rows="8"
+                    placeholder="Ecrivez votre message" [(ngModel)]="message"></textarea>
+            </div>
+            <div class="checkbox-list">
+                <div class="select-all-container">
+                    <label>Destination</label>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="check-all" name="check-all" [(ngModel)]="enseignantsAllChecked"
+                            (change)="toggleSelectAll()">
+                        <label for="check-all">Selectionner Tous</label>
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <ng-container *ngFor="let enseignant of enseignants;">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="{{enseignant.id}}" name="enseignant"
+                                [(ngModel)]="enseignant.checked" (change)="toggleEnseignant(enseignant.checked)">
+                            <label for="{{enseignant.id}}">{{enseignant.first_name}} {{enseignant.last_name}}</label>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="form-buttons">
+            <button class="btn-annuler" (click)="removeDemandeBesoinPopUp()">Annuler</button>
+            <button type="submit" class="btn-envoyer" (click)="submitDemandeBesoins()">Envoyer</button>
+        </div>
+    </form>
+</div>
+
+<div class="pop-up-container" #demanderBesoinToEnseignant style="display:none;">
+    <form class="form-pop-up">
+        <div class="form-pop-up-top">
+            <div class="enseignant-container">
+                <div class="icon-enseignant-container">
+                    <i class='bx bx-user enseignant-icon'></i>
+                </div>
+                <p class="enseignant-name" *ngIf="enseignantToMessage">
+                    {{enseignantToMessage.first_name}} {{enseignantToMessage.last_name}}
+                </p>
+            </div>
+            <div>
+                <label for="message" class="message">Message</label><br>
+                <textarea id="message" name="message" class="form-control-texterea" rows="8"
+                    placeholder="Ecrivez votre message" [(ngModel)]="message"></textarea>
+            </div>
+        </div>
+        <div class="form-buttons">
+            <button class="btn-annuler" (click)="removeDemandeBesoinPopUp()">Annuler</button>
+            <button type="submit" class="btn-envoyer" (click)="sendMessageToEneignant()">Envoyer</button>
+        </div>
+    </form>
+</div>
