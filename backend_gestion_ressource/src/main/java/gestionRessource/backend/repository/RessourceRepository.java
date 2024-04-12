@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import gestionRessource.backend.model.Departement;
 import gestionRessource.backend.model.Ressource;
@@ -17,4 +18,8 @@ public interface RessourceRepository extends JpaRepository<Ressource, Long> {
 
 	@Query("SELECT r FROM Ressource r WHERE r.codeInventaire IS NOT NULL AND r.codeInventaire <> ''")
 	List<Ressource> findAllByCodeInventaireEmpty();
+
+	@Query("SELECT r FROM Ressource r JOIN r.user u WHERE u.role = 'Enseignant' AND u.departement.id = :deptId")
+	List<Ressource> getRessourcesEnseignantsByDepartement(@Param("deptId") Long deptId);
+
 }

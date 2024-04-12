@@ -20,4 +20,6 @@ public interface RessourceService {
 	List<Ressource> getRessourceDelivred();
 
 	List<Ressource> getRessourcesByDep(Long depId);
+
+	List<Ressource> getRessourcesEnseignantsByDepartement(Long deptId);
 }

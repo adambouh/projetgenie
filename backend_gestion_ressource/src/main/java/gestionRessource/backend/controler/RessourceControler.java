@@ -172,6 +172,23 @@ public class RessourceControler {
 	public List<Ressource> getRessourcesByDep(@RequestParam Long depId) {
 		List<Ressource> ressources = ressourceService.getRessourcesByDep(depId);
 		return ressources;
+	}
+
+	@GetMapping("/getRessourcesEnseignantsByDepartement")
+	public List<Ressource> getRessourcesEnseignantsByDepartement(@RequestParam Long depId) {
+		return ressourceService.getRessourcesEnseignantsByDepartement(depId);
+	}
+
+	@PutMapping("/modifyEtatRessource")
+	public List<Ressource> modifyEtatRessource(@RequestParam Long depId) {
+		List<Ressource> ressources = ressourceService.getRessourcesEnseignantsByDepartement(depId);
+		for (Ressource ressource : ressources) {
+			if (ressource.getEtatDemande() != EtatDemande.Traité) {
+				ressource.setEtatDemande(EtatDemande.Traité);
+				ressourceService.saveRessource(ressource);
+			}
+		}
+		return ressources;
 
 	}
 

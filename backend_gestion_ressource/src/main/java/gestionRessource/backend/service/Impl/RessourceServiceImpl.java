@@ -64,4 +64,9 @@ public class RessourceServiceImpl implements RessourceService {
 		return ressourceRepository.findByDepartement(dep);
 	}
 
+	@Override
+	public List<Ressource> getRessourcesEnseignantsByDepartement(Long deptId) {
+		return ressourceRepository.getRessourcesEnseignantsByDepartement(deptId);
+	}
+
 }
