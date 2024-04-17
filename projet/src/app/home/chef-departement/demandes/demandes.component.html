@@ -1,0 +1,209 @@
+<!-- MAIN -->
+<main>
+    <div class="head-title">
+        <div class="left">
+            <h1>Demandes</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">demandes</a>
+                </li>
+                <li><i class='bx bx-chevron-right'></i></li>
+                <li>
+                    <a class="active" routerLink="/home/chefdep/acceuil">acceuil</a>
+                </li>
+            </ul>
+        </div>
+
+        <a href="#" class="btn-download" (click)="sendDemandesToResponsable()" onclick="event.preventDefault()">
+            <i class='bx bxs-file-plus'></i>
+            <span class="text">Envoyer Besoins au responsable</span>
+        </a>
+    </div>
+
+    <div class="table-data">
+        <div class="order">
+            <div class="head">
+                <h3>Demandes</h3>
+                <select name="demandes" id="demandes" class="choice-select" [(ngModel)]="selectedDemande"
+                    (change)="changeDemandes()">
+                    <option value="tous">Tous les demandes</option>
+                    <option value="nouvelles">Nouvelles demandes</option>
+                    <option value="anciennes">Anciennes demandes</option>
+                </select>
+
+                <form action="#">
+                    <div class="form-input">
+                        <input type="search" placeholder="Search..." #filter (input)="filterResults(filter.value)">
+                        <button type="button" class="search-btn" (click)="filterResults(filter.value)"><i
+                                class='bx bx-search'></i></button>
+                    </div>
+                </form>
+                <i class='bx bx-filter'></i>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Enseignant
+                        </th>
+                        <th>
+                            Type
+                        </th>
+                        <th>
+                            Caractéristiques
+                        </th>
+                        <th>
+                            Etat demande
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <style>
+                    tbody td {
+                        vertical-align: top;
+                    }
+                </style>
+                <tbody>
+                    <tr *ngFor="let demande of filteredDemandes let i = index">
+                        <td>
+                            {{ i }}
+                        </td>
+                        <td class="display:flex; align-items: top;">
+                            {{ demande.user.first_name }} {{ demande.user.last_name }}
+                        </td>
+                        <td>
+                            {{demande.typeRessource}}
+                        </td>
+                        <ng-container *ngIf="demande.typeRessource === 'Imprimante'">
+                            <td>
+                                <span>Vitesse : {{ demande.vitesseImpression }}</span><br>
+                                <span>Resolution : {{ demande.resolution }}</span>
+                            </td>
+                        </ng-container>
+
+                        <ng-container *ngIf="demande.typeRessource === 'Ordinateur'">
+                            <td>
+                                <span>RAM : {{ demande.ram }}</span><br>
+                                <span>CPU : {{ demande.cpu }}</span><br>
+                                <span>Disque : {{ demande.disqueDur }}</span><br>
+                                <span>Ecran: {{ demande.ecran }}</span>
+                            </td>
+                        </ng-container>
+                        <td>
+                            <ng-container *ngIf="demande.etatDemande == 'En_Cours_De_Traitement'; else traite">
+                                En cours
+                            </ng-container>
+                            <ng-template #traite>
+                                Traité
+                            </ng-template>
+                        </td>
+                        <td>
+                            {{ demande.dateCreation }}
+                        </td>
+                        <td class="td-actions">
+                            <i class="bx bx-edit icons" style="color: #3C91E6;"
+                                (click)="updateDemandePopUp(demande)"></i>
+                            <i class="bx bx-trash icons" style="color: red;" (click)='deleteDemande(demande)'></i>
+                        </td>
+                        <style>
+                            .icons {
+                                margin: 0px 5px;
+                                font-size: 22px;
+                                cursor: pointer;
+                            }
+                        </style>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<div class="pop-up-container" #popUpUpdateDemande_pc style="display:none;">
+    <div class="form-pop-up">
+        <h3>Ordinateur</h3>
+        <br>
+        <hr><br>
+        <form class="form" [formGroup]="formulaire_update_demande_pc">
+            <div class="element-container">
+                <label class="element-lebel">CPU</label>
+                <input type="text" name="cpu" formControlName="cpu" class="element-input" value="">
+            </div>
+            <div class="element-container">
+                <label class="element-lebel">RAM</label>
+                <input type="text" name="ram" formControlName="ram" class="element-input" value="">
+            </div>
+            <div class="element-container">
+                <label class="element-lebel">Disque</label>
+                <input type="text" name="disque" formControlName="disque" class="element-input" value="">
+            </div>
+            <div class="element-radio-container">
+                <label class="element-lebel">Ecran</label>
+                <div class="radio-container">
+                    <input type="radio" name="ecran" formControlName="ecran" id="optionsRadios1" value="Avec" checked>
+                    <label for="optionsRadios1" class="custom-radio"></label>
+                    <label for="optionsRadios1">Avec</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" name="ecran" formControlName="ecran" id="optionsRadios2" value="Sans">
+                    <label for="optionsRadios2" class="custom-radio"></label>
+                    <label for="optionsRadios2">Sans</label>
+                </div>
+
+            </div>
+            <br>
+            <hr>
+            <div class="btns-container">
+                <button class="btn-annuler" (click)="removePopUp()">Annuler</button>
+                <button class="btn-envoyer" (click)="updateCurrentDemande()">Modifier</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="pop-up-container" #popUpUpdateDemande_imprimante style="display:none;">
+    <div class="form-pop-up">
+        <h3>Imprimante</h3>
+        <br>
+        <hr><br>
+        <form [formGroup]="formulaire_update_demande_imprimante">
+            <div class="element-container">
+                <label class="element-lebel">Vitesse</label>
+                <input type="text" name="vitesse" formControlName="vitesse" class="element-input" value="">
+            </div>
+            <div class="element-container">
+                <label class="element-lebel">Résolution</label>
+                <input type="text" name="resolution" formControlName="resolution" class="element-input" value="">
+            </div>
+            <hr><br>
+            <div class="btns-container">
+                <button class="btn-annuler" (click)="removePopUp()">Annuler</button>
+                <button class="btn-envoyer" (click)="updateCurrentDemande()">Modifier</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="pop-up-container" #sendDemandesToResponsableEl style="display:none;">
+    <div class="form-pop-up">
+        <div class="alert-icon-container">
+            <i class='bx bxs-error-circle'></i>
+        </div>
+        <div class="text-container">
+            <p> En cliquant sur Envoyer, les demandes que vous avez reçues seront envoyées aux responsables des
+                ressources !</p>
+        </div>
+        <div class="btns-container">
+            <button class="btn-annuler" (click)="removePopUp()">Annuler</button>
+            <button class="btn-envoyer" (click)="sendDemandes()">Envoyer</button>
+        </div>
+    </div>
+</div>

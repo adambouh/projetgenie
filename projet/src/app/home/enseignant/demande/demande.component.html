@@ -1,0 +1,113 @@
+<!-- <main>
+    <div class="head-title">
+        <div class="left">
+            <h1>Demandes</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">demandes</a>
+                </li>
+                <li><i class='bx bx-chevron-right'></i></li>
+                <li>
+                    <a class="active" routerLink="/home/chefdep/acceuil">acceuil</a>
+                </li>
+            </ul>
+        </div>
+
+        <a href="#" class="btn-download" (click)="sendDemandesToResponsable()" onclick="event.preventDefault()">
+            <i class='bx bxs-file-plus'></i>
+            <span class="text">Envoyer Besoins au responsable</span>
+        </a>
+    </div>
+
+    <div class="table-data">
+        <div class="order">
+            <div class="head">
+                <h3>Demandes</h3>
+                <select name="demandes" id="demandes" class="choice-select" [(ngModel)]="selectedDemande" (change)="changeDemandes()"> 
+                    <option value="tous" >Tous les demandes</option>
+                    <option value="nouvelles">Nouvelles demandes</option>
+                    <option value="anciennes">Anciennes demandes</option>
+                </select>
+                
+                <form action="#">
+                    <div class="form-input">
+                        <input type="search" placeholder="Search..." #filter (input)="filterResults(filter.value)">
+                        <button type="button" class="search-btn" (click)="filterResults(filter.value)"><i class='bx bx-search'></i></button>
+                    </div>
+                </form>
+                <i class='bx bx-filter'></i>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Enseignant
+                        </th>
+                        <th>
+                            Type
+                        </th>
+                        <th>
+                            Caractéristiques
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <style>
+                    tbody td {
+                        vertical-align: top;
+                    }
+                </style>
+                <tbody>
+                    <tr *ngFor="let demande of filteredDemandes let i = index">
+                        <td>
+                            {{ i }}
+                        </td>
+                        <td class="display:flex; align-items: top;">
+                            {{ demande.user.first_name }} {{ demande.user.last_name }}
+                        </td>
+                        <td>
+                            {{demande.typeRessource}}
+                        </td>
+                        <ng-container *ngIf="demande.typeRessource === 'Imprimante'">
+                            <td>
+                                <span>Vitesse : {{ demande.vitesseImpression }}</span><br>
+                                <span>Resolution : {{ demande.resolution }}</span>
+                            </td>
+                        </ng-container>
+
+                        <ng-container *ngIf="demande.typeRessource === 'Ordinateur'">
+                            <td>
+                                <span>RAM : {{ demande.ram }}</span><br>
+                                <span>CPU : {{ demande.cpu }}</span><br>
+                                <span>Disque : {{ demande.disqueDur }}</span><br>
+                                <span>Ecran: {{ demande.ecran }}</span>
+                            </td>
+                        </ng-container>
+                        <td>
+                            {{ demande.dateCreation }}
+                        </td>
+                        <td class="td-actions">
+                            <i class="bx bx-edit icons" style="color: #3C91E6;"></i>
+                            <i class="bx bx-trash icons" style="color: red;"></i>
+                        </td>
+                        <style>
+                            .icons {
+                                margin: 0px 5px;
+                                font-size: 22px;
+                                cursor: pointer;
+                            }
+                        </style>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main> -->
