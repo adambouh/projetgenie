@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import gestionRessource.backend.model.Departement;
 import gestionRessource.backend.model.Ressource;
+import gestionRessource.backend.model.User;
 
 public interface RessourceRepository extends JpaRepository<Ressource, Long> {
 	List<Ressource> findByUserIdOrderByEtatDemandeDesc(Long userId);
@@ -15,6 +16,8 @@ public interface RessourceRepository extends JpaRepository<Ressource, Long> {
 	List<Ressource> findAllByOrderByEtatDemandeDesc();
 
 	List<Ressource> findByDepartement(Departement departement);
+
+	List<Ressource> findByEnseignant(User enseignant);
 
 	@Query("SELECT r FROM Ressource r WHERE r.codeInventaire IS NOT NULL AND r.codeInventaire <> ''")
 	List<Ressource> findAllByCodeInventaireEmpty();

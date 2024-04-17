@@ -1,6 +1,7 @@
 package gestionRessource.backend.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import gestionRessource.backend.model.EtatDemande;
 
@@ -17,6 +18,7 @@ public class RessourceDTO {
 	private long userId;
 	private long departementId;
 	private Date dateCreation;
+	private List<Long> ressourceIdList;
 
 	public long getUserId() {
 		return userId;
@@ -112,6 +114,14 @@ public class RessourceDTO {
 
 	public void setDepartementId(long departementId) {
 		this.departementId = departementId;
+	}
+
+	public List<Long> getRessourceIdList() {
+		return ressourceIdList;
+	}
+
+	public void setRessourceIdList(List<Long> ressourceIdList) {
+		this.ressourceIdList = ressourceIdList;
 	}
 
 }

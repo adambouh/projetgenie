@@ -21,5 +21,7 @@ public interface RessourceService {
 
 	List<Ressource> getRessourcesByDep(Long depId);
 
+	List<Ressource> getRessourcesByEnseignant(Long enseignantId);
+
 	List<Ressource> getRessourcesEnseignantsByDepartement(Long deptId);
 }

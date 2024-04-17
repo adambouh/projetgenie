@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import gestionRessource.backend.model.Departement;
 import gestionRessource.backend.model.Ressource;
+import gestionRessource.backend.model.User;
 import gestionRessource.backend.repository.DepartementRepository;
 import gestionRessource.backend.repository.RessourceRepository;
+import gestionRessource.backend.repository.UserRepository;
 import gestionRessource.backend.service.RessourceService;
 
 @Service
@@ -20,6 +22,9 @@ public class RessourceServiceImpl implements RessourceService {
 
 	@Autowired
 	private DepartementRepository departementRepository;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	@Override
 	public List<Ressource> getAllResources() {
@@ -67,6 +72,13 @@ public class RessourceServiceImpl implements RessourceService {
 	@Override
 	public List<Ressource> getRessourcesEnseignantsByDepartement(Long deptId) {
 		return ressourceRepository.getRessourcesEnseignantsByDepartement(deptId);
+	}
+
+	@Override
+	public List<Ressource> getRessourcesByEnseignant(Long enseignantId) {
+		Optional<User> optionalUser = userRepository.findById(enseignantId);
+		User enseignant = optionalUser.get();
+		return ressourceRepository.findByEnseignant(enseignant);
 	}
 
 }

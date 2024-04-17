@@ -26,10 +26,11 @@ public class Ordinateur extends Ressource {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ordinateur(Long id, String codeInventaire, EtatDemande etatDemande, User user, AppelDoffre appelDoffre,
-			Detail detail, Departement departement, List<Panne> pannes, String typeRessource, Date dateCreation) {
-		super(id, codeInventaire, etatDemande, user, appelDoffre, detail, departement, pannes, typeRessource,
-				dateCreation);
+	public Ordinateur(Long id, String codeInventaire, EtatDemande etatDemande, User user, User enseignant,
+			AppelDoffre appelDoffre, Detail detail, Departement departement, List<Panne> pannes, String typeRessource,
+			Date dateCreation) {
+		super(id, codeInventaire, etatDemande, user, enseignant, appelDoffre, detail, departement, pannes,
+				typeRessource, dateCreation);
 		// TODO Auto-generated constructor stub
 	}
 

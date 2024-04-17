@@ -40,6 +40,11 @@ public class Ressource {
 	private User user;
 
 	@ManyToOne
+	@JoinColumn(name = "enseignant_id")
+	@JsonIgnoreProperties({ "notifications", "password", "departement" })
+	private User enseignant;
+
+	@ManyToOne
 	@JoinColumn(name = "appelDoffre_id")
 	@JsonIgnoreProperties({ "ressources", "propositions" })
 	private AppelDoffre appelDoffre;
@@ -68,13 +73,15 @@ public class Ressource {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ressource(Long id, String codeInventaire, EtatDemande etatDemande, User user, AppelDoffre appelDoffre,
-			Detail detail, Departement departement, List<Panne> pannes, String typeRessource, Date dateCreation) {
+	public Ressource(Long id, String codeInventaire, EtatDemande etatDemande, User user, User enseignant,
+			AppelDoffre appelDoffre, Detail detail, Departement departement, List<Panne> pannes, String typeRessource,
+			Date dateCreation) {
 		super();
 		this.id = id;
 		this.codeInventaire = codeInventaire;
 		this.etatDemande = etatDemande;
 		this.user = user;
+		this.enseignant = enseignant;
 		this.appelDoffre = appelDoffre;
 		this.detail = detail;
 		this.departement = departement;
@@ -113,6 +120,14 @@ public class Ressource {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public User getEnseignant() {
+		return enseignant;
+	}
+
+	public void setEnseignant(User enseignant) {
+		this.enseignant = enseignant;
 	}
 
 	public AppelDoffre getAppelDoffre() {

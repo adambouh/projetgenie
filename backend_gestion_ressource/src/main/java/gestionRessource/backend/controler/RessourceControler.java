@@ -1,6 +1,7 @@
 package gestionRessource.backend.controler;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +100,7 @@ public class RessourceControler {
 		}
 		if (ressourceDto.getTypeRessource().equals("Ordinateur")) {
 			Ordinateur ordi = new Ordinateur();
-			ordi.setEtatDemande(EtatDemande.En_Cours_De_Traitement);
+			ordi.setEtatDemande(EtatDemande.créée);
 			ordi.setCpu(ressourceDto.getCpu());
 			ordi.setDisqueDur(ressourceDto.getDisqueDur());
 			ordi.setEcran(ressourceDto.getEcran());
@@ -112,7 +113,7 @@ public class RessourceControler {
 
 		} else if (ressourceDto.getTypeRessource().equals("Imprimante")) {
 			Imprimante impr = new Imprimante();
-			impr.setEtatDemande(EtatDemande.En_Cours_De_Traitement);
+			impr.setEtatDemande(EtatDemande.créée);
 			impr.setResolution(ressourceDto.getResolution());
 			impr.setTypeRessource(ressourceDto.getTypeRessource());
 			impr.setVitesseImpression(ressourceDto.getVitesseImpression());
@@ -179,13 +180,50 @@ public class RessourceControler {
 		return ressourceService.getRessourcesEnseignantsByDepartement(depId);
 	}
 
-	@PutMapping("/modifyEtatRessource")
-	public List<Ressource> modifyEtatRessource(@RequestParam Long depId) {
+	@PutMapping("/changeStatusToTraité")
+	public List<Ressource> changeStatusToTraité(@RequestParam Long depId) {
 		List<Ressource> ressources = ressourceService.getRessourcesEnseignantsByDepartement(depId);
 		for (Ressource ressource : ressources) {
 			if (ressource.getEtatDemande() != EtatDemande.Traité) {
 				ressource.setEtatDemande(EtatDemande.Traité);
 				ressourceService.saveRessource(ressource);
+			}
+		}
+		return ressources;
+
+	}
+
+	@PutMapping("/affectRessourceToEnseignant")
+	public Ressource affectRessourceToEnseignant(@RequestParam Long ressourceId, @RequestParam Long enseignantId) {
+		Ressource ressource = ressourceService.getRessourceById(ressourceId);
+		User enseignant = userService.getUserById(enseignantId);
+		if (ressource != null && enseignant != null) {
+			ressource.setEnseignant(enseignant);
+			ressourceService.saveRessource(ressource);
+
+		}
+
+		return ressource;
+
+	}
+
+	@GetMapping("/getRessourcesByEnseignant")
+	public List<Ressource> getRessourcesByEnseignant(@RequestParam Long enseignantId) {
+		List<Ressource> ressources = ressourceService.getRessourcesByEnseignant(enseignantId);
+		return ressources;
+	}
+
+	@PutMapping("/modifyStatusRessources")
+	public List<Ressource> modifyStatusRessources(@RequestBody RessourceDTO ressourceDto) {
+		List<Ressource> ressources = new ArrayList<Ressource>();
+		if (ressourceDto.getRessourceIdList() != null && !ressourceDto.getRessourceIdList().isEmpty()) {
+			for (Long ressourceId : ressourceDto.getRessourceIdList()) {
+				Ressource ressource = ressourceService.getRessourceById(ressourceId);
+				if (ressource != null) {
+					ressource.setEtatDemande(ressourceDto.getEtatDemande());
+					ressourceService.saveRessource(ressource);
+					ressources.add(ressource);
+				}
 			}
 		}
 		return ressources;

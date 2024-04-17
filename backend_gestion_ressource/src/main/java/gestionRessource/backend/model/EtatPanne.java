@@ -1,5 +1,5 @@
 package gestionRessource.backend.model;
 
 public enum EtatPanne {
-	NonRepare, Repare, EnCours
+	NonRepare, Repare, EnCours, Severe
 }
