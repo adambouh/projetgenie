@@ -2,16 +2,6 @@
 <main>
     <div class="head-title">
         <div class="left">
-            <h1>Acceuil</h1>
-            <ul class="breadcrumb">
-                <!-- <li>
-            <a href="#">Acceuil</a>
-          </li>
-          <li><i class='bx bx-chevron-right' ></i></li>
-          <li>
-            <a class="active" routerLink="">Home</a>
-          </li> -->
-            </ul>
         </div>
 
         <a href="#" class="btn-download" (click)="DemandeBesoinPopUp()" onclick="event.preventDefault()">
@@ -37,9 +27,9 @@
                 <thead >
                     <tr style="display: grid; grid-template-columns: 2fr 4fr 4fr 2fr;">
                         <th>#</th>
-                        <th>Nom </th>
+                        <th>Nom</th>
                         <th>Prenom</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,8 +37,8 @@
                         <td>{{ i + 1 }}</td>
                         <td>{{ enseignant.last_name }}</td>
                         <td>{{ enseignant.first_name }}</td>
-                        <td class="text-center">
-                            <i class="bx bxs-envelope icon-send-message" style="font-size: 24px; color: #3C91E6;" (click)="DemandeBesoinToEnseignantPopUp(enseignant)">
+                        <td class="text-center" style="padding-left: 10%;">
+                            <i class="bx bxs-message icon-send-message" style="font-size: 24px; color: #3C91E6;" (click)="DemandeBesoinToEnseignantPopUp(enseignant)">
                                 <span class="flesh"></span>
                                 <span class="explication">Envoyer un message</span>
                             </i>
@@ -118,3 +108,4 @@
         </div>
     </form>
 </div>
+

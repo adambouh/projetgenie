@@ -41,7 +41,7 @@ export class ChefDepartementService {
           console.log("notification send to the departement");
         }),
         catchError((error) => {
-          console.log("error send notification to departement");
+          console.log("error sending notification to departement");
 
           return throwError(error);
         })
