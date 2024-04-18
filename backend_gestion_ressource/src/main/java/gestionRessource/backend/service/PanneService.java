@@ -11,4 +11,5 @@ public interface PanneService {
 
 	Panne getPanneById(Long panne_id);
 
+	List<Panne> getPannesByUser(Long user_id);
 }

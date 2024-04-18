@@ -67,6 +67,11 @@ public class PanneControler {
 		return panneService.getPanneById(panne_id);
 	}
 
+	@GetMapping("/getPanneByUserId")
+	public List<Panne> getPanneByUserId(@RequestParam Long user_id) {
+		return panneService.getPannesByUser(user_id);
+	}
+
 	@PutMapping("/modifyPanne")
 	public Panne modifyPanner(@RequestParam Long panne_id, @RequestBody PanneDTO panneDto) {
 		Panne oldPanne = panneService.getPanneById(panne_id);
