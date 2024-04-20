@@ -44,4 +44,9 @@ public class PanneServiceImpl implements PanneService {
 		return panneRepository.findByUser(user);
 	}
 
+	@Override
+	public List<Panne> getPanneByRessourceUser(Long user_id) {
+		return panneRepository.getPanneByRessourceUser(user_id);
+	}
+
 }

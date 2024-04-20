@@ -79,4 +79,9 @@ public class PanneControler {
 		oldPanne.setEtatPanne(panneDto.getEtatPanne());
 		return panneService.savePanne(oldPanne);
 	}
+
+	@GetMapping("/getPanneByRessourceUser")
+	public List<Panne> getPanneByRessourceUser(@RequestParam Long user_id) {
+		return panneService.getPanneByRessourceUser(user_id);
+	}
 }
