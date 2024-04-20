@@ -11,5 +11,5 @@ import { HomeComponent } from '../home.component';
   styleUrls: ['./chef-departement.component.css'],
 })
 export class ChefDepartementComponent extends HomeComponent{
-
+  
 }

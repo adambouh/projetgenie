@@ -15,8 +15,9 @@ export class AcceuilchefComponent extends ChefDepartementComponent implements On
 
   private tag = 'Acceuil';
   enseignants: any[] = [];
+  private chefID!: any;
   private role = "Enseignant";
-  private departementID = Number(localStorage.getItem("departementID"));
+  private departementID!: any;
   private enseignantsCheckedID: any[] = [];
   enseignantToMessage!: any;
   filtredEnseignants: any[] = [];
@@ -33,6 +34,8 @@ export class AcceuilchefComponent extends ChefDepartementComponent implements On
 
   override ngOnInit(): void {
     this.setActiveClassToOffres(this.tag);
+    this.chefID = localStorage.getItem("id");
+    this.departementID = Number(localStorage.getItem("departementID"));
     this.loadEnseignants(this.departementID);
   }
 
@@ -95,46 +98,36 @@ export class AcceuilchefComponent extends ChefDepartementComponent implements On
 
   message = "";
   submitDemandeBesoins() {
-    // Looking for user id
-    const login = String(localStorage.getItem("login"));
-    let user!: any;
+    if (this.enseignantsAllChecked) {
 
-    this.userService.getUserByLogin(login).subscribe(
-      (response: any[]) => {
-        user = response;
-        // All the enseignants are checked
-        if (this.enseignantsAllChecked) {
-
-          this.chefService.sendNotificationToDepartement(user.id, this.departementID, this.message).subscribe(
-            (reponse: any[]) => { },
-            (error) => {
-              console.error(error);
-            }
-          );
-
-        } else { // Only some of them
-
-          this.enseignants.forEach(ens => {
-            if (ens.checked) {
-              this.enseignantsCheckedID.push(ens.id);
-            }
-          }); // Build list
-
-          this.chefService.addNotificationForListEnseignants(user.id, this.message, this.enseignantsCheckedID).subscribe(
-            (reponse: any[]) => { },
-            (error) => {
-              console.error(error);
-            }
-          );
+      this.chefService.sendNotificationToDepartement(this.chefID, this.departementID, this.message).subscribe(
+        (reponse: any[]) => {
+          alert("La demande est envoyée aux enseignants du département !!");
+         },
+        (error) => {
+          console.error(error);
         }
-        this.demanderBesoins.nativeElement.style.display = 'none';
-      },
-      (error) => {
-        console.log("error while getting user id");
+      );
 
-        console.error(error);
-      }
-    );
+    } else { // Only some of them
+
+      this.enseignants.forEach(ens => {
+        if (ens.checked) {
+          this.enseignantsCheckedID.push(ens.id);
+        }
+      }); // Build list
+
+      this.chefService.addNotificationForListEnseignants(this.chefID, this.message, this.enseignantsCheckedID).subscribe(
+        (reponse: any[]) => {
+          alert("La demande est envoyée aux enseignants du département que vous avez spécifié !!");
+         },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+    this.demanderBesoins.nativeElement.style.display = 'none';
+
   }
 
   // Send notification to a specific enseignant
@@ -148,7 +141,7 @@ export class AcceuilchefComponent extends ChefDepartementComponent implements On
         user = response;
         this.chefService.sendMessageToEneignant(user.id, this.message, this.enseignantToMessage).subscribe(
           (reponse: any[]) => {
-            this.demanderBesoinToEnseignant.nativeElement.style.display = 'none';
+            alert("Le message est envoyé à l'enseignant !!")
           },
           (error) => {
             console.error(error);
@@ -159,6 +152,7 @@ export class AcceuilchefComponent extends ChefDepartementComponent implements On
         console.error(error);
       }
     );
+    this.demanderBesoinToEnseignant.nativeElement.style.display = 'none';
 
   }
   // End demande besoins tasks

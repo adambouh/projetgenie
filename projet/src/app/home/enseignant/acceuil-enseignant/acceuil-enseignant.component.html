@@ -1,25 +1,100 @@
 <main>
-    <div class="head-title">
-        <div class="left">
-            <h1>Acceuil</h1>
-            <ul class="breadcrumb">
-                <li>
-                    <a href="#">acceuil</a>
-                </li>
-                <li><i class='bx bx-chevron-right'></i></li>
-            </ul>
-        </div>
-    </div>
 
     <div class="table-data">
         <div class="order">
             <div class="head">
                 <h3>Mes ressources</h3>
-                
+
                 <form action="#">
                     <div class="form-input">
-                        <input type="search" placeholder="Search...">
-                        <button type="button" class="search-btn" ><i class='bx bx-search'></i></button>
+                        <input type="search" placeholder="Search..." #filterRessources
+                            (input)="filterResultsRessources(filterRessources.value)">
+                        <button type="button" class="search-btn"><i class='bx bx-search'
+                                (click)="filterResultsRessources(filterRessources.value)"></i></button>
+                    </div>
+                </form>
+                <i class='bx bx-filter'></i>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Code Inventaire
+                        </th>
+                        <th>
+                            Type Ressouce
+                        </th>
+                        <th>
+                            Caractéristiques
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <style>
+                    tbody td {
+                        vertical-align: top;
+                    }
+                </style>
+                <tbody>
+                    <ng-container *ngFor="let ressource of filtredRessouces">
+
+                        <tr>
+                            <td>
+                                {{ ressource.codeInventaire }}
+                            </td>
+                            <td>
+                                {{ressource.typeRessource}}
+                            </td>
+                            <ng-container *ngIf="ressource.typeRessource === 'Imprimante'">
+                                <td>
+                                    <span>Vitesse : {{ ressource.vitesseImpression }}</span><br>
+                                    <span>Resolution : {{ ressource.resolution }}</span>
+                                </td>
+                            </ng-container>
+
+                            <ng-container *ngIf="ressource.typeRessource === 'Ordinateur'">
+                                <td>
+                                    <span>RAM : {{ ressource.ram }}</span><br>
+                                    <span>CPU : {{ ressource.cpu }}</span><br>
+                                    <span>Disque : {{ ressource.disqueDur }}</span><br>
+                                    <span>Ecran: {{ ressource.ecran }}</span>
+                                </td>
+                            </ng-container>
+                            <td>
+                                <i class="bx bxs-error-circle"
+                                    style="font-size: 24px; color: rgb(245, 186, 23); padding-left: 10%;"
+                                    (click)="pannePopUp(ressource.id)"></i>
+                            </td>
+                        </tr>
+
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="table-data" style="margin-top: 50px; margin-bottom: 50px;">
+        <div class="order">
+            <div class="head">
+                <h3>Pannes Des Ressources</h3>
+                
+                <select class="choice-select" [(ngModel)]="selectedPannes"
+                    (change)="changePannes()">
+                    <option value="NonRepare">Non réparé</option>
+                    <option value="Repare">Réparé</option>
+                    <option value="EnCours">En cours</option>
+                    <option value="Severe">Severe</option>
+                    <option value="all">Tous</option>
+                </select>
+
+                <form action="#">
+                    <div class="form-input">
+                        <input type="search" placeholder="Search..." #filterPannes
+                            (input)="filterResultsPannes(filterPannes.value)">
+                        <button type="button" class="search-btn"><i class='bx bx-search'
+                                (click)="filterResultsPannes(filterPannes.value)"></i></button>
                     </div>
                 </form>
                 <i class='bx bx-filter'></i>
@@ -31,10 +106,16 @@
                             #
                         </th>
                         <th>
-                            Type
+                            Code Inventaire
                         </th>
                         <th>
-                            Caractéristiques
+                            Type Ressouce
+                        </th>
+                        <th>
+                            Etat Panne
+                        </th>
+                        <th>
+                            Date Signalisation
                         </th>
                     </tr>
                 </thead>
@@ -44,39 +125,44 @@
                     }
                 </style>
                 <tbody>
-                    <!-- <tr *ngFor="let demande of filteredDemandes let i = index">
+                    <tr *ngFor="let panne of filtredPannes let i = index">
                         <td>
                             {{ i }}
                         </td>
-                        <td class="display:flex; align-items: top;">
-                            {{ demande.user.first_name }} {{ demande.user.last_name }}
+                        <td>
+                            {{ panne.ressource.codeInventaire }}
                         </td>
                         <td>
-                            {{demande.typeRessource}}
+                            {{panne.ressource.typeRessource}}
                         </td>
-                        <ng-container *ngIf="demande.typeRessource === 'Imprimante'">
-                            <td>
-                                <span>Vitesse : {{ demande.vitesseImpression }}</span><br>
-                                <span>Resolution : {{ demande.resolution }}</span>
-                            </td>
-                        </ng-container>
+                        <td *ngIf="panne.etatPanne == 'NonRepare'">Non Réparé</td  >
+                        <td *ngIf="panne.etatPanne == 'Repare'">Réparé</td  >
+                        <td *ngIf="panne.etatPanne == 'EnCours'">En Cours</td  >
+                        <td *ngIf="panne.etatPanne == 'Severe'">Sévère</td  >
 
-                        <ng-container *ngIf="demande.typeRessource === 'Ordinateur'">
-                            <td>
-                                <span>RAM : {{ demande.ram }}</span><br>
-                                <span>CPU : {{ demande.cpu }}</span><br>
-                                <span>Disque : {{ demande.disqueDur }}</span><br>
-                                <span>Ecran: {{ demande.ecran }}</span>
-                            </td>
-                        </ng-container>
-                    </tr> -->
-                    <tr>
-                        <td>1</td>
-                        <td>Imprimante</td>
-                        <td>cp <br> ram</td>
+                        <td>{{panne.dateSignal}}</td>
+
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </main>
+
+<div class="pop-up-container" #popUpPanne style="display:none;">
+    <div class="form-pop-up">
+        <div class="alert-icon-container">
+            <i class='bx bxs-error-circle'></i>
+        </div>
+        <div class="text-container">
+            <p>
+                En cliquant sur "Signaler", cette ressource sera automatiquement ajoutée
+                à la liste des pannes de
+                la faculté et un technicien sera chargé de résoudre le problème.</p>
+        </div>
+        <div class="btns-container">
+            <button class="btn-annuler" (click)="removePannePopUp()">Annuler</button>
+            <button class="btn-envoyer" (click)="signalerPanne()">Signaler</button>
+        </div>
+    </div>
+</div>

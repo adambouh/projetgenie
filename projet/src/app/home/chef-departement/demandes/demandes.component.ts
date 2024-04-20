@@ -143,9 +143,9 @@ export class DemandesComponent extends ChefDepartementComponent implements OnIni
 
       this.chefService.deletedemandeById(demande.id).subscribe(
         (response: any) => {
-          console.log('demande supprimé avec succès.');
           this.allDemandes = this.allDemandes.filter(dem => dem.id !== demande.id);
           this.changeDemandes();
+          alert("La demande a été supprimée avec succès !!");
         },
         (error) => {
           console.error('Une erreur s\'est produite lors de la suppression du demande : ', error);
@@ -177,15 +177,14 @@ export class DemandesComponent extends ChefDepartementComponent implements OnIni
 
     this.chefService.updateRessource(this.ressourceID, this.demandesEnseignants[index]).subscribe(
       (response: any[]) => {
-
-        this.popUpUpdateDemande_pc.nativeElement.style.display = 'none';
-        this.popUpUpdateDemande_imprimante.nativeElement.style.display = 'none';
+        alert("La demande a été modifiée avec succès !!");
       }, (error) => {
         console.log("error while updating demande");
         console.error(error);
       }
     );
-
+    this.popUpUpdateDemande_pc.nativeElement.style.display = 'none';
+    this.popUpUpdateDemande_imprimante.nativeElement.style.display = 'none';
   }
 
   sendDemandes() {
@@ -197,14 +196,13 @@ export class DemandesComponent extends ChefDepartementComponent implements OnIni
           }
         });
         this.changeDemandes();
-        this.sendDemandesToResponsableEl.nativeElement.style.display = 'none';
-        console.log("Demandes status changed succefully");
-
+        alert("Les demandes sont envoyées au responsable des ressources !!");
       }, (error) => {
         console.log("Error changing demandes status");
         console.error(error);
       }
     );
+    this.sendDemandesToResponsableEl.nativeElement.style.display = 'none';
 
   }
 

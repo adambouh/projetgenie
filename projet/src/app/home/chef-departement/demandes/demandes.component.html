@@ -16,7 +16,7 @@
 
         <a href="#" class="btn-download" (click)="sendDemandesToResponsable()" onclick="event.preventDefault()">
             <i class='bx bxs-file-plus'></i>
-            <span class="text">Envoyer Besoins au responsable</span>
+            <span class="text">Envoyer Besoins Au Responsable</span>
         </a>
     </div>
 
@@ -50,16 +50,16 @@
                             Enseignant
                         </th>
                         <th>
-                            Type
+                            Type Ressource
                         </th>
                         <th>
                             Caractéristiques
                         </th>
                         <th>
-                            Etat demande
+                            Etat Demande
                         </th>
                         <th>
-                            Date
+                            Date Demande
                         </th>
                         <th>
                             Actions
@@ -99,10 +99,10 @@
                         </ng-container>
                         <td>
                             <ng-container *ngIf="demande.etatDemande == 'En_Cours_De_Traitement'; else traite">
-                                En cours
+                                En cours de traitement
                             </ng-container>
                             <ng-template #traite>
-                                Traité
+                                Envoyé au responsable
                             </ng-template>
                         </td>
                         <td>

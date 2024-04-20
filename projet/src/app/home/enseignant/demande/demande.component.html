@@ -1,4 +1,5 @@
-<!-- <main>
+<!-- MAIN -->
+<main>
     <div class="head-title">
         <div class="left">
             <h1>Demandes</h1>
@@ -13,26 +14,31 @@
             </ul>
         </div>
 
-        <a href="#" class="btn-download" (click)="sendDemandesToResponsable()" onclick="event.preventDefault()">
+        <a href="#" class="btn-download" (click)="sendDemandesToChef()" onclick="event.preventDefault()">
             <i class='bx bxs-file-plus'></i>
-            <span class="text">Envoyer Besoins au responsable</span>
+            <span class="text">Envoyer Besoins Au Chef Departement</span>
         </a>
     </div>
 
     <div class="table-data">
         <div class="order">
             <div class="head">
-                <h3>Demandes</h3>
-                <select name="demandes" id="demandes" class="choice-select" [(ngModel)]="selectedDemande" (change)="changeDemandes()"> 
-                    <option value="tous" >Tous les demandes</option>
-                    <option value="nouvelles">Nouvelles demandes</option>
-                    <option value="anciennes">Anciennes demandes</option>
+                <h3 style="display: flex;">
+                    <button class="btn-add-ordinateur" (click)="popUpOrdinateur()">Ajouter Ordinateur</button>
+                    <button class="btn-add-imprimante" (click)="popUpImprimante()">Ajouter Imprimante</button>
+                </h3>
+                <select class="choice-select" [(ngModel)]="selectedBesoin"
+                    (change)="changeBesoines()">
+                    <option value="all">Tous les besoins</option>
+                    <option value="created">Besoins créés</option>
+                    <option value="sent">Besoins envoyés</option>
                 </select>
-                
+
                 <form action="#">
                     <div class="form-input">
-                        <input type="search" placeholder="Search..." #filter (input)="filterResults(filter.value)">
-                        <button type="button" class="search-btn" (click)="filterResults(filter.value)"><i class='bx bx-search'></i></button>
+                        <input type="search" placeholder="Search...">
+                        <button type="button" class="search-btn"><i
+                                class='bx bx-search'></i></button>
                     </div>
                 </form>
                 <i class='bx bx-filter'></i>
@@ -44,16 +50,16 @@
                             #
                         </th>
                         <th>
-                            Enseignant
-                        </th>
-                        <th>
-                            Type
+                            Type Ressource
                         </th>
                         <th>
                             Caractéristiques
                         </th>
                         <th>
-                            Date
+                            Etat Besoin
+                        </th>
+                        <th>
+                            Date Creation
                         </th>
                         <th>
                             Actions
@@ -66,7 +72,27 @@
                     }
                 </style>
                 <tbody>
-                    <tr *ngFor="let demande of filteredDemandes let i = index">
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        Imprimante
+                    </td>
+                    <td>
+                        resolution <br> vitesse
+                    </td>
+                    <td>
+                        Crée
+                    </td>
+                    <td>
+                        05/05/2025
+                    </td>
+                    <td class="td-actions">
+                        <i class="bx bx-edit icons" style="color: #3C91E6;"
+                           ></i>
+                        <i class="bx bx-trash icons" style="color: red;" (click)='deleteBesoin(1)'></i>
+                    </td>
+                    <!-- <tr *ngFor="let demande of filteredDemandes let i = index">
                         <td>
                             {{ i }}
                         </td>
@@ -92,22 +118,93 @@
                             </td>
                         </ng-container>
                         <td>
+                            <ng-container *ngIf="demande.etatDemande == 'En_Cours_De_Traitement'; else traite">
+                                En cours
+                            </ng-container>
+                            <ng-template #traite>
+                                Traité
+                            </ng-template>
+                        </td>
+                        <td>
                             {{ demande.dateCreation }}
                         </td>
-                        <td class="td-actions">
-                            <i class="bx bx-edit icons" style="color: #3C91E6;"></i>
-                            <i class="bx bx-trash icons" style="color: red;"></i>
-                        </td>
-                        <style>
-                            .icons {
-                                margin: 0px 5px;
-                                font-size: 22px;
-                                cursor: pointer;
-                            }
-                        </style>
-                    </tr>
+                        
+                        
+                    </tr> -->
+                    <style>
+                        .icons {
+                            margin: 0px 5px;
+                            font-size: 22px;
+                            cursor: pointer;
+                        }
+                    </style>
                 </tbody>
             </table>
         </div>
     </div>
-</main> -->
+</main>
+
+<div class="pop-up-container" #popUp_ordinateur style="display:none;">
+    <div class="form-pop-up">
+        <h3>Ordinateur</h3>
+        <br>
+        <hr><br>
+        <form class="form" [formGroup]="formulaire_ajout_ordinateur">
+            <div class="element-container">
+                <label class="element-lebel">CPU</label>
+                <input type="text" name="cpu" formControlName="cpu" class="element-input" value="">
+            </div>
+            <div class="element-container">
+                <label class="element-lebel">RAM</label>
+                <input type="text" name="ram" formControlName="ram" class="element-input" value="">
+            </div>
+            <div class="element-container">
+                <label class="element-lebel">Disque</label>
+                <input type="text" name="disque" formControlName="disque" class="element-input" value="">
+            </div>
+            <div class="element-radio-container">
+                <label class="element-lebel">Ecran</label>
+                <div class="radio-container">
+                    <input type="radio" name="ecran" formControlName="ecran" id="optionsRadios1" value="Avec" checked>
+                    <label for="optionsRadios1" class="custom-radio"></label>
+                    <label for="optionsRadios1">Avec</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" name="ecran" formControlName="ecran" id="optionsRadios2" value="Sans">
+                    <label for="optionsRadios2" class="custom-radio"></label>
+                    <label for="optionsRadios2">Sans</label>
+                </div>
+
+            </div>
+            <br>
+            <hr>
+            <div class="btns-container">
+                <button class="btn-annuler" (click)="removePopUpOrdinateur()">Annuler</button>
+                <button class="btn-envoyer">Modifier</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="pop-up-container" #popUpUp_imprimante style="display:none;">
+    <div class="form-pop-up">
+        <h3>Imprimante</h3>
+        <br>
+        <hr><br>
+        <form [formGroup]="formulaire_ajout_imprimante">
+            <div class="element-container">
+                <label class="element-lebel">Vitesse</label>
+                <input type="text" name="vitesse" formControlName="vitesse" class="element-input" value="">
+            </div>
+            <div class="element-container">
+                <label class="element-lebel">Résolution</label>
+                <input type="text" name="resolution" formControlName="resolution" class="element-input" value="">
+            </div>
+            <hr><br>
+            <div class="btns-container">
+                <button class="btn-annuler" (click)="removePopUpImprimante()">Annuler</button>
+                <button class="btn-envoyer">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>

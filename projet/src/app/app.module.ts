@@ -22,7 +22,6 @@ import { PersonnelComponent } from './home/responsable-des-resources/personnel/p
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgFor, NgForOf } from '@angular/common';
 import { EnseignantComponent } from './home/enseignant/enseignant.component';
-import { PanneComponent } from './home/enseignant/panne/panne.component';
 import { NotificationComponent } from './home/enseignant/notification/notification.component';
 import { DemandeComponent } from './home/enseignant/demande/demande.component';
 import { AcceuilEnseignantComponent } from './home/enseignant/acceuil-enseignant/acceuil-enseignant.component';
@@ -63,7 +62,6 @@ const routes: Routes = [
         { path: "demandes", component: DemandeComponent },
         { path: "notifications", component: NotificationComponent },
         { path: "acceuil", component: AcceuilEnseignantComponent },
-        { path: "pannes", component: PanneComponent },
       ]
     },
     ],
@@ -83,8 +81,9 @@ export default routes;
     PersonnelsComponent,
     ChefDepartementComponent,
     NotificationsComponent,
+    AcceuilEnseignantComponent,
     DemandesComponent, // Add HomeComponent to the declarations array
-    ProfileComponent, PersonnelComponent, EnseignantComponent, PanneComponent, NotificationComponent, DemandeComponent, // Add HomeComponent to the declarations array
+    ProfileComponent, PersonnelComponent, EnseignantComponent, NotificationComponent, DemandeComponent, // Add HomeComponent to the declarations array
   ],
   imports: [
     BrowserModule,
