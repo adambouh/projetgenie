@@ -33,4 +33,11 @@ public class NotificationServiceImpl implements NotificationService {
 		return notificationRepository.findByUser(user);
 	}
 
+	@Override
+	public Notification getNotificationrById(Long notificationId) {
+		Optional<Notification> notificationOptional = notificationRepository.findById(notificationId);
+		return notificationOptional.orElse(null);
+
+	}
+
 }

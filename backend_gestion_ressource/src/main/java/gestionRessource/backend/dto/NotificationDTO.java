@@ -8,6 +8,7 @@ public class NotificationDTO {
 	private List<Long> listeUserId;
 	private Long depId;
 	private Long emetteur_id;
+	private List<Long> listeNotifId;
 
 	public String getMessage() {
 		return message;
@@ -47,6 +48,14 @@ public class NotificationDTO {
 
 	public void setEmetteur_id(Long emetteur_id) {
 		this.emetteur_id = emetteur_id;
+	}
+
+	public List<Long> getListeNotifId() {
+		return listeNotifId;
+	}
+
+	public void setListeNotifId(List<Long> listeNotifId) {
+		this.listeNotifId = listeNotifId;
 	}
 
 }

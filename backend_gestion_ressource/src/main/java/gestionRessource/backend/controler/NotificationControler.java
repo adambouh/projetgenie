@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -96,4 +97,20 @@ public class NotificationControler {
 	private List<Notification> getNotificationByUser(@RequestParam Long user_id) {
 		return notificationService.getNotificationByUser(user_id);
 	}
+
+	@PutMapping("/modifierEtatNotification")
+	public List<Notification> modifierEtatNotification(@RequestBody NotificationDTO notifDto) {
+		List<Notification> notifications = new ArrayList<Notification>();
+		if (notifDto.getListeNotifId() != null && !notifDto.getListeNotifId().isEmpty()) {
+			for (Long notifId : notifDto.getListeNotifId()) {
+				Notification notif = notificationService.getNotificationrById(notifId);
+				notif.setEtat_lu(true);
+				notificationService.AjouterNotification(notif);
+				notifications.add(notif);
+			}
+		}
+		return notifications;
+
+	}
+
 }
