@@ -1,5 +1,7 @@
 package gestionRessource.backend.model;
 
+import java.sql.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -26,11 +28,11 @@ public class Constat {
 	@Enumerated(EnumType.STRING)
 	private FrequenceConstat frequenceConstat;
 
-	@Column(name = "ordreLogiciel")
-	private String ordreLogiciel;
+	@Column(name = "ordre")
+	private String ordre;
 
-	@Column(name = "ordreMateriel")
-	private String ordreMateriel;
+	@Column(name = "dateApparition")
+	private Date dateApparition;
 
 	@ManyToOne
 	@JoinColumn(name = "panne_id")
@@ -42,14 +44,14 @@ public class Constat {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Constat(Long id, String explication, FrequenceConstat frequenceConstat, String ordreLogiciel,
-			String ordreMateriel, Panne panne) {
+	public Constat(Long id, String explication, FrequenceConstat frequenceConstat, String ordre, Date dateApparition,
+			Panne panne) {
 		super();
 		this.id = id;
 		this.explication = explication;
 		this.frequenceConstat = frequenceConstat;
-		this.ordreLogiciel = ordreLogiciel;
-		this.ordreMateriel = ordreMateriel;
+		this.ordre = ordre;
+		this.dateApparition = dateApparition;
 		this.panne = panne;
 	}
 
@@ -77,20 +79,12 @@ public class Constat {
 		this.frequenceConstat = frequenceConstat;
 	}
 
-	public String getOrdreMateriel() {
-		return ordreMateriel;
+	public String getOrdre() {
+		return ordre;
 	}
 
-	public void setOrdreMateriel(String ordreMateriel) {
-		this.ordreMateriel = ordreMateriel;
-	}
-
-	public String getOrdreLogiciel() {
-		return ordreLogiciel;
-	}
-
-	public void setOrdreLogiciel(String ordreLogiciel) {
-		this.ordreLogiciel = ordreLogiciel;
+	public void setOrdre(String ordre) {
+		this.ordre = ordre;
 	}
 
 	public Panne getPanne() {
@@ -99,6 +93,14 @@ public class Constat {
 
 	public void setPanne(Panne panne) {
 		this.panne = panne;
+	}
+
+	public Date getDateApparition() {
+		return dateApparition;
+	}
+
+	public void setDateApparition(Date dateApparition) {
+		this.dateApparition = dateApparition;
 	}
 
 }

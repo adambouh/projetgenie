@@ -1,22 +1,24 @@
 package gestionRessource.backend.dto;
 
+import java.sql.Date;
+
 import gestionRessource.backend.model.FrequenceConstat;
 
 public class ConstatDTO {
 	private String explication;
 	private FrequenceConstat frequenceConstat;
-	private String ordreLogiciel;
-	private String ordreMateriel;
+	private String ordre;
 	private Long panne_id;
+	private Date dateApparition;
 
-	public ConstatDTO(String explication, FrequenceConstat frequenceConstat, String ordreLogiciel, String ordreMateriel,
-			Long panne_id) {
+	public ConstatDTO(String explication, FrequenceConstat frequenceConstat, String ordre, Long panne_id,
+			Date dateApparition) {
 		super();
 		this.explication = explication;
 		this.frequenceConstat = frequenceConstat;
-		this.ordreLogiciel = ordreLogiciel;
-		this.ordreMateriel = ordreMateriel;
+		this.ordre = ordre;
 		this.panne_id = panne_id;
+		this.dateApparition = dateApparition;
 	}
 
 	public String getExplication() {
@@ -35,20 +37,12 @@ public class ConstatDTO {
 		this.frequenceConstat = frequenceConstat;
 	}
 
-	public String getOrdreLogiciel() {
-		return ordreLogiciel;
+	public String getOrdre() {
+		return ordre;
 	}
 
-	public void setOrdreLogiciel(String ordreLogiciel) {
-		this.ordreLogiciel = ordreLogiciel;
-	}
-
-	public String getOrdreMateriel() {
-		return ordreMateriel;
-	}
-
-	public void setOrdreMateriel(String ordreMateriel) {
-		this.ordreMateriel = ordreMateriel;
+	public void setOrdre(String ordre) {
+		this.ordre = ordre;
 	}
 
 	public Long getPanne_id() {
@@ -57,6 +51,14 @@ public class ConstatDTO {
 
 	public void setPanne_id(Long panne_id) {
 		this.panne_id = panne_id;
+	}
+
+	public Date getDateApparition() {
+		return dateApparition;
+	}
+
+	public void setDateApparition(Date dateApparition) {
+		this.dateApparition = dateApparition;
 	}
 
 }

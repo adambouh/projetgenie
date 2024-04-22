@@ -33,8 +33,8 @@ public class ConstatControler {
 		Constat constat = new Constat();
 		constat.setExplication(constatDto.getExplication());
 		constat.setFrequenceConstat(constatDto.getFrequenceConstat());
-		constat.setOrdreLogiciel(constatDto.getOrdreLogiciel());
-		constat.setOrdreMateriel(constatDto.getOrdreMateriel());
+		constat.setOrdre(constatDto.getOrdre());
+		constat.setDateApparition(constatDto.getDateApparition());
 		constat.setPanne(panne);
 		constatService.saveConstat(constat);
 		return constat;

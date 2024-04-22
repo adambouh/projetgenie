@@ -26,7 +26,10 @@ public class Panne {
 
 	@Column(name = "dateSignal")
 	private Date dateSignal;
-
+	
+	@Column(name = "datePanne")
+	private Date datePanne;
+	
 	@Enumerated(EnumType.STRING)
 	private EtatPanne etatPanne;
 
