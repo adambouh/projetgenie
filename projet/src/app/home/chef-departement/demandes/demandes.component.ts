@@ -57,6 +57,7 @@ export class DemandesComponent extends ChefDepartementComponent implements OnIni
         console.log("demandes des enseignants sont bien recuperés");
 
         this.demandesEnseignants = response;
+        this.demandesEnseignants = this.demandesEnseignants.filter(demande => demande.etatDemande != "créée");
         this.filteredDemandes = this.demandesEnseignants;
         this.allDemandes = this.demandesEnseignants;
       },
@@ -141,16 +142,18 @@ export class DemandesComponent extends ChefDepartementComponent implements OnIni
 
     } else {
 
-      this.chefService.deletedemandeById(demande.id).subscribe(
-        (response: any) => {
-          this.allDemandes = this.allDemandes.filter(dem => dem.id !== demande.id);
-          this.changeDemandes();
-          alert("La demande a été supprimée avec succès !!");
-        },
-        (error) => {
-          console.error('Une erreur s\'est produite lors de la suppression du demande : ', error);
-        }
-      );
+      if( confirm("Voulez vous vraiment supprimer cette demande ?")) {
+        this.chefService.deletedemandeById(demande.id).subscribe(
+          (response: any) => {
+            this.allDemandes = this.allDemandes.filter(dem => dem.id !== demande.id);
+            this.changeDemandes();
+            alert("La demande a été supprimée avec succès !!");
+          },
+          (error) => {
+            console.error('Une erreur s\'est produite lors de la suppression du demande : ', error);
+          }
+        );
+      }
     }
   }
 
@@ -208,14 +211,15 @@ export class DemandesComponent extends ChefDepartementComponent implements OnIni
 
   // Filtrage
   filterResults(text: string): void {
+    this.changeDemandes();
     if (!text) {
       // If search input is empty, display all users
-      this.filteredDemandes = this.demandesEnseignants;
+      this.filteredDemandes = this.filteredDemandes;
       return;
     }
 
     // Filter users based on the search query
-    this.filteredDemandes = this.demandesEnseignants.filter(
+    this.filteredDemandes = this.filteredDemandes.filter(
       // || String(demande?.resolution).includes(text.toLowerCase()) || String(demande?.includes(text.toLowerCase()) || demande?.disqueDur?.includes(text.toLowerCase()));
       demande => demande?.user.first_name.toLowerCase().includes(text.toLowerCase()) || demande?.user.last_name.toLowerCase().includes(text.toLowerCase()) || demande?.typeRessource.toLowerCase().includes(text.toLowerCase()) || String(demande?.dateCreation).includes(text) || String(demande?.vitesseImpression).includes(text.toLowerCase()) || String(demande?.resolution).includes(text.toLowerCase()) || String(demande?.ram).includes(text.toLowerCase()) || String(demande?.cpu).includes(text.toLowerCase()) || String(demande?.disqueDur).includes(text.toLowerCase()));
   }

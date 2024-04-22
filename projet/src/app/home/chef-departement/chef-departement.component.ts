@@ -11,5 +11,10 @@ import { HomeComponent } from '../home.component';
   styleUrls: ['./chef-departement.component.css'],
 })
 export class ChefDepartementComponent extends HomeComponent{
-  
+  protected changingSpace = Number(localStorage.getItem("chaning-space"));
+
+  changeSpace() {
+    localStorage.setItem("role", "Enseignant");
+    this.router.navigate(['/home/enseignant/acceuil']);
+  }
 }

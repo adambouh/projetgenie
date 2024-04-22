@@ -12,7 +12,6 @@ import { responsabledesresources } from './home/responsable-des-resources/respon
 import { AcceuilComponent } from './home/responsable-des-resources/acceuil/acceuil.component';
 import { PersonnelsComponent } from './home/responsable-des-resources/personnels/personnels.component';
 import { ChefDepartementComponent } from './home/chef-departement/chef-departement.component';
-import { NotificationsComponent } from './home/chef-departement/notifications/notifications.component';
 import { AcceuilchefComponent } from './home/chef-departement/acceuilchef/acceuilchef.component';
 import { DemandesComponent } from './home/chef-departement/demandes/demandes.component';
 
@@ -22,9 +21,13 @@ import { PersonnelComponent } from './home/responsable-des-resources/personnel/p
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgFor, NgForOf } from '@angular/common';
 import { EnseignantComponent } from './home/enseignant/enseignant.component';
-import { NotificationComponent } from './home/enseignant/notification/notification.component';
 import { DemandeComponent } from './home/enseignant/demande/demande.component';
 import { AcceuilEnseignantComponent } from './home/enseignant/acceuil-enseignant/acceuil-enseignant.component';
+import { NotificationEnsComponent } from './home/enseignant/notification-ens/notification-ens.component';
+import { NotificationsComponent } from './home/notifications/notifications.component';
+import { NotificationChefComponent } from './home/chef-departement/notification-chef/notification-chef.component';
+import { TechnicienComponent } from './home/technicien/technicien.component';
+import { PannesTechComponent } from './home/technicien/pannes-tech/pannes-tech.component';
 
 // Import HomeComponent here
 const routes: Routes = [
@@ -50,8 +53,8 @@ const routes: Routes = [
       children: [
         { path: '', redirectTo: 'acceuil', pathMatch: 'full' },
         { path: "demandes", component: DemandesComponent },
-        { path: "notifications", component: NotificationsComponent },
         { path: "acceuil", component: AcceuilchefComponent },
+        { path: "notifications", component: NotificationChefComponent },
       ]
     },
     {
@@ -60,8 +63,16 @@ const routes: Routes = [
       children: [
         { path: '', redirectTo: 'acceuil', pathMatch: 'full' },
         { path: "demandes", component: DemandeComponent },
-        { path: "notifications", component: NotificationComponent },
         { path: "acceuil", component: AcceuilEnseignantComponent },
+        { path: "notifications", component: NotificationEnsComponent },
+      ]
+    },
+    {
+      path: "technicien",
+      component: TechnicienComponent,
+      children: [
+        { path: '', redirectTo: 'pannes', pathMatch: 'full' },
+        { path: "pannes", component: PannesTechComponent },
       ]
     },
     ],
@@ -80,10 +91,10 @@ export default routes;
     AcceuilchefComponent,
     PersonnelsComponent,
     ChefDepartementComponent,
-    NotificationsComponent,
     AcceuilEnseignantComponent,
     DemandesComponent, // Add HomeComponent to the declarations array
-    ProfileComponent, PersonnelComponent, EnseignantComponent, NotificationComponent, DemandeComponent, // Add HomeComponent to the declarations array
+    ProfileComponent, PersonnelComponent, EnseignantComponent, DemandeComponent, NotificationEnsComponent, NotificationChefComponent, NotificationsComponent, TechnicienComponent, // Add HomeComponent to the declarations array
+    PannesTechComponent,
   ],
   imports: [
     BrowserModule,

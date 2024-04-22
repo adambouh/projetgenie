@@ -60,10 +60,6 @@ export class AcceuilEnseignantComponent extends EnseignantComponent implements O
       (response: any[]) => {
         this.pannes = response;
         this.filtredPannes = this.pannes;
-        console.log("les panens : ");
-        console.log(this.filtredPannes);
-        
-        
       },
       (error: any) => {
         console.error('Erreur lors de récuperation des pannes : ', error);
@@ -88,7 +84,18 @@ export class AcceuilEnseignantComponent extends EnseignantComponent implements O
 
     this.enseignantService.signalPanne(this.resourceID).subscribe(
       (response: any) => {
+        const resource = this.ressources.find(res => res.id = this.resourceID);
+        const formattedDate = new Date().toISOString().slice(0, 10);
+        this.filtredPannes.unshift({
+          "ressource": {
+            "codeInventaire": resource.codeInventaire,
+            "typeRessource": resource.typeRessource,
+          },
+          "etatPanne": "NonRepare",
+          "dateSignal": formattedDate
+        });
         alert("Panne est signalée!!")
+
       },
       (error: any) => {
         console.error('Erreur lors signalisation de la panne de ressource : ', error);
@@ -131,14 +138,14 @@ export class AcceuilEnseignantComponent extends EnseignantComponent implements O
 
   // Filter for Pannes
   filterResultsPannes(text: string): void {    
-    
+    this.changePannes();
     if (!text) {
       // If search input is empty, display all ressources
-      this.filtredPannes = this.pannes;
+      this.filtredPannes = this.filtredPannes;
       return;
     }
 
-    this.filtredPannes = this.pannes.filter(
+    this.filtredPannes = this.filtredPannes.filter(
       panne => String(panne?.ressource.codeInventaire).toLowerCase().includes(text.toLowerCase()) || panne?.ressource.typeRessource.toLowerCase().includes(text.toLowerCase()) || panne?.etatPanne.toLowerCase().includes(text.toLowerCase())  || String(panne?.dateSignal).includes(text)
     );
   }

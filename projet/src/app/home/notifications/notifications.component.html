@@ -1,0 +1,99 @@
+<!-- MAIN -->
+<main>
+    <div class="head-title">
+        <div class="left">
+        </div>
+
+        <a href="#" class="btn-download" onclick="event.preventDefault()" (click)="changeAllNotificationsStatus()">
+            <i class='bx bxs-file-plus'></i>
+            <span class="text">Lire tous les notifications</span>
+        </a>
+    </div>
+
+    <div class="table-data">
+        <div class="order">
+            <div class="head">
+                <h3 style="display: flex;">
+                    Notifications
+                </h3>
+                <select class="choice-select" [(ngModel)]="selectedNotifications" (change)="changeNotifications()">
+                    <option value="non-lu">Non lues</option>
+                    <option value="lu">Lues</option>
+                    <option value="all">Toutes</option>
+                </select>
+
+                <form action="#">
+                    <div class="form-input">
+                        <input type="search" placeholder="Search..." #filterNotifications
+                        (input)="filterUserNotifications(filterNotifications.value)">
+                        <button type="button" class="search-btn" (click)="filterUserNotifications(filterNotifications.value)"><i class='bx bx-search'></i></button>
+                    </div>
+                </form>
+                <i class='bx bx-filter'></i>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Emetteur
+                        </th>
+                        <th>
+                            Contenu
+                        </th>
+                        <th>
+                            Etat
+                        </th>
+                        <th>
+                            Date Envoi
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <style>
+                    tbody td {
+                        vertical-align: top;
+                    }
+                </style>
+                <tbody>
+                    <tr *ngFor="let notification of filtredNotifications let i = index">
+                        <td>
+                            {{ i }}
+                        </td>
+                        <td>
+                            {{notification.emetteur.id}}
+                        </td>
+                        <td>
+                            {{notification.contenu}}
+                        </td>
+                        <td>
+                            <ng-container *ngIf="notification.etat_lu == false; else seen">
+                                Non Lu
+                            </ng-container>
+                            <ng-template #seen>
+                                Lu
+                            </ng-template>
+                        </td>
+                        <td>
+                            {{ notification.date_envoi }}
+                        </td>
+                        <td class="td-actions">
+                            <i class="bx bx-envelope-open icons" style="color: #3C91E6;" (click)="changeNotificationStatus(notification)"></i>
+                        </td>
+                    </tr>
+                    <style>
+                        .icons {
+                            margin: 0px 5px;
+                            font-size: 22px;
+                            cursor: pointer;
+                        }
+                    </style>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

@@ -19,6 +19,12 @@
       </li>
     </ul>
     <ul class="side-menu">
+      <li *ngIf="changingSpace == 1">
+        <a onclick="event.preventDefault()" (click)="changeSpace()">
+          <i class="bx bx-transfer-alt"></i>
+          <span class="text">Espace Enseignant</span>
+        </a>
+      </li>
       <li>
         <a routerLink="Profile">
             <i class='bx bxs-cog' ></i>

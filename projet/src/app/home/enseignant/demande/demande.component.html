@@ -14,7 +14,7 @@
             </ul>
         </div>
 
-        <a href="#" class="btn-download" (click)="sendDemandesToChef()" onclick="event.preventDefault()">
+        <a href="#" class="btn-download" (click)="sendNeedsToChef()" onclick="event.preventDefault()">
             <i class='bx bxs-file-plus'></i>
             <span class="text">Envoyer Besoins Au Chef Departement</span>
         </a>
@@ -24,20 +24,21 @@
         <div class="order">
             <div class="head">
                 <h3 style="display: flex;">
-                    <button class="btn-add-ordinateur" (click)="popUpOrdinateur()">Ajouter Ordinateur</button>
                     <button class="btn-add-imprimante" (click)="popUpImprimante()">Ajouter Imprimante</button>
+                    <button class="btn-add-ordinateur" (click)="popUpOrdinateur()">Ajouter Ordinateur</button>
                 </h3>
-                <select class="choice-select" [(ngModel)]="selectedBesoin"
-                    (change)="changeBesoines()">
-                    <option value="all">Tous les besoins</option>
+                <select class="choice-select" [(ngModel)]="selectedNeed"
+                    (change)="changeNeeds()">
                     <option value="created">Besoins créés</option>
                     <option value="sent">Besoins envoyés</option>
+                    <option value="all">Tous les besoins</option>
                 </select>
 
                 <form action="#">
                     <div class="form-input">
-                        <input type="search" placeholder="Search...">
-                        <button type="button" class="search-btn"><i
+                        <input type="search" placeholder="Search..." #filterNeeds
+                        (input)="filterResultsNeeds(filterNeeds.value)">
+                        <button type="button" class="search-btn" (click)="filterResultsNeeds(filterNeeds.value)"><i
                                 class='bx bx-search'></i></button>
                     </div>
                 </form>
@@ -72,65 +73,45 @@
                     }
                 </style>
                 <tbody>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        Imprimante
-                    </td>
-                    <td>
-                        resolution <br> vitesse
-                    </td>
-                    <td>
-                        Crée
-                    </td>
-                    <td>
-                        05/05/2025
-                    </td>
-                    <td class="td-actions">
-                        <i class="bx bx-edit icons" style="color: #3C91E6;"
-                           ></i>
-                        <i class="bx bx-trash icons" style="color: red;" (click)='deleteBesoin(1)'></i>
-                    </td>
-                    <!-- <tr *ngFor="let demande of filteredDemandes let i = index">
+                    <tr *ngFor="let need of filtredNeeds let i = index">
                         <td>
                             {{ i }}
                         </td>
-                        <td class="display:flex; align-items: top;">
-                            {{ demande.user.first_name }} {{ demande.user.last_name }}
-                        </td>
                         <td>
-                            {{demande.typeRessource}}
+                            {{need.typeRessource}}
                         </td>
-                        <ng-container *ngIf="demande.typeRessource === 'Imprimante'">
+                        <ng-container *ngIf="need.typeRessource === 'Imprimante'">
                             <td>
-                                <span>Vitesse : {{ demande.vitesseImpression }}</span><br>
-                                <span>Resolution : {{ demande.resolution }}</span>
+                                <span>Vitesse : {{ need.vitesseImpression }}</span><br>
+                                <span>Resolution : {{ need.resolution }}</span>
                             </td>
                         </ng-container>
 
-                        <ng-container *ngIf="demande.typeRessource === 'Ordinateur'">
+                        <ng-container *ngIf="need.typeRessource === 'Ordinateur'">
                             <td>
-                                <span>RAM : {{ demande.ram }}</span><br>
-                                <span>CPU : {{ demande.cpu }}</span><br>
-                                <span>Disque : {{ demande.disqueDur }}</span><br>
-                                <span>Ecran: {{ demande.ecran }}</span>
+                                <span>RAM : {{ need.ram }}</span><br>
+                                <span>CPU : {{ need.cpu }}</span><br>
+                                <span>Disque : {{ need.disqueDur }}</span><br>
+                                <span>Ecran: {{ need.ecran }}</span>
                             </td>
                         </ng-container>
                         <td>
-                            <ng-container *ngIf="demande.etatDemande == 'En_Cours_De_Traitement'; else traite">
-                                En cours
+                            <ng-container *ngIf="need.etatDemande == 'créée'; else sent">
+                                Crée
                             </ng-container>
-                            <ng-template #traite>
-                                Traité
+                            <ng-template #sent>
+                                Envoyé
                             </ng-template>
                         </td>
                         <td>
-                            {{ demande.dateCreation }}
+                            {{ need.dateCreation }}
                         </td>
-                        
-                        
-                    </tr> -->
+                        <td class="td-actions">
+                            <i class="bx bx-edit icons" style="color: #3C91E6;" (click)="updateNeedPopUp(need)"
+                               ></i>
+                            <i class="bx bx-trash icons" style="color: red;" (click)='deleteNeed(need)'></i>
+                        </td>                        
+                    </tr>
                     <style>
                         .icons {
                             margin: 0px 5px;
@@ -180,7 +161,7 @@
             <hr>
             <div class="btns-container">
                 <button class="btn-annuler" (click)="removePopUpOrdinateur()">Annuler</button>
-                <button class="btn-envoyer">Modifier</button>
+                <button class="btn-envoyer" (click)="addOrdinateur()">Ajouter</button>
             </div>
         </form>
     </div>
@@ -203,7 +184,72 @@
             <hr><br>
             <div class="btns-container">
                 <button class="btn-annuler" (click)="removePopUpImprimante()">Annuler</button>
-                <button class="btn-envoyer">Ajouter</button>
+                <button class="btn-envoyer" (click)="addImprimante()">Ajouter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="pop-up-container" #popUpUpdateDemande_ordinateur style="display:none;">
+    <div class="form-pop-up">
+        <h3>Ordinateur</h3>
+        <br>
+        <hr><br>
+        <form class="form" [formGroup]="formulaire_update_demande_ordinateur">
+            <div class="element-container">
+                <label class="element-lebel">CPU</label>
+                <input type="text" name="cpu" formControlName="cpu" class="element-input" value="">
+            </div>
+            <div class="element-container">
+                <label class="element-lebel">RAM</label>
+                <input type="text" name="ram" formControlName="ram" class="element-input" value="">
+            </div>
+            <div class="element-container">
+                <label class="element-lebel">Disque</label>
+                <input type="text" name="disque" formControlName="disque" class="element-input" value="">
+            </div>
+            <div class="element-radio-container">
+                <label class="element-lebel">Ecran</label>
+                <div class="radio-container">
+                    <input type="radio" name="ecran_update" formControlName="ecran_update" id="optionsRadios11" value="Avec">
+                    <label for="optionsRadios11" class="custom-radio"></label>
+                    <label for="optionsRadios11">Avec</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" name="ecran_update" formControlName="ecran_update" id="optionsRadios22" value="Sans">
+                    <label for="optionsRadios22" class="custom-radio"></label>
+                    <label for="optionsRadios22">Sans</label>
+                </div>
+
+            </div>
+            <br>
+            <hr>
+            <div class="btns-container">
+                <button class="btn-annuler" (click)="removeUpdateNeedPopUp()">Annuler</button>
+                <button class="btn-envoyer"  (click)="updateCurrentNeed()">Modifier</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="pop-up-container" #popUpUpdateDemande_imprimante style="display:none;">
+    <div class="form-pop-up">
+        <h3>Imprimante</h3>
+        <br>
+        <hr><br>
+        <form [formGroup]="formulaire_update_demande_imprimante">
+            <div class="element-container">
+                <label class="element-lebel">Vitesse</label>
+                <input type="text" name="vitesse" formControlName="vitesse" class="element-input" value="">
+            </div>
+            <div class="element-container">
+                <label class="element-lebel">Résolution</label>
+                <input type="text" name="resolution" formControlName="resolution" class="element-input" value="">
+            </div>
+            <hr><br>
+            <div class="btns-container">
+                <button class="btn-annuler" (click)="removeUpdateNeedPopUp()">Annuler</button>
+                <button class="btn-envoyer" (click)="updateCurrentNeed()">Modifier</button>
             </div>
         </form>
     </div>

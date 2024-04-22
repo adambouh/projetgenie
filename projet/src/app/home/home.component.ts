@@ -10,21 +10,53 @@ import { waitForAsync } from '@angular/core/testing';
   styleUrls: []
 })
 export class HomeComponent implements OnInit {
+  protected notifications: any[] = [];
+  protected numberNotificationsNonSeen = 0;
   constructor(protected authService: AuthService, protected router: Router, protected HomeService: HomeService) { }
-  
+
   ngOnInit(): void {
-    if (HomeService.role() === "ChefDepartement") {
-      this.router.navigate(['/home/respo']); // Navigate to the 'chef-departement' route
-    }
+    this.loadNotifications();
+    // if (HomeService.role() === "ChefDepartement") {
+    //   this.router.navigate(['/home/respo']); // Navigate to the 'chef-departement' route
+    // }
 
     // To navigate to chef dep and enseignants remove these comments (//)
-    // if (HomeService.role() == "ChefDepartement") {
-    //   this.router.navigate(['/home/chefdep']); // Navigate to the 'chef-departement' route
-    // } else if (HomeService.role() == "Enseignant") {
-    //   this.router.navigate(['/home/enseignant']); // Navigate to the 'enseignant' route
-    // }
+    if (HomeService.role() == "ChefDepartement") {
+      localStorage.setItem("chaning-space", "1");
+      this.router.navigate(['/home/chefdep']); // Navigate to the 'chef-departement' route
+    } else if (HomeService.role() == "Enseignant") {
+      this.router.navigate(['/home/enseignant']); // Navigate to the 'enseignant' route
+    } else if (HomeService.role() == "Technicien") {
+      this.router.navigate(['/home/technicien']); // Navigate to the 'technicien' route
+    }
   }
 
+  loadNotifications() {
+    this.HomeService.getNotifications(Number(localStorage.getItem("id"))).subscribe(
+      (response: any[]) => {
+        this.notifications = response;
+        const nonSeenNotifications = this.notifications.filter(notification => !notification.etat_lu);
+        this.numberNotificationsNonSeen = nonSeenNotifications.length;
+      },
+      (error) => {
+        console.error('Une erreur s\'est produite lors de récupération des notifications: ', error);
+      }
+    );
+  }
+
+  getNotifications() {
+    return this.notifications;
+  }
+
+  showNotificationsPage() {
+    
+    // To navigate to notifications page
+    if (HomeService.role() == "ChefDepartement") {
+      this.router.navigate(['/home/chefdep/notifications']); // Navigate to the 'chef-departement' route
+    } else if (HomeService.role() == "Enseignant") {
+      this.router.navigate(['/home/enseignant/notifications']); // Navigate to the 'enseignant' route
+    }
+  }
 
   logout() {
     this.authService.logout();
