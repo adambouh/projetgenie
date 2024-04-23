@@ -24,8 +24,14 @@ export class TechnicienService {
   changePanneStatus(panneID: Number, etat: string): Observable<any> {
     const url = "http://localhost:8080/api/panne/modifyPanne?panne_id="+panneID;
     const body = {
-      etatPanne: "EnCours"
+      etatPanne: etat
     }
     return this.http.put(url, body);
+  }
+
+  // To add constat
+  addConstat(constat: any): Observable<any> {
+    const url = "http://localhost:8080/api/constat/addConstat";
+    return this.http.post(url, constat);
   }
 }

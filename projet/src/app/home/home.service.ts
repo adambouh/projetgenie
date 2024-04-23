@@ -22,4 +22,14 @@ export class HomeService {
   getNotifications(id_user: number): Observable<any[]> {
     return this.http.get<any[]>("http://localhost:8080/api/notification/getNotificationByUser?user_id="+id_user);
   }
+
+  // Méthode pour changer l'etat de notification
+  changeNotificationsStatus(listeNotificationIds: any[]): Observable<any> {
+
+    const url = "http://localhost:8080/api/notification/modifierEtatNotification";
+    const body = {
+      listeNotifId: listeNotificationIds
+    }
+    return this.http.put(url, body);
+  }
 }

@@ -28,6 +28,7 @@ import { NotificationsComponent } from './home/notifications/notifications.compo
 import { NotificationChefComponent } from './home/chef-departement/notification-chef/notification-chef.component';
 import { TechnicienComponent } from './home/technicien/technicien.component';
 import { PannesTechComponent } from './home/technicien/pannes-tech/pannes-tech.component';
+import { PublicComponent } from './public/public.component';
 
 // Import HomeComponent here
 const routes: Routes = [
@@ -78,6 +79,8 @@ const routes: Routes = [
     ],
   },
   { path: 'login', component: LoginComponent },  // Add more routes as needed
+  { path: 'public-sapce', component: PublicComponent},
+
 ];
 
 export class AppRoutingModule { }
@@ -94,7 +97,7 @@ export default routes;
     AcceuilEnseignantComponent,
     DemandesComponent, // Add HomeComponent to the declarations array
     ProfileComponent, PersonnelComponent, EnseignantComponent, DemandeComponent, NotificationEnsComponent, NotificationChefComponent, NotificationsComponent, TechnicienComponent, // Add HomeComponent to the declarations array
-    PannesTechComponent,
+    PannesTechComponent, PublicComponent,
   ],
   imports: [
     BrowserModule,

@@ -191,7 +191,15 @@ export class DemandesComponent extends ChefDepartementComponent implements OnIni
   }
 
   sendDemandes() {
-    this.chefService.changeDemandesStatus(this.departementID).subscribe(
+    let resourcesIDs: any[] = [];
+
+    this.allDemandes.forEach(demande => {
+      if (demande.etatDemande === "En_Cours_De_Traitement") {
+        resourcesIDs.push(demande.id);
+      }
+    });
+
+    this.chefService.changeDemandesStatus(resourcesIDs).subscribe(
       (response: any) => {
         this.allDemandes.forEach(demande => {
           if (demande.etatDemande === "En_Cours_De_Traitement") {
@@ -220,7 +228,6 @@ export class DemandesComponent extends ChefDepartementComponent implements OnIni
 
     // Filter users based on the search query
     this.filteredDemandes = this.filteredDemandes.filter(
-      // || String(demande?.resolution).includes(text.toLowerCase()) || String(demande?.includes(text.toLowerCase()) || demande?.disqueDur?.includes(text.toLowerCase()));
       demande => demande?.user.first_name.toLowerCase().includes(text.toLowerCase()) || demande?.user.last_name.toLowerCase().includes(text.toLowerCase()) || demande?.typeRessource.toLowerCase().includes(text.toLowerCase()) || String(demande?.dateCreation).includes(text) || String(demande?.vitesseImpression).includes(text.toLowerCase()) || String(demande?.resolution).includes(text.toLowerCase()) || String(demande?.ram).includes(text.toLowerCase()) || String(demande?.cpu).includes(text.toLowerCase()) || String(demande?.disqueDur).includes(text.toLowerCase()));
   }
 }

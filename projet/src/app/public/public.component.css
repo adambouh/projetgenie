@@ -1,0 +1,45 @@
+.head {
+    height: 80px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: grid;
+    grid-template-columns: 10fr 2fr;
+}
+.head ul {
+    display: flex;
+    flex-direction: row;
+}
+.head ul:first-child {
+    margin-left: 20%;
+}
+.head ul li {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 40px;
+    color: white;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+.head ul li:hover {
+    color: #d82a4e;
+}
+.head a {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-decoration: none;
+    color: white;
+    background-color: #d82a4e;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-up-part {
+    height: 85vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}

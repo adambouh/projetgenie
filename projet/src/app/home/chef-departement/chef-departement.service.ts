@@ -105,7 +105,12 @@ export class ChefDepartementService {
   }
 
   // Change the demandes status to traited
-  changeDemandesStatus(departementID: number) {
-    return this.http.put('http://localhost:8080/api/ressource/modifyEtatRessource?depId='+departementID, null);
+  changeDemandesStatus(resourcesIDs: any[]) {
+    const url = "http://localhost:8080/api/ressource/modifyStatusRessources";
+    const body = {
+      ressourceIdList: resourcesIDs,
+      etatDemande: "Traité"
+    }
+    return this.http.put(url, body);
   }
 }

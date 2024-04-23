@@ -4,11 +4,11 @@
             <div class="head">
                 <h3>Mes Pannes</h3>
 
-                <select class="choice-select" [(ngModel)]="selectedPannes">
+                <select class="choice-select" [(ngModel)]="selectedPannes" (change)="changeMyPannes()">
                     <option value="Repare">Réparé</option>
                     <option value="EnCours">En cours</option>
                     <option value="Severe">Severe</option>
-                    <option value="all">Tous</option>
+                    <option value="All">Tous</option>
                 </select>
 
                 <form action="#">
@@ -20,6 +20,7 @@
                     </div>
                 </form>
                 <i class='bx bx-filter'></i>
+
             </div>
             <table>
                 <thead>
@@ -149,13 +150,13 @@
         <form class="form" [formGroup]="formulaire_modifier_panne">
             <div class="element-container">
                 <label class="element-lebel">Code Inventaire</label>
-                <input type="text" [disabled]="isDisabled" name="codeInventaire" formControlName="codeInventaire" class="element-input" value="">
+                <input type="text" name="codeInventaire" formControlName="codeInventaire" class="element-input">
             </div>
             <div class="element-container">
                 <label class="element-lebel">Type Ressource</label>
-                <input type="text" [disabled]="true" name="typeRessource" formControlName="typeRessource" class="element-input" value="">
+                <input type="text" name="typeRessource" formControlName="typeRessource" class="element-input">
             </div>
-            <div class="element-radio-container">
+            <div class="element-radio-container" style="margin-bottom: 15px;">
                 <label class="element-lebel">Etat De Panne</label>
                 <div class="radio-container" (click)="showConstatElements()">
                     <input type="radio" name="etat" formControlName="etat" id="optionsRadios1" value="Severe">
@@ -163,32 +164,61 @@
                     <label for="optionsRadios1">Sévère</label>
                 </div>
                 <div class="radio-container" (click)="hideConstatElements()">
-                    <input type="radio" name="etat" formControlName="etat" id="optionsRadios2" value="Repare" checked>
+                    <input type="radio" name="etat" formControlName="etat" id="optionsRadios2" value="Repare">
                     <label for="optionsRadios2" class="custom-radio"></label>
                     <label for="optionsRadios2">Réparée</label>
                 </div>
             </div>
-            <div #constat style="display: none; flex-direction: column; margin-top: 20px;">
+            <div #constat style="display: none; flex-direction: column; margin-top: 15px; margin-bottom: 15px;">
                 <hr>
+                <div class="element-container" style="margin-top: 15px;">
+                    <label class="element-lebel">Date D'apprition</label>
+                    <input type="date" name="dateApparition" id="dateApparition" formControlName="dateApparition" class="element-input">
+                </div>
                 <div class="element-container-texterea">
                     <label class="element-lebel">Explication De Panne</label>
-                    <textarea type="text" rows="5" name="explication" formControlName="explication" class="element-input" value=""></textarea>
+                    <textarea type="text" rows="3" name="explication" formControlName="explication"
+                        class="element-input" value=""></textarea>
                 </div>
                 <div class="element-container">
                     <label class="element-lebel">Fréquence De Panne</label>
-                    <input type="text" name="frequence" formControlName="frequence" class="element-input" value="">
+                    <select name="frequence" formControlName="frequence" class="element-input">
+                        <option value="rare">Rare</option>
+                        <option value="frequente">Fréquente</option>
+                        <option value="permanente">Permanente</option>
+                    </select>
                 </div>
-                <div class="element-container">
-                    <label class="element-lebel">Ordre Logiciel</label>
-                    <input type="text" name="ordreLogiciel" formControlName="ordreLogiciel" class="element-input" value="">
+
+                <div class="element-radio-container" style="margin-bottom: 15px;" #ordrePanne>
+                    <label class="element-lebel">Ordre De Panne</label>
+                    <div class="radio-container">
+                        <input type="radio" name="ordre" formControlName="ordre" id="optionsRadios11" value="Logiciel"  (click)="showDefautPanne()">
+                        <label for="optionsRadios11" class="custom-radio"></label>
+                        <label for="optionsRadios11">Logiciel</label>
+                    </div>
+                    <div class="radio-container">
+                        <input type="radio" name="ordre" formControlName="ordre" id="optionsRadios22" value="Matériel" (click)="hideDefautPanne()">
+                        <label for="optionsRadios22" class="custom-radio"></label>
+                        <label for="optionsRadios22">Matériel</label>
+                    </div>
                 </div>
-                <div class="element-container">
-                    <label class="element-lebel">Ordre Matériel</label>
-                    <input type="text" name="ordreMateriel" formControlName="ordreMateriel" class="element-input" value="">
+
+                <div class="element-radio-container" style="margin-bottom: 15px; display: none;" #defautPanne>
+                    <label class="element-lebel">Défaut Panne</label>
+                    <div class="radio-container">
+                        <input type="radio" name="ordreLogiciel" formControlName="ordreLogiciel" id="optionsRadios111" value="Système">
+                        <label for="optionsRadios111" class="custom-radio"></label>
+                        <label for="optionsRadios111">Système</label>
+                    </div>
+                    <div class="radio-container">
+                        <input type="radio" name="ordreLogiciel" formControlName="ordreLogiciel" id="optionsRadios222" value="Logiciel utilitaire">
+                        <label for="optionsRadios222" class="custom-radio"></label>
+                        <label for="optionsRadios222">Logiciel utilitaire</label>
+                    </div>
                 </div>
 
             </div>
-            <br>
+
             <hr>
             <div class="btns-container">
                 <button class="btn-annuler" (click)="removePopUpPanne()">Annuler</button>

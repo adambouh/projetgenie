@@ -113,4 +113,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  changeNotificationsStatus(listeNotificationIds: any[]) {
+    return this.HomeService.changeNotificationsStatus(listeNotificationIds);
+  }
+
 }
