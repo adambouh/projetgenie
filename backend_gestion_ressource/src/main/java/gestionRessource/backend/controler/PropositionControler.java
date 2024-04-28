@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import gestionRessource.backend.dto.DetailRessourceDTO;
@@ -55,6 +56,7 @@ public class PropositionControler {
 		proposition.setEtatProposition(EtatProposition.NonTraite);
 		proposition.setMontantTotal(propositionDto.getMontantTotal());
 		proposition.setFournisseur(fournisseur);
+		propositionService.saveProposition(proposition);
 		if (propositionDto.getDetailRessourceDto() != null && !propositionDto.getDetailRessourceDto().isEmpty()) {
 			for (DetailRessourceDTO detailRessourceDto : propositionDto.getDetailRessourceDto()) {
 				Ressource ressource = ressourceService.getRessourceById(detailRessourceDto.getIdRessource());
@@ -63,6 +65,7 @@ public class PropositionControler {
 				detail.setMarque(detailRessourceDto.getMarque());
 				detail.setPrix(detailRessourceDto.getPrix());
 				detail.setRessource(ressource);
+				detail.setProposition(proposition);
 				ressource.setDetail(detail);
 				detailService.saveDetail(detail);
 				ressourceService.saveRessource(ressource);
@@ -76,5 +79,19 @@ public class PropositionControler {
 	@GetMapping("/getPropositionOrderByMoinsDisant")
 	public List<Proposition> getPropositionOrderByMoinsDisant() {
 		return propositionService.getPropositionOrderByMoinsDisant();
+	}
+
+	@GetMapping("/getPropositionForFournisseur")
+	public List<Proposition> getPropositionForFournisseur(@RequestParam Long fournisseurId) {
+		List<Proposition> propositions = propositionService.getPropositionByFournisseur(fournisseurId);
+		return propositions;
+	}
+
+	@GetMapping("/checkPropositionForFournisseur")
+	public Proposition checkPropositionForFournisseur(@RequestParam Long fournisseurId,
+			@RequestParam Long appelDoffreId) {
+		Proposition proposition = propositionService.getPropositionByFournisseurAndAppelDoffre(fournisseurId,
+				appelDoffreId);
+		return proposition;
 	}
 }

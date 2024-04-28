@@ -10,4 +10,8 @@ public interface PropositionService {
 
 	List<Proposition> getPropositionOrderByMoinsDisant();
 
+	List<Proposition> getPropositionByFournisseur(Long fournisseurId);
+
+	Proposition getPropositionByFournisseurAndAppelDoffre(Long fournisseurId, Long appelDoffreId);
+
 }
