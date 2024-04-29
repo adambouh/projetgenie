@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="fournisseur-container">
     <div class="head">
         <ul>
             <li>Appels D'offres</li>
@@ -8,7 +8,179 @@
         </ul>
         <a routerLink="/login">Login</a>
     </div>
-    <div class="sign-up-part">
+    <div class="separator" style="margin-top: 100px;"></div>
 
+    <div class="sign-up-part">
+        <div class="form-container">
+            <div class="form-left-container">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="form-right-container">
+                <form action="#" class="form" id="form">
+                    <h2 class="form-title">Sign Up</h2>
+                    <div class="inputs-container">
+                        <input type="text" placeholder="Sciete" class="input" />
+                        <input type="password" placeholder="Password" class="input" />
+                    </div>
+                    <div class="btn-container">
+                        <button class="custom-btn btn-5"><span>Sign Up</span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="appels-offres-container">
+        <h1 class=".h1">Appels D'offres</h1>
+        <br>
+        <p class=".p">Soumettez une Proposition pour l'appel d'offre qui vous convient le mieux, et spécifiez le détail
+            de chaque besoin.</p>
+        <div class="new-ended-all">
+            <span class="new-choice active" (click)="changeVisibleAppels('new-choice')">Nouvelles</span>
+            <span class="ended-choice" (click)="changeVisibleAppels('ended-choice')">Terminées</span>
+            <span class="all-choice" (click)="changeVisibleAppels('all-choice')">Toutes</span>
+        </div>
+        <div class="appels-offres">
+            <div class="cart-appel new all">
+                <h3 class="offre-number">Appel Offre 1</h3>
+                <hr>
+                <div class="number-ressources-container">
+                    <p>
+                        <span>Nombre Ordinateur</span><span>20</span>
+                    </p>
+                    <p>
+                        <span>Nombre Imprimante</span><span>10</span>
+                    </p>
+                </div>
+                <div class="dates-container">
+                    <p>
+                        <span>Date Lance</span><span>2020/05/01</span>
+                    </p>
+                    <p>
+                        <span>Date Fin</span><span>2020/05/04</span>
+                    </p>
+                </div>
+                <div class="btn-container">
+                    <button class="custom-btn btn-5"><span>Soumettre Proposition</span></button>
+                </div>
+            </div>
+            <div class="cart-appel new all">
+                <h3 class="offre-number">Appel Offre 1</h3>
+                <hr>
+                <div class="number-ressources-container">
+                    <p>
+                        <span>Nombre Ordinateur</span><span>20</span>
+                    </p>
+                    <p>
+                        <span>Nombre Imprimante</span><span>10</span>
+                    </p>
+                </div>
+                <div class="dates-container">
+                    <p>
+                        <span>Date Lance</span><span>2020/05/01</span>
+                    </p>
+                    <p>
+                        <span>Date Fin</span><span>2020/05/04</span>
+                    </p>
+                </div>
+                <div class="btn-container">
+                    <button class="custom-btn btn-5"><span>Soumettre Proposition</span></button>
+                </div>
+            </div>
+            <div class="cart-appel new all">
+                <h3 class="offre-number">Appel Offre 1</h3>
+                <hr>
+                <div class="number-ressources-container">
+                    <p>
+                        <span>Nombre Ordinateur</span><span>20</span>
+                    </p>
+                    <p>
+                        <span>Nombre Imprimante</span><span>10</span>
+                    </p>
+                </div>
+                <div class="dates-container">
+                    <p>
+                        <span>Date Lance</span><span>2020/05/01</span>
+                    </p>
+                    <p>
+                        <span>Date Fin</span><span>2020/05/04</span>
+                    </p>
+                </div>
+                <div class="btn-container">
+                    <button class="custom-btn btn-5"><span>Soumettre Proposition</span></button>
+                </div>
+            </div>
+            <div class="cart-appel ended all">
+                <h3 class="offre-number">Appel Offre 1</h3>
+                <hr>
+                <div class="number-ressources-container">
+                    <p>
+                        <span>Nombre Ordinateur</span><span>20</span>
+                    </p>
+                    <p>
+                        <span>Nombre Imprimante</span><span>10</span>
+                    </p>
+                </div>
+                <div class="dates-container">
+                    <p>
+                        <span>Date Lance</span><span>2020/05/01</span>
+                    </p>
+                    <p>
+                        <span>Date Fin</span><span>2020/05/04</span>
+                    </p>
+                </div>
+                <div class="btn-container">
+                    <button class="custom-btn btn-5"><span>Soumettre Proposition</span></button>
+                </div>
+            </div>
+            <div class="cart-appel ended all">
+                <h3 class="offre-number">Appel Offre 1</h3>
+                <hr>
+                <div class="number-ressources-container">
+                    <p>
+                        <span>Nombre Ordinateur</span><span>20</span>
+                    </p>
+                    <p>
+                        <span>Nombre Imprimante</span><span>10</span>
+                    </p>
+                </div>
+                <div class="dates-container">
+                    <p>
+                        <span>Date Lance</span><span>2020/05/01</span>
+                    </p>
+                    <p>
+                        <span>Date Fin</span><span>2020/05/04</span>
+                    </p>
+                </div>
+                <div class="btn-container">
+                    <button class="custom-btn btn-5"><span>Soumettre Proposition</span></button>
+                </div>
+            </div>
+            <div class="cart-appel ended all">
+                <h3 class="offre-number">Appel Offre 1</h3>
+                <hr>
+                <div class="number-ressources-container">
+                    <p>
+                        <span>Nombre Ordinateur</span><span>20</span>
+                    </p>
+                    <p>
+                        <span>Nombre Imprimante</span><span>10</span>
+                    </p>
+                </div>
+                <div class="dates-container">
+                    <p>
+                        <span>Date Lance</span><span>2020/05/01</span>
+                    </p>
+                    <p>
+                        <span>Date Fin</span><span>2020/05/04</span>
+                    </p>
+                </div>
+                <div class="btn-container">
+                    <button class="custom-btn btn-5"><span>Soumettre Proposition</span></button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

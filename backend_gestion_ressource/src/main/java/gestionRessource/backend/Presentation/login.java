@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import gestionRessource.backend.controler.*;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gestionRessource.backend.controler.UserControler;
 import gestionRessource.backend.dto.AuthentificationDTO;
+import gestionRessource.backend.dto.FournisseurDTO;
 import gestionRessource.backend.model.User;
 
 @Controller
@@ -26,6 +28,9 @@ public class login {
 
     @Autowired
     private UserControler userControler;
+  
+    @Autowired
+    private FournisseurControler fournisseurControler;
 
     @GetMapping("/login")
     public String showLoginPage() {
@@ -59,6 +64,58 @@ public class login {
             return "login"; // Return to login page with error message
         }
     }
+    
+    // page login fournisseur
+    @GetMapping("/fournisseur-login")
+    public String showLogInFournisseur( HttpServletRequest request) {
+    	return "Fournisseur/loginFournisseur";
+    }
+    
+    // logout fournisseur
+    @GetMapping("/fournisseur-logout")
+    public String logoutFournisseur(HttpServletRequest request) {
+    	// Supprimez l'attribut 'fournisseur' s'il existe pour assurer le logout
+        HttpSession session = request.getSession();
+    	session.removeAttribute("fournisseur");
+    	return "redirect:/fournisseur-login";
+    }
 
+    // verification login password fournisseur
+    @PostMapping("/fournisseur-in")
+    public String loginFournisseur(@ModelAttribute AuthentificationDTO authoDto, HttpServletRequest request, Model model) {
+    	
+    	User fournisseur = userControler.authentification(authoDto);
+    	if ( fournisseur == null) { // fournisseur doesn't exist
+    		
+    		model.addAttribute("errorLoginFournisseur", "Login ou mot de passe incorrect");
+        	return "Fournisseur/loginFournisseur";
+ 
+    	} else { // fournissuer exists
+    		
+            HttpSession session = request.getSession();
+            session.setAttribute("fournisseur", fournisseur);
+            
+    		return "redirect:/appels-d-offres";
+    	}
+    }
+    
+    // verification login password fournisseur
+    @PostMapping("/fournisseur-signup")
+    public String signupFournisseur(@ModelAttribute FournisseurDTO fournisseurDTO, HttpServletRequest request, Model model) {
+    	
+    	User fournisseur = fournisseurControler.addFournisseur(fournisseurDTO);
+    	if ( fournisseur == null) { // fournisseur doesn't exist
+    		
+    		model.addAttribute("errorSignupFournisseur", "Une erreur s'est produite.");
+        	return "Fournisseur/appels-d-offres";
+ 
+    	} else { // fournissuer exists
+    		
+            HttpSession session = request.getSession();
+            session.setAttribute("fournisseur", fournisseur);
+            
+    		return "redirect:/appels-d-offres";
+    	}
+    }
 
 }

@@ -1,9 +1,20 @@
+.fournisseur-container {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Head part */
+
 .head {
-    height: 80px;
+    height: 100px;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgb(0, 0, 0);
     display: grid;
     grid-template-columns: 10fr 2fr;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 1000;
 }
 .head ul {
     display: flex;
@@ -13,33 +24,259 @@
     margin-left: 20%;
 }
 .head ul li {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     margin-right: 40px;
     color: white;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+     
     font-weight: bold;
     cursor: pointer;
 }
 .head ul li:hover {
-    color: #d82a4e;
+    color: rgba(255, 27, 0, 1);
 }
 .head a {
     margin-top: 30px;
     margin-bottom: 30px;
     text-decoration: none;
     color: white;
-    background-color: #d82a4e;
+    background-color: rgba(255, 27, 0, 1);
     border-radius: 5px;
-    width: 100px;
-    height: 30px;
+    width: 150px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* appels d'eoffres part */
+
+.appels-offres-container {
+    background-color: rgb(252, 247, 247);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.new-ended-all {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+     
+    font-size: 20px;
+    width: 400px;
+    font-weight: bold;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+.new-ended-all .active {
+    border-bottom: 4px solid rgba(255, 27, 0, 1);
+    padding-bottom: 3px;
+    color: rgba(255, 27, 0, 1);
+}
+
+.new-ended-all span {
+    cursor: pointer;
+}
+
+.new-ended-all span:hover {
+    border-bottom: 4px solid rgba(255, 27, 0, 1);
+    padding-bottom: 3px;
+}
+
+.appels-offres {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.appels-offres .cart-appel {
+    background-color: white;
+    height: 370px;
+    width: 300px;
+    margin-left: 10px;
+    margin-right: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 2px 1px rgb(204, 203, 203);
+    border-radius: 4px;
+    padding: 15px 30px;
+}
+
+.offre-number {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.number-ressources-container,
+.dates-container {
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 40px;
+     
+}
+
+.number-ressources-container p {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dates-container p {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.btn-container {
+    text-align: center;
+}
+.custom-btn {
+  width: 200px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+
+/* 5 */
+.btn-5 {
+    width: 200px;
+    height: 40px;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    background: rgb(255,27,0);
+  background: linear-gradient(0deg, rgba(255,27,0,1) 0%, rgba(251,75,2,1) 100%);
+  }
+  .btn-5:hover {
+    color: #f0094a;
+    background: transparent;
+     box-shadow:none;
+  }
+  .btn-5:before,
+  .btn-5:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #f0094a;
+    box-shadow:
+     -1px -1px 5px 0px #fff,
+     7px 7px 20px 0px #0003,
+     4px 4px 5px 0px #0002;
+    transition:400ms ease all;
+  }
+  .btn-5:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:2px;
+  }
+  .btn-5:hover:before,
+  .btn-5:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+  
+
+.h1 {
+    position: relative;
+    text-align: center;
+    color: #353535;
+    font-size: 50px;
+     
+}
+
+.p {
+     
+    font-weight: 300;
+    text-align: center;
+    font-size: 18px;
+    color: #676767;
+}
+
+/* sign up part */
+
 .sign-up-part {
     height: 85vh;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.form-container {
+    width: 60%;
+    min-width: 500px;
+    height: 70vh;
+    min-height: 300px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 2px 2px 2px 1px rgb(219, 216, 216);
+}
+
+.form-left-container,
+.form-right-container {
+    width: 100%;
+    height: 100%;
+}
+.form-right-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-right-container .form {
+    background-color: rgb(252, 247, 247);
+    height: 70%;
+    width: 90%;
+    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.form-right-container .form .inputs-container {
+    display: flex;
+    flex-direction: column;
+}
+.form-right-container .form .inputs-container input {
+    height: 30px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    padding: 20px 20px;
+}
+.form-left-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-left-container div {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgb(247, 161, 152), rgb(252, 247, 247));
+}
+

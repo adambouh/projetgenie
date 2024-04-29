@@ -94,7 +94,7 @@ public class NotificationControler {
 	}
 
 	@GetMapping("/getNotificationByUser")
-	private List<Notification> getNotificationByUser(@RequestParam Long user_id) {
+	public List<Notification> getNotificationByUser(@RequestParam Long user_id) {
 		return notificationService.getNotificationByUser(user_id);
 	}
 
