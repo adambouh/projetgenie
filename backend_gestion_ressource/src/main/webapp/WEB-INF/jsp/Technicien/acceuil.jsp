@@ -1,27 +1,18 @@
 <!-- including the home -->
-<%@ include file="./../home.jsp"%>
-<%@ include file="sideBar.jsp"%>
-<main>
+<%@ include file="./../home.jsp" %>
+    <%@ include file="sideBar.jsp" %>
+        <!-- <main>
     <div class="table-data" style="margin-top: 50px; margin-bottom: 50px;">
         <div class="order">
             <div class="head">
                 <h3>Mes Pannes</h3>
 
                 <select class="choice-select" [(ngModel)]="selectedPannes" (change)="changeMyPannes()">
-                    <option value="Repare">Réparé</option>
+                    <option value="Repare">Rï¿½parï¿½</option>
                     <option value="EnCours">En cours</option>
                     <option value="Severe">Severe</option>
                     <option value="All">Tous</option>
                 </select>
-
-                <form action="#">
-                    <div class="form-input">
-                        <input type="search" placeholder="Search..." #filterMyPannes
-                            (input)="filterPannes(filterMyPannes.value)">
-                        <button type="button" class="search-btn"><i class='bx bx-search'
-                                (click)="filterPannes(filterMyPannes.value)"></i></button>
-                    </div>
-                </form>
                 <i class='bx bx-filter'></i>
 
             </div>
@@ -59,14 +50,15 @@
                             {{ i }}
                         </td>
                         <td>
+                            <!panne.getcodeIn>
                             {{ panne.ressource.codeInventaire }}
                         </td>
                         <td>
                             {{panne.ressource.typeRessource}}
                         </td>
-                        <td *ngIf="panne.etatPanne == 'Repare'">Réparé</td>
+                        <td *ngIf="panne.etatPanne == 'Repare'">Rï¿½parï¿½</td>
                         <td *ngIf="panne.etatPanne == 'EnCours'">En Cours</td>
-                        <td *ngIf="panne.etatPanne == 'Severe'">Sévère</td>
+                        <td *ngIf="panne.etatPanne == 'Severe'">Sï¿½vï¿½re</td>
 
                         <td>{{panne.dateSignal}}</td>
                         <td>
@@ -82,15 +74,6 @@
         <div class="order">
             <div class="head">
                 <h3>Nouvelles pannes</h3>
-
-                <form action="#">
-                    <div class="form-input">
-                        <input type="search" placeholder="Search..." #filterNewPannes
-                            (input)="filternewPannes(filterNewPannes.value)">
-                        <button type="button" class="search-btn"><i class='bx bx-search'
-                                (click)="filternewPannes(filterNewPannes.value)"></i></button>
-                    </div>
-                </form>
                 <i class='bx bx-filter'></i>
             </div>
             <table>
@@ -132,7 +115,7 @@
                         <td>
                             {{panne.ressource.typeRessource}}
                         </td>
-                        <td>Non Reparé</td>
+                        <td>Non Reparï¿½</td>
 
                         <td>{{panne.dateSignal}}</td>
                         <td>
@@ -164,12 +147,12 @@
                 <div class="radio-container" (click)="showConstatElements()">
                     <input type="radio" name="etat" formControlName="etat" id="optionsRadios1" value="Severe">
                     <label for="optionsRadios1" class="custom-radio"></label>
-                    <label for="optionsRadios1">Sévère</label>
+                    <label for="optionsRadios1">Sï¿½vï¿½re</label>
                 </div>
                 <div class="radio-container" (click)="hideConstatElements()">
                     <input type="radio" name="etat" formControlName="etat" id="optionsRadios2" value="Repare">
                     <label for="optionsRadios2" class="custom-radio"></label>
-                    <label for="optionsRadios2">Réparée</label>
+                    <label for="optionsRadios2">Rï¿½parï¿½e</label>
                 </div>
             </div>
             <div #constat style="display: none; flex-direction: column; margin-top: 15px; margin-bottom: 15px;">
@@ -184,10 +167,10 @@
                         class="element-input" value=""></textarea>
                 </div>
                 <div class="element-container">
-                    <label class="element-lebel">Fréquence De Panne</label>
+                    <label class="element-lebel">Frï¿½quence De Panne</label>
                     <select name="frequence" formControlName="frequence" class="element-input">
                         <option value="rare">Rare</option>
-                        <option value="frequente">Fréquente</option>
+                        <option value="frequente">Frï¿½quente</option>
                         <option value="permanente">Permanente</option>
                     </select>
                 </div>
@@ -200,18 +183,18 @@
                         <label for="optionsRadios11">Logiciel</label>
                     </div>
                     <div class="radio-container">
-                        <input type="radio" name="ordre" formControlName="ordre" id="optionsRadios22" value="Matériel" (click)="hideDefautPanne()">
+                        <input type="radio" name="ordre" formControlName="ordre" id="optionsRadios22" value="Matï¿½riel" (click)="hideDefautPanne()">
                         <label for="optionsRadios22" class="custom-radio"></label>
-                        <label for="optionsRadios22">Matériel</label>
+                        <label for="optionsRadios22">Matï¿½riel</label>
                     </div>
                 </div>
 
                 <div class="element-radio-container" style="margin-bottom: 15px; display: none;" #defautPanne>
-                    <label class="element-lebel">Défaut Panne</label>
+                    <label class="element-lebel">Dï¿½faut Panne</label>
                     <div class="radio-container">
-                        <input type="radio" name="ordreLogiciel" formControlName="ordreLogiciel" id="optionsRadios111" value="Système">
+                        <input type="radio" name="ordreLogiciel" formControlName="ordreLogiciel" id="optionsRadios111" value="Systï¿½me">
                         <label for="optionsRadios111" class="custom-radio"></label>
-                        <label for="optionsRadios111">Système</label>
+                        <label for="optionsRadios111">Systï¿½me</label>
                     </div>
                     <div class="radio-container">
                         <input type="radio" name="ordreLogiciel" formControlName="ordreLogiciel" id="optionsRadios222" value="Logiciel utilitaire">
@@ -229,4 +212,22 @@
             </div>
         </form>
     </div>
-</div>
+</div> -->
+        <!DOCTYPE html>
+        <html lang="en">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+
+        <body>
+            <p>
+                Hello Aya
+            </p>
+            <? panne : list-pannes>
+            >
+        </body>
+
+        </html>

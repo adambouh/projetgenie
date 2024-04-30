@@ -59,7 +59,6 @@ public class PanneControler {
 	@GetMapping("/getPannes")
 	public List<Panne> getPannes() {
 		return panneService.getAllPannes();
-
 	}
 
 	@GetMapping("/getPanneById")
