@@ -11,18 +11,6 @@
 <title>Appels D'offres</title>
 <link rel="stylesheet" href="./../../css/style_fournisseur.css">
 
-<style type="text/css">
-.appel-ressources-detail .ressource-caracteristiques-ordinateur {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-.appel-ressources-detail .ressource-caracteristiques-imprimante {
-	display: grid;
-	grid-template-columns: 2fr 2fr;
-}
-</style>
-
 </head>
 <body>
 	<div class="fournisseur-container">
@@ -175,6 +163,38 @@
 			</div>
 		</div>
 	</div>
+	
+	<c:if test="${not empty warningMessage}">
+		<div class="message-erreur-container">
+	        <div class="message-elements">
+	
+	            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-exclamation-lg  warning-icon"
+	                viewBox="0 0 16 16">
+	                <path
+	                    d="M7.005 3.1a1 1 0 1 1 1.99 0l-.388 6.35a.61.61 0 0 1-1.214 0zM7 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0" />
+	            </svg>
+	
+	            <h2>Attention</h2>
+	            <p>${warningMessage}</p>
+	            <button class="custom-btn btn-ok" onclick="hideMessageError()"><span>OK</span></button>
+	        </div>
+	    </div>
+	 </c:if>
+	 
+	 <c:if test="${not empty succesMessage}">
+		<div class="message-succes-container">
+	        <div class="message-elements">
+	
+	            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-lg succes-icon" viewBox="0 0 16 16">
+				  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+				</svg>
+	
+	            <h2>Validation</h2>
+	            <p>${succesMessage}</p>
+	            <button class="custom-btn btn-ok-succes" onclick="hideMessageSucces()"><span>OK</span></button>
+	        </div>
+	    </div>
+	 </c:if>
 
 	<script src="./../../js/script_fournisseur.js"></script>
 	<script>
@@ -182,7 +202,33 @@
         for (let element of elements) {
             element.style.color = "rgba(255, 27, 0, 1)";
         }
+        
+
+	     // hiding any message error
+	     function hideMessageError() {
+	       const ressourceDetails = document.querySelectorAll('.message-erreur-container');
+	       if (ressourceDetails) {
+	         ressourceDetails.forEach((element) => {
+	               if (element) {
+	                   element.style.display = "none";
+	               }
+	           });
+	       }
+	     }
+	
+	     // hiding any succes message
+	     function hideMessageSucces() {
+	       const ressourceDetails = document.querySelectorAll('.message-succes-container');
+	       if (ressourceDetails) {
+	         ressourceDetails.forEach((element) => {
+	               if (element) {
+	                   element.style.display = "none";
+	               }
+	           });
+	       }
+	     }
     </script>
+    
 </body>
 
 </html>

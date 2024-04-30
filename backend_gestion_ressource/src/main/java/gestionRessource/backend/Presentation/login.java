@@ -83,7 +83,7 @@ public class login {
     @PostMapping("/fournisseur-in")
     public String loginFournisseur(@ModelAttribute AuthentificationDTO authoDto, HttpServletRequest request, Model model) {
     	
-    	User fournisseur = userControler.authentification(authoDto);
+    	Object fournisseur = userControler.authentification(authoDto);
     	if ( fournisseur == null) { // fournisseur doesn't exist
     		
     		model.addAttribute("errorLoginFournisseur", "Login ou mot de passe incorrect");

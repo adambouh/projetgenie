@@ -50,7 +50,7 @@ public class PropositionController {
 	}
 	
 	@GetMapping("soumettre-proposition")
-	public String soumettreProposition(@RequestParam("id") Long appelID, HttpServletRequest request, Model model) {
+	public String soumettreProposition(@RequestParam("id") Long appelID, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
 		
 		// Testing if the user has a sessoin
 		HttpSession session = request.getSession();
@@ -63,7 +63,8 @@ public class PropositionController {
 							
 				return "Fournisseur/soumettreProposition";
 			} else {
-				// on peut ajouter un message d'erreur
+				// un message d'erreur
+				redirectAttributes.addFlashAttribute("warningMessage", "Vous avez déjà ajouté votre proposition pour cette appel d'offre.");
 				return "redirect:/appels-d-offres";
 			}
 			
@@ -76,7 +77,8 @@ public class PropositionController {
 	public String addProposition(
 			 HttpServletRequest request,
 	        @RequestParam("dateLivraison") Date dateLivraison,
-	        @RequestParam("idAppelDoffre") Long idAppelDoffre
+	        @RequestParam("idAppelDoffre") Long idAppelDoffre,
+	        RedirectAttributes redirectAttributes
 	) {
 		
 		HttpSession session = request.getSession();
@@ -118,9 +120,12 @@ public class PropositionController {
 		propositionDTO.setDetailRessourceDto(detailRessourceDTOs);		
 	   
 		if(this.propositionControler.addProposition(propositionDTO) != null) {
-			return "redirect:/mes-propositions";
+			// un message d'erreur
+			redirectAttributes.addFlashAttribute("succesMessage", "Vous proposition a été ajouté avec succès.");
+			return "redirect:/appels-d-offres";
 		} else {
-			// on peut passer un message d'erreur
+			// un message d'erreur
+			redirectAttributes.addFlashAttribute("warningMessage", "Un erreur se prrduite lors de l'ajout de votre proposition, veuillez essayez à nouveau.");
 			return "redirect:/appels-d-offres";
 		}
 	    

@@ -40,7 +40,7 @@
 							<tr>
 								<td><c:out value="${index}"></c:out></td>
 								<td>${proposition.dateProposition }</td>
-<%-- 								<td class="td-status"><small class="accepted">${proposition.etatProposition}</small></td> --%>
+
 								<c:if test="${proposition.etatProposition == 'accepte' }">
 									<td class="td-status"><small class="accepted">acceptée</small></td>
 								</c:if>
@@ -63,6 +63,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<script src="./../../js/script_fournisseur.js"></script>
 	<script>
         const elements = document.getElementsByClassName("mes-propositions-nav-link");

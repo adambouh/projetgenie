@@ -428,6 +428,173 @@ table tbody tr td button:hover {
 	}
 }
 
+
+ /* compte style */
+ .compte-informations-container {
+    width: 100%;
+    height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.compte-cart {
+    width: 60%;
+    min-width: 350px;
+    min-height: 300px;
+    height: 30%;
+    box-shadow: 2px 2px 2px 1px rgb(204, 203, 203);
+}
+.compte-cart h4 {
+    text-align: center;
+}
+.compte-cart .infos-container {
+    padding: 20px 50px;
+}
+.compte-cart .infos-container .info-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+.compte-cart .infos-container .info-container span, .compte-cart .infos-container .info-container a {
+    text-align: center;
+}
+.compte-cart .link-retour {
+    text-align: center;
+    width: 100%;
+}
+
+/* warning succes messages */
+.message-erreur-container, .message-succes-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 10000;
+	background-color: rgba(0, 0, 0, 0.1);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.message-elements {
+	height: 400px;
+	width: 500px;
+	background-color: rgb(250, 248, 248);
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.warning-icon {
+	width: 70px;
+	height: 70px;
+	margin-top: 40px;
+	margin-bottom: 30px;
+	color: yellow;
+}
+
+.succes-icon {
+	width: 70px;
+	height: 70px;
+	margin-top: 40px;
+	margin-bottom: 30px;
+	color: green;
+}
+
+.message-elements p {
+	max-width: 370px;
+	text-align: center;
+}
+
+.btn-ok {
+	margin-top: 40px;
+	width: 200px;
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	background: yellow;
+	background: yellow;
+}
+
+.btn-ok:hover {
+	color: yellow;
+	background: transparent;
+	box-shadow: none;
+}
+
+.btn-ok:before, .btn-ok:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: yellow;
+	box-shadow: -1px -1px 5px 0px #fff, 7px 7px 20px 0px #0003, 4px 4px 5px
+		0px #0002;
+	transition: 400ms ease all;
+}
+
+.btn-ok:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 4px;
+}
+
+.btn-ok:hover:before, .btn-ok:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
+
+.btn-ok-succes {
+	margin-top: 40px;
+	width: 200px;
+	height: 40px;
+	line-height: 42px;
+	padding: 0;
+	border: none;
+	background: green;
+}
+
+.btn-ok-succes:hover {
+	color: green;
+	background: transparent;
+	box-shadow: none;
+}
+
+.btn-ok-succes:before, .btn-ok-succes:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: green;
+	box-shadow: -1px -1px 5px 0px #fff, 7px 7px 20px 0px #0003, 4px 4px 5px
+		0px #0002;
+	transition: 400ms ease all;
+}
+
+.btn-ok-succes:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 4px;
+}
+
+.btn-ok-succes:hover:before, .btn-ok-succes:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
+
+
 /* Mes Propositions */
 .td-status {
 	display: flex;
@@ -541,6 +708,16 @@ table tbody tr td button:hover {
 	min-width: 400px;
 	overflow: auto;
 	position: relative;
+}
+
+.appel-ressources-detail .ressource-caracteristiques-ordinateur {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.appel-ressources-detail .ressource-caracteristiques-imprimante {
+	display: grid;
+	grid-template-columns: 2fr 2fr;
 }
 
 .cancel-svg {
