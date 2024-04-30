@@ -2,7 +2,7 @@
 <%
 // Récupérer l'objet fournisseur de la session
 HttpSession FournisseurSession = request.getSession();
-User fournisseur = (User) session.getAttribute("fournisseur");
+Object fournisseur = (Object) session.getAttribute("fournisseur");
 %>
 
 <div class="head">
@@ -15,7 +15,7 @@ User fournisseur = (User) session.getAttribute("fournisseur");
 					Propositions</a></li>
 			<li class="mes-notifications-nav-link"><a
 				href="/mes-notifications">Mes Notifications</a></li>
-			<li class="ma-compte-nav-link"><a href="/ma-compte">${fournisseur.getLogin()}</a></li>
+			<li class="ma-compte-nav-link"><a href="/ma-compte">${fournisseur.login}</a></li>
 		</c:if>
 	</ul>
 	<div class="bi-list-container">
