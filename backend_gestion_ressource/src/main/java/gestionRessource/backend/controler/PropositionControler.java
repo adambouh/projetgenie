@@ -30,7 +30,7 @@ import gestionRessource.backend.service.RessourceService;
 @RequestMapping("/api/proposition")
 public class PropositionControler {
 	@Autowired
-	private PropositionService propositionService;
+	private  PropositionService propositionService;
 
 	@Autowired
 	private RessourceService ressourceService;
@@ -77,7 +77,7 @@ public class PropositionControler {
 	}
 
 	@GetMapping("/getPropositionOrderByMoinsDisant")
-	public List<Proposition> getPropositionOrderByMoinsDisant() {
+	public  List<Proposition> getPropositionOrderByMoinsDisant() {
 		return propositionService.getPropositionOrderByMoinsDisant();
 	}
 

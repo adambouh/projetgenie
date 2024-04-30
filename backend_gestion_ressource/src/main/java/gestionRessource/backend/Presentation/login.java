@@ -28,7 +28,7 @@ public class login {
 
     @Autowired
     private UserControler userControler;
-  
+
     @Autowired
     private FournisseurControler fournisseurControler;
 
@@ -56,7 +56,6 @@ public class login {
            // Set a flag to indicate user is logged in
 
             redirectAttributes.addFlashAttribute("message", "Login successful!");
-            System.out.println("l7wa");
             return "redirect:/home"; // Change to your secure page
         } else {
             // Login failed
