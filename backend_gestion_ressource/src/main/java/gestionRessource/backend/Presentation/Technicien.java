@@ -30,7 +30,6 @@ public class Technicien {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			User user = (User) session.getAttribute("user");
-			// Redirect to a secure page, or set user in session, etc.
 
 			if (user != null) {
 				// Print the attribute to the console
