@@ -20,11 +20,11 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class login {
 
-    @Autowired
-    private UserControler userControler;
+	@Autowired
+	private UserControler userControler;
 
-    @Autowired
-    private FournisseurControler fournisseurControler;
+	@Autowired
+	private FournisseurControler fournisseurControler;
 
 	@GetMapping("/login")
 	public String showLoginPage() {
@@ -54,7 +54,6 @@ public class login {
 			return "login"; // Return to login page with error message
 		}
 	}
-    
 
 	// page login fournisseur
 	@GetMapping("/fournisseur-login")
