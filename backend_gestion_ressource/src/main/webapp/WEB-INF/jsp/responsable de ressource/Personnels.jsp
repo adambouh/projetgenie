@@ -39,7 +39,7 @@
                             if(!use.getRole().equals(Role.Responsable))
                                 {
                         %>
-                    <a href="id=<%=use.getId()%>"><tr >
+                    <a href="id<%=use.getId()%>"><tr >
                         <td>
                             <img src="assets/images/default.jpeg">
                             <p><%=use.getFirst_name()%>  <%=use.getLast_name()%></p>

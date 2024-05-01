@@ -25,7 +25,7 @@ public class HomeController {
 	public String showHomePage(HttpServletRequest request, Model model) {
 		// Get an attribute from the session
 		HttpSession session = request.getSession(false);
-		if (session != null) {
+		if (session != null) {       //hhh
 			System.out.println("bra");
 			User user = (User) session.getAttribute("user");
 			// Redirect to a secure page, or set user in session, etc.
