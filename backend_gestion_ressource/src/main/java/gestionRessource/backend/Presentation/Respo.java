@@ -68,11 +68,9 @@ public String showHomePage(HttpServletRequest request, Model model) {
                 System.out.println(user.getRole().toString());
                 if (Objects.equals(user.getRole().toString(),"Responsable"))
                 {
-                    List<Departement> departements = departementControler.getAllDepartements();
-                    session.setAttribute("departements", departements);
-                    List<Proposition> proposition = propositionControler.getAllPropositions();
-                    session.setAttribute("Proposition", proposition);
-                    System.out.println(proposition);
+                    List<User> users = userControler.getAllUsers();
+                    session.setAttribute("Users", users);
+
                     return "responsable de ressource/Personnels";}
             } else {
 

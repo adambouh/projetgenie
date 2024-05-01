@@ -1,3 +1,6 @@
+<%@ page import="gestionRessource.backend.model.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="gestionRessource.backend.model.Role" %>
 <%@ include file="header.jspf"%>
 <script>
     tag="Personnels";
@@ -28,17 +31,25 @@
                         <th>Role</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr *ngFor="let user of filteredusersList">
+                    <tbody><%
+                    List<User> users= (List<User>) session.getAttribute("Users");
+                        if (users != null && !users.isEmpty()) {
+                        for (User use : users) {
+                            if(!use.getRole().equals(Role.Fournisseur)){
+                            if(!use.getRole().equals(Role.Responsable))
+                                {
+                        %>
+                    <a href="id=<%=use.getId()%>"><tr >
                         <td>
                             <img src="assets/images/default.jpeg">
-                            <p>{{ user.first_name + " " + user.last_name }}</p>
+                            <p><%=use.getFirst_name()%>  <%=use.getLast_name()%></p>
                         </td>
-                        <td>{{ user.department }}</td>
+                        <td><%if(use.getDepartement()!=null ){%><%=use.getDepartement().getNomDepartement()%><%}%></td>
                         <td>
-                            <span class="status" [ngClass]="{ 'process': user.role === 'ChefDepartement', 'completed': user.role !== 'ChefDepartement' }">{{ user.role }}</span>
+                            <span class="status <% if(!use.getRole().equals(Role.Enseignant)){%> process <%}else if(!use.getRole().equals(Role.ChefDepartement)){%>completed<%}else if(!use.getRole().equals(Role.Technicien)){%>pending<%}%>"><%=use.getRole()%></span>
                         </td>
-                    </tr>
+                    </tr></a>
+                    <%}}}}%>
                     <tr><a routerLink="1">
                         <td>
                             <img src="https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g">
