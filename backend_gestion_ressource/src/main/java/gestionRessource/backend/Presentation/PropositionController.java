@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gestionRessource.backend.controler.AppelDoffreControler;
+import gestionRessource.backend.controler.DetailController;
 import gestionRessource.backend.controler.PropositionControler;
 import gestionRessource.backend.dto.DetailRessourceDTO;
 import gestionRessource.backend.dto.PropositionDTO;
 import gestionRessource.backend.model.AppelDoffre;
+import gestionRessource.backend.model.Detail;
 import gestionRessource.backend.model.Proposition;
 import gestionRessource.backend.model.User;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +34,9 @@ public class PropositionController {
 	
 	@Autowired
 	private PropositionControler propositionControler;
+	
+	@Autowired
+	private DetailController detailController;
 
 	@GetMapping("mes-propositions")
 	public String showMyPropositions(HttpServletRequest request, Model model) {
@@ -129,6 +134,22 @@ public class PropositionController {
 			return "redirect:/appels-d-offres";
 		}
 	    
+	}
+	
+	@GetMapping("/mes-propositions/detail")
+	public String showPropositionDetail(@RequestParam("idProposition") Long idProposition, HttpServletRequest request, Model model) {
+		
+		// Testing if the user has a sessoin
+		HttpSession session = request.getSession();
+		User fournisseur = (User) session.getAttribute("fournisseur");
+		
+		if (fournisseur != null) {
+			List<Detail> details = detailController.getDetailByProposition(idProposition);
+			model.addAttribute("details", details);
+			return "Fournisseur/detailProposition";
+		} else {
+			return "redirect:/fournisseur-login";
+		}
 	}
 
 
