@@ -1,17 +1,12 @@
 package gestionRessource.backend.Presentation;
 
-import gestionRessource.backend.model.Departement;
-import gestionRessource.backend.model.User;
-import gestionRessource.backend.controler.DepartementControler;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import java.util.Objects;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
-import java.util.Objects;
+import gestionRessource.backend.controler.DepartementControler;
 import gestionRessource.backend.model.Role;
 import gestionRessource.backend.model.User;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,11 +15,11 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
-    private final DepartementControler departementControler;
+	private final DepartementControler departementControler;
 
-    public HomeController(DepartementControler departementControler) {
-        this.departementControler = departementControler;
-    }
+	public HomeController(DepartementControler departementControler) {
+		this.departementControler = departementControler;
+	}
 
 	@GetMapping("/home")
 	public String showHomePage(HttpServletRequest request, Model model) {
@@ -39,10 +34,9 @@ public class HomeController {
 				if (user.getRole().equals(Role.Technicien)) {
 					return "redirect:/technicien/acceuil";
 				}
-                // If the user is a "Responsable", set the department list and redirect
-                if (Objects.equals(user.getRole().toString(), "Responsable")) {
-                    return "redirect:/Respo"; // Redirect to the "Responsable" page
-                }
+				if (Objects.equals(user.getRole().toString(), "Responsable")) {
+					return "redirect:/Respo"; // Redirect to the "Responsable" page
+				}
 				// Print the attribute to the console
 				System.out.println("Session user: " + user.toString());
 			} else {
