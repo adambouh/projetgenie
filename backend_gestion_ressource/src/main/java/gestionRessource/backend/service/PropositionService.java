@@ -14,4 +14,5 @@ public interface PropositionService {
 
 	Proposition getPropositionByFournisseurAndAppelDoffre(Long fournisseurId, Long appelDoffreId);
 
+	List<Proposition> getAllPropositions();
 }

@@ -94,4 +94,9 @@ public class PropositionControler {
 				appelDoffreId);
 		return proposition;
 	}
+	@GetMapping("/getAllPropositions")
+    public List<Proposition> getAllPropositions() {
+		List<Proposition> proposition = propositionService.getAllPropositions();
+		return proposition;
+    }
 }

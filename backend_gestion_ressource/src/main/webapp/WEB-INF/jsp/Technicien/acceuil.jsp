@@ -1,6 +1,6 @@
 <!-- including the home -->
-<%@ include file="./../home.jsp" %>
-    <%@ include file="sideBar.jsp" %>
+
+    <%@ include file="header.jspf" %>
         <!-- <main>
     <div class="table-data" style="margin-top: 50px; margin-bottom: 50px;">
         <div class="order">
@@ -224,8 +224,7 @@
 
         <body>
             <p>
-                Hello Aya
-            </p>
+hhh aaya            </p>
             <? panne : list-pannes>
             >
         </body>

@@ -52,4 +52,9 @@ public class PropositionServiceImpl implements PropositionService {
 		return propositionRepository.findByFournisseurAndAppelDoffre(fournisseur, appelDoffre);
 	}
 
+	@Override
+	public List<Proposition> getAllPropositions() {
+		return propositionRepository.findAll();
+	}
+
 }

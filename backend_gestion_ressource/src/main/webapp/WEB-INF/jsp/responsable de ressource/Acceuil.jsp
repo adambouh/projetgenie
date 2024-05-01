@@ -2,6 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="gestionRessource.backend.model.*" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.Instant" %>
+<%@ page import="java.util.GregorianCalendar" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.ZoneId" %>
 
 <!-- MAIN -->
 <main>
@@ -66,19 +73,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                <%  List<Proposition> propositions=(List<Proposition>)session.getAttribute("Propositions");
+                <%  List<Proposition> propositions=(List<Proposition>)session.getAttribute("Proposition");
                     if (propositions != null && !propositions.isEmpty())
-                        for (Proposition proposition : propositions) {
-                %>
+                  for (Proposition proposition : propositions) {
+                      if(proposition.getEtatProposition().toString().equals("accepte")){%>
                 <tr>
                     <td>
                         <img src="https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g">
-                        <p>John Doe</p>
+                        <p><%= proposition.getFournisseur().getSociete()%></p>
                     </td>
-                    <td>01-10-2023</td>
-                    <td><span class="status completed">livré</span></td>
+                    <td><%= proposition.getDateLivraison()%></td>
+                    <td><span class="status <%
+                        if(proposition.getDateLivraison().after(new java.util.Date())){%>completed">  livré</span></td>
                 </tr>
-                <%}%>
+                jj
+                <%}else{%>process">
+                pas encore </span></td>
+                </tr>
+                <%} }}%>
 
                 </tbody>
             </table>

@@ -20,7 +20,6 @@ public class PanneController {
 	@Autowired
 	PanneService panneService;
 
-	@GetMapping("/technicien/acceuil")
 	public String showAcceuilTechnicie(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute("user");
@@ -37,7 +36,6 @@ public class PanneController {
 
 		model.addAttribute("fixed-pannes", fixedPanne);
 		model.addAttribute("list-pannes", pannes);
-
 		return "Technicien/acceuil";
 	}
 

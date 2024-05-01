@@ -20,19 +20,11 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class login {
 
-<<<<<<< Updated upstream
     @Autowired
     private UserControler userControler;
 
     @Autowired
     private FournisseurControler fournisseurControler;
-=======
-	@Autowired
-	private UserControler userControler;
->>>>>>> Stashed changes
-
-	@Autowired
-	private FournisseurControler fournisseurControler;
 
 	@GetMapping("/login")
 	public String showLoginPage() {
@@ -47,39 +39,12 @@ public class login {
 		authDto.setPassword(password);
 
 		User user = userControler.authentification(authDto);
-
-<<<<<<< Updated upstream
-            redirectAttributes.addFlashAttribute("message", "Login successful!");
-            return "redirect:/home"; // Change to your secure page
-        } else {
-            // Login failed
-            model.addAttribute("error", "Invalid username or password");
-            return "login"; // Return to login page with error message
-        }
-    }
-    
-    // page login fournisseur
-    @GetMapping("/fournisseur-login")
-    public String showLogInFournisseur( HttpServletRequest request) {
-    	return "Fournisseur/loginFournisseur";
-    }
-    
-    // logout fournisseur
-    @GetMapping("/fournisseur-logout")
-    public String logoutFournisseur(HttpServletRequest request) {
-    	// Supprimez l'attribut 'fournisseur' s'il existe pour assurer le logout
-        HttpSession session = request.getSession();
-    	session.removeAttribute("fournisseur");
-    	return "redirect:/fournisseur-login";
-    }
-=======
 		if (user != null) {
 			// Login successful
 			HttpSession session = request.getSession();
 			// Store data in the session
 			session.setAttribute("user", user); // Store the actual username
 			// Set a flag to indicate user is logged in
->>>>>>> Stashed changes
 
 			redirectAttributes.addFlashAttribute("message", "Login successful!");
 			return "redirect:/home"; // Change to your secure page
@@ -89,6 +54,7 @@ public class login {
 			return "login"; // Return to login page with error message
 		}
 	}
+    
 
 	// page login fournisseur
 	@GetMapping("/fournisseur-login")
