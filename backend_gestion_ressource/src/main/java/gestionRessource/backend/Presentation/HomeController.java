@@ -38,9 +38,8 @@ public class HomeController {
 			if (user != null) {
 				if (user.getRole().equals(Role.Technicien)) {
 					return "redirect:/technicien/acceuil";
-				}
-                // If the user is a "Responsable", set the department list and redirect
-                if (Objects.equals(user.getRole().toString(), "Responsable")) {
+				}else
+					if (Objects.equals(user.getRole().toString(), "Responsable")) {
                     return "redirect:/Respo"; // Redirect to the "Responsable" page
                 }
 				// Print the attribute to the console
