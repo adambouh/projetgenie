@@ -20,6 +20,10 @@ public class ConstatDTO {
 		this.panne_id = panne_id;
 		this.dateApparition = dateApparition;
 	}
+	
+	public ConstatDTO() {
+		super();
+	}
 
 	public String getExplication() {
 		return explication;
