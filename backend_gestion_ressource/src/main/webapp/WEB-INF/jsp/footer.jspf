@@ -52,3 +52,9 @@
     }
 
 </script>
+<script>
+    // JavaScript function to navigate to a specific URL when a table row is clicked
+    function navigateTo(url) {
+        window.location.href = url;  // Redirects to the specified URL
+    }
+</script>

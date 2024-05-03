@@ -86,7 +86,7 @@
                     <td><span class="status <%
                         if(proposition.getDateLivraison().before(new java.util.Date())){%>completed">  livré</span></td>
                 </tr>
-                jj
+
                 <%}else{%>process">
                 pas encore </span></td>
                 </tr>

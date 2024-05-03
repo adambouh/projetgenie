@@ -15,10 +15,11 @@
             <div class="order">
                 <div class="head">
                     <h3>liste des personels</h3>
-                    <form action="#">
+
+                    <form action="Respo/newPersonnels"  >
                         <div class="form-input">
-                            <input type="search" placeholder="Search..." #filter>
-                            <button type="button" (click)="filterResults(filter.value)" class="search-btn"><i class='bx bx-search'></i></button>
+                            <button class="btn btn-primary " type="submit" > Add User </button>
+
                         </div>
                     </form>
                     <i class='bx bx-filter'></i>
@@ -39,16 +40,18 @@
                             if(!use.getRole().equals(Role.Responsable))
                                 {
                         %>
-                    <a href="id<%=use.getId()%>"><tr >
-                        <td>
-                            <img src="assets/images/default.jpeg">
-                            <p><%=use.getFirst_name()%>  <%=use.getLast_name()%></p>
+
+                        <tr onclick="navigateTo('Respo/Personnels/<%= use.getLogin() %>')">
+
+                    <td>
+                            <img src="/images/default.jpeg">
+                            <p><%=use.getFirst_name()%>  <%=use.getLast_name()%></p></a>
                         </td>
                         <td><%if(use.getDepartement()!=null ){%><%=use.getDepartement().getNomDepartement()%><%}%></td>
                         <td>
                             <span class="status <% if(!use.getRole().equals(Role.Enseignant)){%> process <%}else if(!use.getRole().equals(Role.ChefDepartement)){%>completed<%}else if(!use.getRole().equals(Role.Technicien)){%>pending<%}%>"><%=use.getRole()%></span>
                         </td>
-                    </tr></a>
+                            </tr>
                     <%}}}}%>
                     <tr><a routerLink="1">
                         <td>

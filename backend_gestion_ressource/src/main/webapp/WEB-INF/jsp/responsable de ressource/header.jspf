@@ -31,11 +31,15 @@
             <i class='bx bxs-doughnut-chart' ></i>
             <span class="text">Ressources</span>
         </a>
+        <style>
+
+
+        </style>
     </li>
 </ul>
 <ul class="side-menu">
     <li>
-        <a routerLink="Profile">
+        <a href="Profile">
             <i class='bx bxs-cog' ></i>
             <span class="text">Profile</span>
         </a>
