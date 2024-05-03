@@ -13,6 +13,15 @@ public class PanneDTO {
 		this.dateSignal = dateSignal;
 		this.etatPanne = etatPanne;
 	}
+	
+	public PanneDTO(EtatPanne etatPanne) {
+		super();
+		this.etatPanne = etatPanne;
+	}
+	
+	public PanneDTO() {
+		super();
+	}
 
 	public Date getDateSignal() {
 		return dateSignal;
