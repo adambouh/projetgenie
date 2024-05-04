@@ -38,7 +38,7 @@ public class PropositionController {
 	@Autowired
 	private DetailController detailController;
 
-	@GetMapping("mes-propositions")
+	@GetMapping("/fournisseur/propositions")
 	public String showMyPropositions(HttpServletRequest request, Model model) {
 		
 		// Testing if the user has a sessoin
@@ -50,11 +50,11 @@ public class PropositionController {
 			model.addAttribute("propositions", propositions);
 	    	return "Fournisseur/myPropositions";
 	    } else {
-	    	return "Fournisseur/loginFournisseur";
+	    	return "redirect:/fournisseur/login";
 	    }
 	}
 	
-	@GetMapping("soumettre-proposition")
+	@GetMapping("/fournisseur/soumettre-proposition")
 	public String soumettreProposition(@RequestParam("id") Long appelID, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
 		
 		// Testing if the user has a sessoin
@@ -74,7 +74,7 @@ public class PropositionController {
 			}
 			
 		} else {
-			return "redirect:/fournisseur-login";
+			return "redirect:/fournisseur/login";
 	    }
 	}
 	
@@ -136,7 +136,7 @@ public class PropositionController {
 	    
 	}
 	
-	@GetMapping("/mes-propositions/detail")
+	@GetMapping("/fournisseur/propositions/detail")
 	public String showPropositionDetail(@RequestParam("idProposition") Long idProposition, HttpServletRequest request, Model model) {
 		
 		// Testing if the user has a sessoin
@@ -148,7 +148,7 @@ public class PropositionController {
 			model.addAttribute("details", details);
 			return "Fournisseur/detailProposition";
 		} else {
-			return "redirect:/fournisseur-login";
+			return "redirect:/fournisseur/login";
 		}
 	}
 

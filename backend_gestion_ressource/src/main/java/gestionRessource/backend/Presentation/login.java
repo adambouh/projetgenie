@@ -64,18 +64,18 @@ public class login {
 	}
 
 	// page login fournisseur
-	@GetMapping("/fournisseur-login")
+	@GetMapping("/fournisseur/login")
 	public String showLogInFournisseur(HttpServletRequest request) {
 		return "Fournisseur/loginFournisseur";
 	}
 
 	// logout fournisseur
-	@GetMapping("/fournisseur-logout")
+	@GetMapping("/fournisseur/logout")
 	public String logoutFournisseur(HttpServletRequest request) {
 		// Supprimez l'attribut 'fournisseur' s'il existe pour assurer le logout
 		HttpSession session = request.getSession();
 		session.removeAttribute("fournisseur");
-		return "redirect:/fournisseur-login";
+		return "redirect:/fournisseur/login";
 	}
 
 	// verification login password fournisseur
@@ -99,7 +99,7 @@ public class login {
 	}
 
 	// verification login password fournisseur
-	@PostMapping("/fournisseur-signup")
+	@PostMapping("/fournisseur/signup")
 	public String signupFournisseur(@ModelAttribute FournisseurDTO fournisseurDTO, HttpServletRequest request,
 			Model model) {
 

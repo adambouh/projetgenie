@@ -6,7 +6,7 @@
 			<div></div>
 		</div>
 		<div class="form-right-container">
-			<form action="fournisseur-signup" method="POST" class="form" id="form">
+			<form action="/fournisseur/signup" method="POST" class="form" id="form">
 				<h2 class="form-title">Sign Up</h2>
 				<div class="inputs-container">
 					<input type="text" name="societe" placeholder="Sciete" class="input" required/>

@@ -22,7 +22,7 @@ public class NotificationController {
 	@Autowired
 	private NotificationControler notificationControler;
 	
-	@GetMapping("/mes-notifications")
+	@GetMapping("/fournisseur/notifications")
 	public String showMyNotifications(HttpServletRequest request, Model model) {
 		
 		// Testing if the user has a sessoin
@@ -34,7 +34,7 @@ public class NotificationController {
 	    	model.addAttribute("notifications", notifications);
 	    	return "Fournisseur/myNotifications";
 	    } else {
-	    	return "Fournisseur/loginFournisseur";
+	    	return "redirect:/fournisseur/login";
 	    }
 
 	}
@@ -53,11 +53,11 @@ public class NotificationController {
 		if (notifications != null) {
 			// on peut ajouter un message de succes
 			System.out.println("notification modifiée");
-		    return "redirect:/mes-notifications";
+		    return "redirect:/fournisseur/notifications";
 		} else {
 			// on peut ajouter un message d'erreur
 			System.out.println("notification n'est pas modifiée");
-		    return "redirect:/mes-notifications";
+		    return "redirect:/fournisseur/notifications";
 		}
 	}
 

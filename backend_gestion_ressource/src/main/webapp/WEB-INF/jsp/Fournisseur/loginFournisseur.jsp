@@ -18,7 +18,7 @@
 
 		<div class="login-part">
 			<div class="login-form-container">
-				<form action="fournisseur-in" method="POST" class="form" id="form">
+				<form action="/fournisseur-in" method="POST" class="form" id="form">
 					<h2 class="form-title">LogIn</h2>
 					<div class="inputs-container">
 						<input type="text" name="login" placeholder="Sciete" class="input"required /> 

@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class CompteController {
 
-	@GetMapping("/ma-compte")
+	@GetMapping("/fournisseur/compte")
 	public String showFournisseurCompte(HttpServletRequest request) {
 		// Testing if the user has a sessoin
 		HttpSession session = request.getSession();

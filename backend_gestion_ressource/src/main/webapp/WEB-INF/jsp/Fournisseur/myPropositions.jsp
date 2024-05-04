@@ -53,7 +53,7 @@
 								
 								<td>${proposition.montantTotal} DHs</td>
 								<td>${proposition.dateLivraison }</td>
-								<td><a href="/mes-propositions/detail?idProposition=${ proposition.id }"><button >Details Proposition</button></a></td>
+								<td><a href="/fournisseur/propositions/detail?idProposition=${ proposition.id }"><button >Details Proposition</button></a></td>
 							</tr>
 							
 							<c:set var="index" value="${index + 1}" />

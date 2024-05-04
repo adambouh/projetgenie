@@ -11,11 +11,11 @@ Object fournisseur = (Object) session.getAttribute("fournisseur");
 				D'offres</a></li>
 				
 		<c:if test="${not empty fournisseur}">
-			<li class="mes-propositions-nav-link"><a href="/mes-propositions">Mes
+			<li class="mes-propositions-nav-link"><a href="/fournisseur/propositions">Mes
 					Propositions</a></li>
 			<li class="mes-notifications-nav-link"><a
-				href="/mes-notifications">Mes Notifications</a></li>
-			<li class="ma-compte-nav-link"><a href="/ma-compte">${fournisseur.login}</a></li>
+				href="/fournisseur/notifications">Mes Notifications</a></li>
+			<li class="ma-compte-nav-link"><a href="/fournisseur/compte">${fournisseur.login}</a></li>
 		</c:if>
 	</ul>
 	<div class="bi-list-container">
@@ -30,19 +30,19 @@ Object fournisseur = (Object) session.getAttribute("fournisseur");
 
 			<c:if test="${not empty fournisseur}">
 				<li class="mes-propositions-nav-link"><a
-					href="/mes-propositions">Mes Propositions</a></li>
+					href="/fournisseur/propositions">Mes Propositions</a></li>
 				<li class="mes-notifications-nav-link"><a
-					href="/mes-notifications">Mes Notifications</a></li>
-				<li class="ma-compte-nav-link"><a href="/ma-compte">${fournisseur.login} </a></li>
+					href="/fournisseur/notifications">Mes Notifications</a></li>
+				<li class="ma-compte-nav-link"><a href="/fournisseur/compte">${fournisseur.login} </a></li>
 			</c:if>
 
 		</ul>
 	</div>
 	<c:if test="${not empty fournisseur}">
-		<a href="/fournisseur-logout">LogOut</a>
+		<a href="/fournisseur/logout">LogOut</a>
 	</c:if>
 	
 	<c:if test="${empty fournisseur}">
-		<a href="/fournisseur-login">LogIn</a>
+		<a href="/fournisseur/login">LogIn</a>
 	</c:if>
 </div>

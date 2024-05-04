@@ -95,7 +95,7 @@
 
 							<div class="btn-container">
 								<c:if test="${showButton == 'true'}">
-									<a href="/soumettre-proposition?id=${appelDoffre.id}">
+									<a href="/fournisseur/soumettre-proposition?id=${appelDoffre.id}">
 										<button class="custom-btn btn-5">Soumettre
 											Proposition</button>
 									</a>

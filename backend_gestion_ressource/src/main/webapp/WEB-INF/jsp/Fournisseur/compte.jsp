@@ -58,7 +58,7 @@
                     </div>
                     <div class="info-container">
                         <span>Site internet</span>
-                        <a href="${fournisseur.siteInternet}">
+                        <a href="/${fournisseur.siteInternet}">
                         	<c:if test="${not empty fournisseur.siteInternet}">
 	                        	${fournisseur.siteInternet}
 	                        </c:if>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <hr>
-                <p class="link-retour"><a href="appels-d-offres"><small>Appels D'offres</small></a></p>
+                <p class="link-retour"><a href="/appels-d-offres"><small>Appels D'offres</small></a></p>
             </div>
         </div>
 		

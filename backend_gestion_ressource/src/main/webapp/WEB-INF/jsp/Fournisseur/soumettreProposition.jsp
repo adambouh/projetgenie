@@ -19,7 +19,7 @@
 		<%@ include file="headerFournisseur.jsp"%>
 
 		<div class="separator" style="margin-top: 100px;"></div>
-		<form action="soumettre-proposition-in" method="POST">
+		<form action="/soumettre-proposition-in" method="POST">
 			<div class="soumettre-proposition">
 				<h1 class=".h1">Soumettre Votre Propositions</h1>
 				<p class=".p">Veuillez remplir les champs correspondants à chaque
