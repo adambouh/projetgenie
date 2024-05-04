@@ -1,10 +1,7 @@
 package gestionRessource.backend.Presentation;
 
 import gestionRessource.backend.controler.*;
-import gestionRessource.backend.model.Departement;
-import gestionRessource.backend.model.Proposition;
-import gestionRessource.backend.model.Role;
-import gestionRessource.backend.model.User;
+import gestionRessource.backend.model.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +14,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Controller
 public class Respo{
     @Autowired
     UserControler userControler;
+    @Autowired
+    PanneControler panneControler;
+    @Autowired
     DepartementControler departementControler;
+    @Autowired
     PropositionControler propositionControler;
+    @Autowired
+    private DetailController detailController;
+    @Autowired
+    private AppelDoffreControler appelDoffreControler;
+
     public  Respo(DepartementControler departementControler, PropositionControler propositionControler) {
         this.departementControler = departementControler;
         this.propositionControler = propositionControler;
@@ -137,6 +146,33 @@ public String showHomePage(HttpServletRequest request, Model model) {
 
 
     } // Name of the }
+   @GetMapping("/Respo/deletePerso/{login}")
+    public String delete(@PathVariable("login") String login, HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            // Redirect to a secure page, or set user in session, etc.
+
+            if (user != null) {
+                // Print the attribute to the console
+                if (Objects.equals(user.getRole().toString(),"Responsable"))
+                {
+                    userControler.DeleteUser(login);
+
+                    return "redirect:/Respo/Personnels";
+                }
+                return "redirect:/login";
+
+            } else {
+                return "redirect:/login";
+
+            }
+        }
+        model.addAttribute("error", "Invalid username or password");
+        return "redirect:/login";
+
+
+    } // Name of the }
     @PostMapping("/modifyPersonnel")
     public String modifyPersonnel(HttpServletRequest request,
                              @RequestParam Long id,
@@ -164,4 +200,141 @@ public String showHomePage(HttpServletRequest request, Model model) {
         // Redirect to the Profile page
         return "redirect:/Respo/Personnels";
     }
+    @GetMapping("/Respo/Pannes")
+    public String Pannes(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            // Redirect to a secure page, or set user in session, etc.
+
+            if (user != null) {
+                // Print the attribute to the console
+
+                if (Objects.equals(user.getRole().toString(),"Responsable"))
+                {
+                    List<Panne> allPannes = panneControler.getPannes();
+
+                    session.setAttribute("list-pannes", allPannes);
+
+                    return "responsable de ressource/Pannes";}
+            } else {
+                return "home";
+
+            }
+        }
+        model.addAttribute("error", "Invalid username or password");
+        return "redirect:/login";
+
+
+    } // Name of the }
+    @GetMapping("/Respo/Panne={id}")
+    public String Panne(@PathVariable("id") String id, HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            // Redirect to a secure page, or set user in session, etc.
+
+            if (user != null) {
+                // Print the attribute to the console
+                if (Objects.equals(user.getRole().toString(),"Responsable"))
+                {
+                    Panne panne = panneControler.getPanneById(Long.parseLong(id));
+                    session.setAttribute("panne", panne);
+                    if(panne != null)
+                    {
+
+                        return "responsable de ressource/Panne";}
+                    return "redirect:/Respo/Pannes";
+                }
+            } else {
+
+            }
+        }
+        model.addAttribute("error", "Invalid username or password");
+        return "redirect:/login";
+
+
+    } // Name of the }
+    @GetMapping("/Respo/Propositions")
+    public String Proposition(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            // Redirect to a secure page, or set user in session, etc.
+
+            if (user != null) {
+                // Print the attribute to the console
+
+                if (Objects.equals(user.getRole().toString(),"Responsable"))
+                {
+                    List<Proposition> propositions = propositionControler.getAllPropositions();
+                    session.setAttribute("propositions", propositions);
+
+                    return "responsable de ressource/Propositions";}
+            } else {
+                return "home";
+
+            }
+        }
+        model.addAttribute("error", "Invalid username or password");
+        return "redirect:/login";
+
+
+    } // Name of the }
+    @GetMapping("/Respo/propositions/{id}")
+    public String Proposition(@PathVariable("id") String id, HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            // Redirect to a secure page, or set user in session, etc.
+
+            if (user != null) {
+                // Print the attribute to the console
+                if (Objects.equals(user.getRole().toString(),"Responsable"))
+                {
+                    Optional<Proposition> proposition = propositionControler.getPropositionById (Long.parseLong(id));
+                    session.setAttribute("proposition", proposition);
+                    if(proposition.isPresent())
+                    {List<Detail> propositionDetails = (List<Detail>) detailController.getDetailByProposition(proposition.get().getId());
+                        session.setAttribute("propositionDetails",propositionDetails);
+                        return "responsable de ressource/proposition";}
+                    return "redirect:/Respo/Propositions";
+                }
+            } else {
+
+            }
+        }
+        model.addAttribute("error", "Invalid username or password");
+        return "redirect:/login";
+
+
+    }
+
+    @GetMapping("/Respo/AppelDoffres")
+    public String AppelDoffres(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            // Redirect to a secure page, or set user in session, etc.
+
+            if (user != null) {
+                // Print the attribute to the console
+
+                if (Objects.equals(user.getRole().toString(),"Responsable"))
+                {
+                    List<AppelDoffre> appelDoffres = appelDoffreControler.getAllAppelDoffres();
+                    session.setAttribute("appelDoffres", appelDoffres);
+
+                    return "responsable de ressource/AppelDOffres";}
+            } else {
+
+            }
+        }
+        model.addAttribute("error", "Invalid username or password");
+        return "redirect:/login";
+
+
+    } // Name of the }
+    // Name of the }
+
 }

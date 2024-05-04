@@ -1,6 +1,7 @@
 package gestionRessource.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import gestionRessource.backend.model.Proposition;
 
@@ -15,4 +16,6 @@ public interface PropositionService {
 	Proposition getPropositionByFournisseurAndAppelDoffre(Long fournisseurId, Long appelDoffreId);
 
 	List<Proposition> getAllPropositions();
+
+    Optional<Proposition> PropositionbyID(Long id);
 }

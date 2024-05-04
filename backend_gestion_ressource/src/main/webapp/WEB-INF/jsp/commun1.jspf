@@ -1,18 +1,32 @@
+<%@ page import="gestionRessource.backend.model.Notification" %>
+<%@ page import="java.util.List" %>
+<%@ page import="gestionRessource.backend.controler.NotificationControler" %>
+<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="header.jspf"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login Page 3</title>
-    <link href="//fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../css/home.css">
+
+    <!-- Custom fonts for this template-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">    <link href="//fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="canonical" href="https://www.creative-tim.com/product/material-dashboard" />
-
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
 
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -25,28 +39,121 @@
 <!-- CONTENT -->
     <section id="content">
         <!-- NAVBAR -->
-        <nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
             <i  class='bx bx-menu'  onclick="addToggle()"></i>
             <form action="#">
                 <div class="form-input">
                      </div>
             </form>
-            <a href="#" class="notification"  onclick="event.preventDefault()" (click)="showNotificationsPage()">
-                <i class='bx bxs-bell' ></i>
-                <span class="num">8
-          </span>
-            </a>
+            <!-- Nav Item - Alerts -->
+                <!-- Alerts Dropdown -->
+                <div class="dropdown">
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bell fa-fw"></i>
+                    <span class="badge badge-danger">
+                <%
 
-            <a href="#" class="profile">
-                <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                    List<Notification> notifications = (List<Notification>) session.getAttribute("notifications");
+                    int unreadCount = 0;
+
+                    if (notifications != null) {
+                        for (Notification notif : notifications) {
+                            if (!notif.isEtat_lu()) { // Check if the notification is unread
+                                unreadCount++; // Increment the count
+                            }
+                        }
+                    }
+
+                    out.print(unreadCount); // Output the count of unread notifications
+                %>
+            </span>
+                </a>
+                <!-- Dropdown - Alerts -->
+                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" style="width: 260px"
+                     aria-labelledby="alertsDropdown">
+                    <h6 class="dropdown-header">
+                        Notifications
+                    </h6>
+                    <%
+
+
+                    %>
+                    <%
+                        if (notifications != null && !notifications.isEmpty()) {
+                            for (Notification notification : notifications) {
+                    %>
+                    <a class="dropdown-item d-flex align-items-center"  onclick="markNotificationAsRead(<%= notification.getId() %>)">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fas fa-file-alt text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="small text-gray-500"><%=notification.getDate_envoi()%></div>
+                            <span class="font-weight-bold"><%=notification.getContenu()%></span><br>
+                            <span class="small text-gray-500 text-right "> sent by <%=notification.getEmetteur().getFirst_name()%> <%=notification.getEmetteur().getLast_name()%></span>
+                        </div>
+                    </a><%}}%>
+
+                </div>
+            </li>
+            <!-- Notification bell with onClick to toggle pop-up -->
+                </div>
+            <!-- User profile -->
+            <a href="/Profile" class="profile">
+                <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="Profile">
             </a>
         </nav>
+
+
+        <script>
+            // Function to toggle the visibility of the notification pop-up
+            function toggleNotifications() {
+                var popup = document.getElementById("notification-popup");
+                if (popup.style.display === "none") {
+                    popup.style.display = "block"; // Show the pop-up
+                } else {
+                    popup.style.display = "none"; // Hide the pop-up
+                }
+            }
+        </script>
+
         <!-- NAVBAR -->
         <section id="sidebar"  >
             <a href="#" class="brand">
                 <i class='bx bxs-smile'></i>
                 <span class="text">Ressourcers</span>
             </a>
-        <!-- MAIN -->
+            <script src="/vendor/jquery/jquery.min.js"></script>
+            <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Core plugin JavaScript-->
+            <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+            <!-
+            <!-- Page level plugins -->
+            <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+            <!-- MAIN --><script>
+            function markNotificationAsRead(notificationId) {
+                // AJAX request to update the notification state
+                $.ajax({
+                    url: '/api/notification/modifierEtatNotification', // Endpoint to update notification state
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ listeNotifId: [notificationId] }),
+                    success: function (response) {
+                        console.log('Notification marked as read'); // Debug log
+                    },
+                    error: function (error) {
+                        console.error('Failed to mark notification as read', error); // Error handling
+                    }
+                });
+            }
+        </script>
 
     <!-- CONTENT -->

@@ -88,6 +88,11 @@ public class UserControler {
 		}
 	}
 
+	@PutMapping("/DeleteUser")
+	public void DeleteUser( @RequestBody String login ) {
+		userService.deleteUser(login);
+	}
+
 	@PutMapping("/modifyPasswordUser")
 	public User modifyPasswordUser(@RequestParam Long user_id, @RequestBody String password) {
 		User oldUser = userService.getUserById(user_id);

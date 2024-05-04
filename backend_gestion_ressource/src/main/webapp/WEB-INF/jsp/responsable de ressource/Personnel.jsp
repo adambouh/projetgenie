@@ -13,7 +13,6 @@
     User user = (User) session.getAttribute("user1");
 %>
 
-<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/Profile.css">
 
 <div class="container rounded bg-white mt-5 mb-5">

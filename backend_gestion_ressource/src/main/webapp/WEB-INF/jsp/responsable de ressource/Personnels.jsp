@@ -44,23 +44,24 @@
                         <tr onclick="navigateTo('Respo/Personnels/<%= use.getLogin() %>')">
 
                     <td>
-                            <img src="/images/default.jpeg">
+                            <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
                             <p><%=use.getFirst_name()%>  <%=use.getLast_name()%></p></a>
                         </td>
                         <td><%if(use.getDepartement()!=null ){%><%=use.getDepartement().getNomDepartement()%><%}%></td>
                         <td>
-                            <span class="status <% if(!use.getRole().equals(Role.Enseignant)){%> process <%}else if(!use.getRole().equals(Role.ChefDepartement)){%>completed<%}else if(!use.getRole().equals(Role.Technicien)){%>pending<%}%>"><%=use.getRole()%></span>
+                            <span class="status <% if(!use.getRole().equals(Role.Enseignant)){%> pending <%}else if(!use.getRole().equals(Role.ChefDepartement)){%>completed<%}else if(!use.getRole().equals(Role.Technicien)){%>pending<%}%>"><%=use.getRole()%></span>
                         </td>
+                            <td>
+                                <form action="Respo/deletePerso/<%= use.getLogin() %>"  >
+                                    <div class="form-input">
+                                        <button class="btn btn-primary " type="submit" style="background:#e63c3c" >delete</button>
+
+                                    </div>
+                                </form>
+                            </td>
                             </tr>
                     <%}}}}%>
-                    <tr><a routerLink="1">
-                        <td>
-                            <img src="https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2023</td>
-                        <td><span class="status pending">Enseignant</span></td></a>
-                    </tr>
+
                     </tbody>
                 </table>
             </div>

@@ -57,4 +57,9 @@ public class PropositionServiceImpl implements PropositionService {
 		return propositionRepository.findAll();
 	}
 
+	@Override
+	public Optional<Proposition> PropositionbyID(Long id) {
+		return propositionRepository.findById(id);
+	}
+
 }

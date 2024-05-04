@@ -1,6 +1,7 @@
 package gestionRessource.backend.controler;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -99,4 +100,9 @@ public class PropositionControler {
 		List<Proposition> proposition = propositionService.getAllPropositions();
 		return proposition;
     }
+	@GetMapping("/Propositionbyid")
+	public Optional<Proposition> getPropositionById(Long id) {
+		Optional<Proposition> proposition = propositionService.PropositionbyID(id);
+		return proposition;
+	}
 }

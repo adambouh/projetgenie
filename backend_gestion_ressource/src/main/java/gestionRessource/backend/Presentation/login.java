@@ -30,6 +30,14 @@ public class login {
 	public String showLoginPage() {
 		return "login"; // This will look for login.jsp or login.html
 	}
+	@GetMapping("/logout")
+	public String logout( HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		// Store data in the session
+		session.removeAttribute("user");// Store the actual username
+
+		return "redirect:/login"; // This will look for login.jsp or login.html
+	}
 
 	@PostMapping("/Login")
 	public String handleLogin(@RequestParam("username") String username, @RequestParam("password") String password,
