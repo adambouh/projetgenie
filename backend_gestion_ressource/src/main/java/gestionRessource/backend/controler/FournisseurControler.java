@@ -47,4 +47,13 @@ public class FournisseurControler {
 
 		return fournisseurService.ajouterFournisseur(oldFournisseur);
 	}
+
+	@PutMapping("/addFournisseurToBlackList")
+	public Fournisseur addFournisseurToBlackList(@RequestParam Long fournisseur_id) {
+		Fournisseur oldFournisseur = fournisseurService.getFournisseurById(fournisseur_id);
+		if (oldFournisseur.getScorePanne() >= 5) {
+			oldFournisseur.setEtatFournisseur("BlackList");
+		}
+		return fournisseurService.ajouterFournisseur(oldFournisseur);
+	}
 }

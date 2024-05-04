@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +32,7 @@ import gestionRessource.backend.service.RessourceService;
 @RequestMapping("/api/proposition")
 public class PropositionControler {
 	@Autowired
-	private  PropositionService propositionService;
+	private PropositionService propositionService;
 
 	@Autowired
 	private RessourceService ressourceService;
@@ -78,7 +79,7 @@ public class PropositionControler {
 	}
 
 	@GetMapping("/getPropositionOrderByMoinsDisant")
-	public  List<Proposition> getPropositionOrderByMoinsDisant() {
+	public List<Proposition> getPropositionOrderByMoinsDisant() {
 		return propositionService.getPropositionOrderByMoinsDisant();
 	}
 
@@ -95,14 +96,31 @@ public class PropositionControler {
 				appelDoffreId);
 		return proposition;
 	}
+
 	@GetMapping("/getAllPropositions")
-    public List<Proposition> getAllPropositions() {
+	public List<Proposition> getAllPropositions() {
 		List<Proposition> proposition = propositionService.getAllPropositions();
 		return proposition;
-    }
+	}
+
 	@GetMapping("/Propositionbyid")
 	public Optional<Proposition> getPropositionById(Long id) {
 		Optional<Proposition> proposition = propositionService.PropositionbyID(id);
 		return proposition;
 	}
+
+	@PutMapping("/refuse")
+	public Proposition RefuserProposition(@RequestParam Long proposition_id) {
+		Proposition oldProposition = propositionService.getPropositionbyId(proposition_id);
+		oldProposition.setEtatProposition(EtatProposition.refuse);
+		return propositionService.saveProposition(oldProposition);
+	}
+
+	@PutMapping("/accepte")
+	public Proposition AccepterProposition(@RequestParam Long proposition_id) {
+		Proposition oldProposition = propositionService.getPropositionbyId(proposition_id);
+		oldProposition.setEtatProposition(EtatProposition.accepte);
+		return propositionService.saveProposition(oldProposition);
+	}
+
 }

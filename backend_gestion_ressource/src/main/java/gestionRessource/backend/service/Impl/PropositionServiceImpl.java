@@ -62,4 +62,10 @@ public class PropositionServiceImpl implements PropositionService {
 		return propositionRepository.findById(id);
 	}
 
+	@Override
+	public Proposition getPropositionbyId(Long id) {
+		Optional<Proposition> propositionOptional = propositionRepository.findById(id);
+		return propositionOptional.get();
+	}
+
 }

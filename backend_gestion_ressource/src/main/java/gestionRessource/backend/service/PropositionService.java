@@ -17,5 +17,7 @@ public interface PropositionService {
 
 	List<Proposition> getAllPropositions();
 
-    Optional<Proposition> PropositionbyID(Long id);
+	Proposition getPropositionbyId(Long id);
+
+	Optional<Proposition> PropositionbyID(Long id);
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,7 +60,12 @@ public class AppelDoffreControler {
 
 		}
 		return appelDoffreService.AjouterAppelDoffre(appelDoffre);
-
 	}
 
+	@PutMapping("/ArreteAppelDoffre")
+	public AppelDoffre arreteAppelDoffre(@RequestParam Long appelDoffre_id) {
+		AppelDoffre oldAppelDoffre = appelDoffreService.getAppelDoffreById(appelDoffre_id);
+		oldAppelDoffre.setEtatDisponibilite(false);
+		return appelDoffreService.AjouterAppelDoffre(oldAppelDoffre);
+	}
 }
