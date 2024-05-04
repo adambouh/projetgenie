@@ -27,6 +27,7 @@ public class Detail {
 
 	@Column(name = "prix")
 	private double prix;
+	
 
 	@ManyToOne
 	@JoinColumn(name = "ressource_id")

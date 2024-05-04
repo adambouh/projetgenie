@@ -14,4 +14,5 @@ public interface PanneService {
 	List<Panne> getPannesByUser(Long user_id);
 
 	List<Panne> getPanneByRessourceUser(Long user_id);
+	 List<Panne> getPanneByRessourceId(Long ressourceId);
 }

@@ -80,5 +80,10 @@ public class RessourceServiceImpl implements RessourceService {
 		User enseignant = optionalUser.get();
 		return ressourceRepository.findByEnseignant(enseignant);
 	}
+	 @Override
+	    public Ressource getRessourceByCodeInventaire(String codeInventaire) {
+	        return ressourceRepository.findByCodeInventaire(codeInventaire);
+	    }
+	
 
 }

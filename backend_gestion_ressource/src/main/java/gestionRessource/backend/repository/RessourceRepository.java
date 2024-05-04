@@ -10,6 +10,8 @@ import gestionRessource.backend.model.Departement;
 import gestionRessource.backend.model.Ressource;
 import gestionRessource.backend.model.User;
 
+
+
 public interface RessourceRepository extends JpaRepository<Ressource, Long> {
 	List<Ressource> findByUserIdOrderByEtatDemandeDesc(Long userId);
 
@@ -24,5 +26,8 @@ public interface RessourceRepository extends JpaRepository<Ressource, Long> {
 
 	@Query("SELECT r FROM Ressource r JOIN r.user u WHERE u.role = 'Enseignant' AND u.departement.id = :deptId")
 	List<Ressource> getRessourcesEnseignantsByDepartement(@Param("deptId") Long deptId);
+	
+	Ressource findByCodeInventaire(String codeInventaire);
+
 
 }

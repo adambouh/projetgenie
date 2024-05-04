@@ -28,6 +28,7 @@ public class HomeController {
 
 	@GetMapping("/home")
 	public String showHomePage(HttpServletRequest request, Model model) {
+<<<<<<< Updated upstream
 		HttpSession session = request.getSession(false);
 
 		if (session != null) {
@@ -64,4 +65,31 @@ public class HomeController {
 			return "redirect:/login"; // Redirect if session is invalid or doesn't exist
 		}
 	}
+=======
+	    // Get an attribute from the session
+	    HttpSession session = request.getSession(false);
+	    if (session != null) {
+	        User user = (User) session.getAttribute("user");
+
+	        if (user != null) {
+	            if (user.getRole().equals(Role.Technicien)) {
+	                return "redirect:/technicien/acceuil";
+	            } else if (user.getRole().equals(Role.Responsable)) {
+	                return "redirect:/Respo";
+	            } else if (user.getRole().equals(Role.Enseignant)) {
+	                return "redirect:/enseignant/acceuil"; 
+	            }
+	            // Print the attribute to the console
+	            System.out.println("Session user: " + user.toString());
+	        } else {
+	            System.out.println("No user found in session.");
+	        }
+	        return "home";
+	    } else {
+	        model.addAttribute("error", "Invalid username or password");
+	        return "redirect:/login";
+	    }
+	}
+ // Name of the view to display
+>>>>>>> Stashed changes
 }

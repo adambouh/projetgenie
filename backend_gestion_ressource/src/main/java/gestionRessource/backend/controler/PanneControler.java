@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,16 +35,7 @@ public class PanneControler {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping("/addPanneToRessource")
-	public Panne addPanneToRessource(@RequestParam Long ressource_id) {
-		Ressource ressource = ressourceService.getRessourceById(ressource_id);
-		Panne panne = new Panne();
-		panne.setDateSignal(new Date(System.currentTimeMillis()));
-		panne.setEtatPanne(EtatPanne.NonRepare);
-		panne.setRessource(ressource);
-		return panneService.savePanne(panne);
 
-	}
 
 	@PutMapping("/affectPanneToTechnicien")
 	public Panne affectPanneToTechnicien(@RequestParam Long panneId, @RequestParam Long userId) {
@@ -82,4 +72,23 @@ public class PanneControler {
 	public List<Panne> getPanneByRessourceUser(@RequestParam Long user_id) {
 		return panneService.getPanneByRessourceUser(user_id);
 	}
+	
+	@PutMapping("/addPanneToRessource")
+	public Panne addPanneToRessource(@RequestParam Long ressource_id) {
+		Ressource ressource = ressourceService.getRessourceById(ressource_id);
+		Panne panne = new Panne();
+		panne.setDateSignal(new Date(System.currentTimeMillis()));
+		panne.setEtatPanne(EtatPanne.NonRepare);
+		panne.setRessource(ressource);
+		return panneService.savePanne(panne);
+
+	}
+	@GetMapping("/getPanneByRessourceId")
+	public List<Panne> getPanneByRessourceId(@RequestParam Long ressourceId) {
+	    return panneService.getPanneByRessourceId(ressourceId);
+	}
+
+
+
+
 }

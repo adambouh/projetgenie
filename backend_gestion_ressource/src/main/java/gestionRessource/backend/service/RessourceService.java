@@ -24,4 +24,5 @@ public interface RessourceService {
 	List<Ressource> getRessourcesByEnseignant(Long enseignantId);
 
 	List<Ressource> getRessourcesEnseignantsByDepartement(Long deptId);
+	Ressource getRessourceByCodeInventaire(String codeInventaire);
 }
