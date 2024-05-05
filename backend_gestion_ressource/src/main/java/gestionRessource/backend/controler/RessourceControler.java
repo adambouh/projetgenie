@@ -27,8 +27,6 @@ import gestionRessource.backend.model.User;
 import gestionRessource.backend.service.DepartementService;
 import gestionRessource.backend.service.RessourceService;
 import gestionRessource.backend.service.UserService;
-import gestionRessource.backend.dto.DetailRessourceDTO;
- 
 
 @CrossOrigin("*")
 @RestController
@@ -92,17 +90,6 @@ public class RessourceControler {
 	public ResponseEntity<Ressource> getRessourceById(@RequestParam Long id) {
 		return new ResponseEntity<Ressource>(ressourceService.getRessourceById(id), HttpStatus.CREATED);
 	}
-	
-	@GetMapping("/getRessourceIdByCodeInventaire")
-	public ResponseEntity<Long> getRessourceIdByCodeInventaire(@RequestParam String codeInventaire) {
-	    Ressource ressource = ressourceService.getRessourceByCodeInventaire(codeInventaire);
-	    if (ressource != null) {
-	        return ResponseEntity.ok().body(ressource.getId());
-	    } else {
-	        return ResponseEntity.notFound().build();
-	   }
-	} 
-
 
 	@PostMapping("/addRessource")
 	public Ressource addRessource(@RequestBody RessourceDTO ressourceDto) {
@@ -146,22 +133,6 @@ public class RessourceControler {
 		return ressources;
 
 	}
-	
-	@GetMapping("/getDetailRessourceById")
-	public ResponseEntity<DetailRessourceDTO> getDetailRessourceById(@RequestParam Long id) {
-	    Ressource ressource = ressourceService.getRessourceById(id);
-	    if (ressource != null && ressource.getDetail() != null) {
-	        DetailRessourceDTO detailRessourceDTO = new DetailRessourceDTO();
-	        detailRessourceDTO.setIdRessource(ressource.getId());
-	        detailRessourceDTO.setDureeGarantie(ressource.getDetail().getDureeGarantie());
-	        detailRessourceDTO.setMarque(ressource.getDetail().getMarque());
-	        return new ResponseEntity<>(detailRessourceDTO, HttpStatus.OK);
-	    } else {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
-	}
-
-
 
 	@GetMapping("/getRessourcesDelivred")
 	public List<Ressource> getRessourcesDelivred() {
@@ -241,7 +212,6 @@ public class RessourceControler {
 		List<Ressource> ressources = ressourceService.getRessourcesByEnseignant(enseignantId);
 		return ressources;
 	}
-	
 
 	@PutMapping("/modifyStatusRessources")
 	public List<Ressource> modifyStatusRessources(@RequestBody RessourceDTO ressourceDto) {

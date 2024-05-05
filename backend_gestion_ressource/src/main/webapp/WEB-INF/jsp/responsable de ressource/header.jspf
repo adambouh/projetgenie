@@ -26,19 +26,19 @@
         </a>
     </li>
     <li>
-        <a href="Respo\AppelDOffres">
+        <a href="Respo\AppelDoffres">
             <i class='bx  bxs-message-dots' ></i>
             <span class="text">Appel d'offres</span>
         </a>
     </li>
     <li>
-        <a href="Respo\fournissseurs">
+        <a href="Respo\Fournisseurs">
             <i class='bx bxs-group' ></i>
             <span class="text">fournisseurs</span>
         </a>
     </li>
     <li>
-        <a href="personnels">
+        <a href="/Respo/Ressources">
             <i class='bx bxs-doughnut-chart' ></i>
             <span class="text">Ressources</span>
         </a>

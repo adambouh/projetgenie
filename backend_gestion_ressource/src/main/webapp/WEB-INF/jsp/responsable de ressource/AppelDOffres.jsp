@@ -42,13 +42,14 @@
                             for (AppelDoffre appelDoffre : appelDoffres) {
                     %>
                     <tr>
-                        <td onclick="navigateTo('Respo/AppelDoffre/<%= appelDoffre.getId() %>')"><%= appelDoffre.getId() %></td> <!-- ID -->
+                        <td onclick="navigateTo('Respo/AppelDoffre=<%= appelDoffre.getId() %>')"><%= appelDoffre.getId() %></td> <!-- ID -->
                         <td><%= appelDoffre.getDateDebut() %></td> <!-- Date Debut -->
                         <td><%= appelDoffre.getDateFin() %></td> <!-- Date Fin -->
                         <td><%= appelDoffre.isEtatDisponibilite() ? "Disponible" : "Indisponible" %></td> <!-- Availability Status -->
                         <td>
                             <!-- Delete button -->
-                            <form action="/api/appelDoffre/ArreteAppelDoffre/<%= appelDoffre.getId() %>" method="POST" style="display:inline-block;">
+                            <form action="/api/appelDoffre/ArreteAppelDoffre" method="POST" style="display:inline-block;" onsubmit="handleFormSubmission(event)">
+                               <input type="hidden" name="appelDoffre_id" value="<%= appelDoffre.getId() %>">
                                 <button class="btn btn-danger" type="submit">Stop</button>
                             </form>
                         </td>
@@ -66,5 +67,24 @@
             </div>
         </div>
     </div>
+    <script>
+        function handleFormSubmission(event) {
+            event.preventDefault();
+            const form = event.target;
 
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // Navigate to a specified URL
+                        window.location.href = '/Respo/AppelDoffres';
+                    } else {
+                        console.error("Error adding resource to Appel D'offres");
+                    }
+                });
+        }
+
+    </script>
     <%@ include file="../footer.jspf" %>

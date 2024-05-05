@@ -48,12 +48,18 @@ public class FournisseurControler {
 		return fournisseurService.ajouterFournisseur(oldFournisseur);
 	}
 
-	@PutMapping("/addFournisseurToBlackList")
-	public Fournisseur addFournisseurToBlackList(@RequestParam Long fournisseur_id) {
-		Fournisseur oldFournisseur = fournisseurService.getFournisseurById(fournisseur_id);
-		if (oldFournisseur.getScorePanne() >= 5) {
+	@PostMapping("/addFournisseurToBlackList")
+	public Fournisseur addFournisseurToBlackList(@RequestParam String fournisseur_id) {
+		Fournisseur oldFournisseur = fournisseurService.getFournisseurById(Long.parseLong(fournisseur_id));
 			oldFournisseur.setEtatFournisseur("BlackList");
-		}
+
 		return fournisseurService.ajouterFournisseur(oldFournisseur);
 	}
+
+	public Fournisseur 	getFournisseurById(@RequestParam String fournisseur_id) {
+		Fournisseur oldFournisseur = fournisseurService.getFournisseurById(Long.parseLong(fournisseur_id));
+
+		return oldFournisseur;
+	}
+
 }

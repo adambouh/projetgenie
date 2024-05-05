@@ -62,9 +62,9 @@ public class AppelDoffreControler {
 		return appelDoffreService.AjouterAppelDoffre(appelDoffre);
 	}
 
-	@PutMapping("/ArreteAppelDoffre")
-	public AppelDoffre arreteAppelDoffre(@RequestParam Long appelDoffre_id) {
-		AppelDoffre oldAppelDoffre = appelDoffreService.getAppelDoffreById(appelDoffre_id);
+	@PostMapping("/ArreteAppelDoffre")
+	public AppelDoffre arreteAppelDoffre(@RequestParam String appelDoffre_id) {
+		AppelDoffre oldAppelDoffre = appelDoffreService.getAppelDoffreById(Long.parseLong(appelDoffre_id));
 		oldAppelDoffre.setEtatDisponibilite(false);
 		return appelDoffreService.AjouterAppelDoffre(oldAppelDoffre);
 	}

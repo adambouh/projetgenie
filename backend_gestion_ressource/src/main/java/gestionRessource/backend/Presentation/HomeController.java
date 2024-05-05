@@ -28,14 +28,13 @@ public class HomeController {
 
 	@GetMapping("/home")
 	public String showHomePage(HttpServletRequest request, Model model) {
-<<<<<<< Updated upstream
-		HttpSession session = request.getSession(false);
 
-		if (session != null) {
-			User user = (User) session.getAttribute("user");
+	    // Get an attribute from the session
+	    HttpSession session = request.getSession(false);
+	    if (session != null) {
+	        User user = (User) session.getAttribute("user");
 
-			if (user != null) {
-				// Fetch notifications explicitly within the same session
+	        if (user != null) {
 				List<Notification> notifications = notificationControler.getNotificationByUser(user.getId());
 				// Check if session is open before accessing lazy-loaded collections
 				if (Objects.nonNull(notifications)) {
@@ -43,42 +42,15 @@ public class HomeController {
 					session.setAttribute("notifications", notifications);
 					System.out.println(notifications);
 				}
-
-				// Redirect based on user role
-				if (Objects.equals(user.getRole(), Role.Technicien)) {
-					return "redirect:/technicien/acceuil"; // Redirect to the technician's page
-				}
-				if (Objects.equals(user.getRole(), Role.Responsable)) {
-					return "redirect:/Respo"; // Redirect to the "Responsable" page
-				}
-
-				// Print user information for debugging
-				System.out.println("Session user: " + user.toString());
-
-				return "home"; // Return the home view
-			} else {
-				model.addAttribute("error", "No user found in session");
-				return "redirect:/login"; // Redirect to login page if no user found
-			}
-		} else {
-			model.addAttribute("error", "Session expired or invalid");
-			return "redirect:/login"; // Redirect if session is invalid or doesn't exist
-		}
-	}
-=======
-	    // Get an attribute from the session
-	    HttpSession session = request.getSession(false);
-	    if (session != null) {
-	        User user = (User) session.getAttribute("user");
-
-	        if (user != null) {
 	            if (user.getRole().equals(Role.Technicien)) {
 	                return "redirect:/technicien/acceuil";
 	            } else if (user.getRole().equals(Role.Responsable)) {
 	                return "redirect:/Respo";
 	            } else if (user.getRole().equals(Role.Enseignant)) {
 	                return "redirect:/enseignant/acceuil"; 
-	            }
+	            }else if (user.getRole().equals(Role.ChefDepartement)) {
+					return "redirect:/chefDepartement/home";
+				}
 	            // Print the attribute to the console
 	            System.out.println("Session user: " + user.toString());
 	        } else {
@@ -91,5 +63,4 @@ public class HomeController {
 	    }
 	}
  // Name of the view to display
->>>>>>> Stashed changes
 }

@@ -8,7 +8,6 @@
         </a>
     </li>
 </ul>
-
 <ul class="side-menu">
     <li>
         <a href="Profile">
@@ -27,3 +26,4 @@
 <script>
     tag="Acceuil";
 </script>
+<%@ include file="../footer.jspf"%>

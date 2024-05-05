@@ -18,7 +18,9 @@ public class FournisseurServiceImpl implements FournisseurService {
 	@Override
 	public Fournisseur getFournisseurById(Long id) {
 		Optional<Fournisseur> fournisseurOptional = fournisseurRepository.findById(id);
+		if(fournisseurOptional.isPresent())
 		return fournisseurOptional.get();
+		return null;
 	}
 
 	@Override

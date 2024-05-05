@@ -39,6 +39,12 @@ public class Profile {
                 if (user.getRole().equals(Role.Responsable) ){
                     return "/responsable de ressource/profile"; // Redirect to the "Responsable" page
                 }
+                if (user.getRole().equals(Role.ChefDepartement) ){
+                    return "/chefDepartement/profile"; // Redirect to the "Responsable" page
+                }
+                if (user.getRole().equals(Role.Enseignant) ){
+                    return "/Enseignant/profile"; // Redirect to the "Responsable" page
+                }
                 // Print the attribute to the console
                 System.out.println("Session user: " + user.toString());
             } else {
