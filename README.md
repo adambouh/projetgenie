@@ -1,6 +1,6 @@
 # Resource Management Application
 # Overview
-# This application is designed to manage material resources for different departments within the Faculty of Sciences and Techniques at Université Sidi Mohamed Ben Abdellah. It facilitates communication between departments, the resource manager, the maintenance service, and suppliers. The application handles procurement processes, resource allocation, maintenance reporting, and more.
+This application is designed to manage material resources for different departments within the Faculty of Sciences and Techniques at Université Sidi Mohamed Ben Abdellah. It facilitates communication between departments, the resource manager, the maintenance service, and suppliers. The application handles procurement processes, resource allocation, maintenance reporting, and more.
 
 # Features
 User Authentication: Secure login for different user roles (department heads, resource manager, maintenance staff, and suppliers).
